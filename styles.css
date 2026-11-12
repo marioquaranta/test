@@ -141,10 +141,10 @@ h3{font-size:20px;font-weight:750;line-height:1.35;letter-spacing:-.02em}
  .header-kicker{display:none}.brand-wordmark img{width:129px}
  .home-hero h1{font-size:42px}
  .question-card{padding:28px 21px}
- .scale-labeled{gap:6px}.scale-label{min-height:54px;padding:8px 3px;justify-content:center;gap:0}
- .scale-label strong{height:33px;width:33px;font-size:16px}.scale-label span{display:none}
- .mobile-scale-legend{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px 15px;color:#5a505d;font-size:12px;line-height:1.38;margin:-2px 0 15px}
- .mobile-scale-legend span b{color:var(--purple-dark)}.mobile-scale-legend span:last-child:nth-child(odd){grid-column:span 2}
+ .scale-labeled{gap:6px;align-items:stretch}
+ .scale-label{height:150px;min-height:150px;padding:11px 4px 10px;justify-content:flex-start;gap:11px}
+ .scale-label strong{flex:0 0 33px;height:33px;width:33px;font-size:16px}
+ .scale-label span{display:block;font-size:clamp(9px,2.8vw,11px);line-height:1.26;overflow-wrap:anywhere;hyphens:manual}
  .scale-legend{font-size:9px;gap:3px}
  .btn{padding:12px 18px}
 }
@@ -154,6 +154,8 @@ h3{font-size:20px;font-weight:750;line-height:1.35;letter-spacing:-.02em}
  .home-hero{padding:32px 20px 35px}.home-hero h1{font-size:38px}
  .question-card{padding:26px 16px}
  .scale-labeled{gap:4px}.scale-legend{font-size:8px}
+ .scale-label{height:156px;min-height:156px;padding:10px 2px 9px;gap:9px}
+ .scale-label span{font-size:10px;line-height:1.2}
  .choice{padding:12px 11px;font-size:14px}
 }
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;scroll-behavior:auto!important}}
@@ -198,4 +200,115 @@ h3{font-size:20px;font-weight:750;line-height:1.35;letter-spacing:-.02em}
  .matrix-legend-item{display:flex;align-items:flex-start;text-align:left;gap:7px;padding:9px 8px}
  .matrix-legend-item b{font-size:13px;margin:0;flex:0 0 18px}
  .matrix-legend-item span{font-size:12px;line-height:1.4;overflow-wrap:break-word;hyphens:none}
+}
+
+/* Le legende delle batterie hanno riquadri di uguale dimensione, anche in presenza
+   di un numero dispari di categorie. */
+@media(max-width:550px){
+ .matrix-legend{align-items:stretch}
+ .matrix-legend-item{min-height:52px;height:100%;}
+ .matrix-legend-item:last-child:nth-child(odd){grid-column:auto}
+}
+
+
+/* Presentazione delle risposte identica per desktop e smartphone.
+   Una categoria = un pulsante con numero + etichetta completa.
+   Stesse dimensioni e ordine per ogni opzione, senza legenda separata su mobile. */
+.scale-labeled {
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  grid-auto-rows:1fr;
+  gap:9px;
+  margin:15px 0 20px;
+}
+.scale-label {
+  display:grid;
+  grid-template-columns:40px minmax(0,1fr);
+  align-items:center;
+  justify-content:stretch;
+  gap:14px;
+  width:100%;
+  height:70px;
+  min-height:70px;
+  padding:10px 16px;
+  text-align:left;
+}
+.scale-label strong {
+  width:38px;
+  height:38px;
+  flex:none;
+  font-size:17px;
+}
+.scale-label span {
+  display:block !important;
+  font-size:15px;
+  line-height:1.35;
+  overflow-wrap:normal;
+  hyphens:none;
+}
+.mobile-scale-legend{display:none !important}
+/* Nelle batterie la legenda e la selezione hanno lo stesso layout
+   a qualunque larghezza: legenda leggibile sopra, pulsanti numerici sotto. */
+.matrix-legend {
+  display:grid !important;
+  grid-template-columns:minmax(0,1fr) !important;
+  grid-auto-rows:1fr;
+  gap:6px;
+  margin:15px 0 15px;
+}
+.matrix-legend-item {
+  display:flex !important;
+  align-items:center;
+  gap:12px;
+  width:100%;
+  min-height:44px;
+  height:100%;
+  padding:9px 13px;
+  text-align:left;
+}
+.matrix-legend-item b {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex:0 0 30px;
+  width:30px;
+  height:30px;
+  margin:0;
+  border-radius:50%;
+  background:#e9ddeb;
+  color:#674575;
+  font-size:15px;
+}
+.matrix-legend-item span {
+  display:block;
+  font-size:14px;
+  line-height:1.35;
+  overflow-wrap:normal;
+  hyphens:none;
+}
+@media(max-width:550px){
+  .scale-labeled{grid-template-columns:minmax(0,1fr);gap:9px}
+  .scale-label{height:70px;min-height:70px;gap:12px;padding:10px 12px;justify-content:stretch}
+  .scale-label strong{width:38px;height:38px;font-size:17px}
+  .scale-label span{font-size:14px;line-height:1.35}
+  .matrix-legend {grid-template-columns:minmax(0,1fr) !important;gap:6px}
+  .matrix-legend-item {min-height:44px;padding:9px 12px}
+  .matrix-legend-item b{font-size:15px;flex:0 0 30px}
+  .matrix-legend-item span{font-size:14px;line-height:1.35}
+}
+
+/* Batterie: un item per schermata, stessa scala completa su ogni dispositivo. */
+.battery-item-label {
+  font-size:clamp(19px,2.3vw,23px);
+  line-height:1.35;
+  color:var(--purple-dark);
+  margin:0 0 8px;
+  font-weight:750;
+}
+.battery-instruction {margin:0 0 16px;}
+/* Mantiene le caselle di risposta identiche anche nelle batterie a quattro punti. */
+.scale-labeled {grid-auto-rows:minmax(70px,1fr);}
+.scale-label {box-sizing:border-box;}
+@media(max-width:550px){
+  .battery-item-label{font-size:20px;}
 }

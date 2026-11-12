@@ -7,7 +7,7 @@ const app=document.getElementById('app');
 const query=new URLSearchParams(location.search);
 const invitation=(query.get('token')||query.get('id')||'BT-PROVA-LOCALE').replace(/[^A-Za-z0-9_-]/g,'').slice(0,90)||'BT-PROVA-LOCALE';
 let screen='intro';
-let currentId=QUESTIONS[0].id;
+let currentKey=QUESTIONS[0].id;
 let answers={};
 let alertMessage='';
 const optionOrders={};
@@ -35,7 +35,6 @@ function active(q){
  if(['B9V','B12S'].includes(q.id))return /^F\d+$/.test(value('B9')||'');
  if(q.id==='D1R')return ['O03','O04'].includes(value('P2'));
  if(q.id==='G4')return ['O01','O02'].includes(value('G3'));
- if(q.id==='G7')return ['O01','O02','O03'].includes(value('G3'));
  return true;
 }
 function activeQuestions(){return QUESTIONS.filter(active);}
@@ -51,9 +50,17 @@ function matrixRows(q){
  }
  return rows;
 }
-function pageTop(q){
- const all=activeQuestions();const i=Math.max(0,all.findIndex(x=>x.id===q.id));
- return `<div class="single-flow"><div class="eyebrow">QUESTIONARIO SOCI · DICEMBRE 2026</div><div class="progress-bg" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.round(((i+1)/all.length)*100)}" aria-label="Avanzamento"><div class="progress-fill" style="width:${((i+1)/all.length)*100}%"></div></div>`;
+// Una schermata per ogni item delle batterie, senza alterare i codici delle variabili.
+function steps(){
+  return activeQuestions().flatMap(q=>q.type==='matrix'
+    ? matrixRows(q).map(row=>({key:`${q.id}::${row.id}`,q,row}))
+    : [{key:q.id,q,row:null}]);
+}
+function getStep(){return steps().find(s=>s.key===currentKey)||null;}
+function pageTop(){
+  const list=steps();const i=Math.max(0,list.findIndex(s=>s.key===currentKey));
+  const percent=Math.round(((i+1)/list.length)*100);
+  return `<div class="single-flow"><div class="eyebrow">QUESTIONARIO SOCI · DICEMBRE 2026</div><div class="progress-bg" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${percent}" aria-label="Avanzamento"><div class="progress-fill" style="width:${percent}%"></div></div>`;
 }
 function titleAndHint(q){
  return `<h2 id="question-title">${escapeHtml(q.text)}</h2>${(q.hint||[]).map(h=>`<p class="hint">${escapeHtml(h)}</p>`).join('')}`;
@@ -66,8 +73,8 @@ function renderScale(q){
  const main=q.opts.filter(o=>/^[1-5]$/.test(o.code));
  const extras=q.opts.filter(o=>!/^[1-5]$/.test(o.code));
  const a=`<div class="scale-labeled" aria-label="Scala di risposta">${main.map(o=>`<button type="button" class="scale-label ${ans===o.code?'active':''}" data-action="choose" data-code="${o.code}" aria-pressed="${ans===o.code}"><strong>${o.code}</strong><span>${escapeHtml(o.label)}</span></button>`).join('')}</div>`;
- const legend=`<div class="mobile-scale-legend">${main.map(o=>`<span><b>${o.code}.</b> ${escapeHtml(o.label)}</span>`).join('')}</div>`;
- return a+legend+(extras.length?`<div class="specials">${extras.map(o=>`<label class="special-choice ${ans===o.code?'selected':''}"><input type="radio" name="single-${q.id}" data-action="radio" value="${o.code}" ${ans===o.code?'checked':''}>${escapeHtml(o.label)}</label>`).join('')}</div>`:'');
+ // Numero e descrizione sono nello stesso pulsante a ogni larghezza.
+ return a+(extras.length?`<div class="specials">${extras.map(o=>`<label class="special-choice ${ans===o.code?'selected':''}"><input type="radio" name="single-${q.id}" data-action="radio" value="${o.code}" ${ans===o.code?'checked':''}>${escapeHtml(o.label)}</label>`).join('')}</div>`:'');
 }
 function renderSingle(q){
  const ans=getAnswer(q)||{};
@@ -88,15 +95,14 @@ function renderMulti(q){
    return `<div class="choice-wrap"><label class="choice ${checked?'selected':''}"><input type="checkbox" data-action="check" value="${escapeHtml(o.code)}" ${checked?'checked':''}><span>${escapeHtml(o.label)}</span></label>${o.other&&checked?`<div class="write-in"><label for="other-input">Specifica</label><input id="other-input" data-action="other-text" data-code="${o.code}" maxlength="300" value="${escapeHtml(ans.otherTexts?.[o.code]||'')}" autocomplete="off"></div>`:''}</div>`;
  }).join('')}</div>`;
 }
-function renderMatrix(q){
- const selected=answers[q.id]?.rows||{};
- const normal=q.opts.filter(o=>/^[1-5]$/.test(o.code)|| (q.id==='B1-B5'&&o.code==='4'));
- const extras=q.opts.filter(o=>!normal.includes(o));
- const legend=`<div class="matrix-legend" style="grid-template-columns:repeat(${normal.length},minmax(0,1fr))" aria-label="Etichette della scala">${normal.map(o=>`<div class="matrix-legend-item"><b>${o.code}</b><span>${escapeHtml(o.label)}</span></div>`).join('')}</div>`;
- return `<p class="muted small">Una risposta per ciascuna riga.</p>${legend}<div class="matrix-rows">${matrixRows(q).map(r=>{
-    const val=selected[r.id]||'';
-    return `<div class="matrix-row" data-row="${r.id}"><div class="matrix-label">${escapeHtml(r.label)}</div><div class="matrix-numbers" style="grid-template-columns:repeat(${normal.length},minmax(0,1fr))" role="radiogroup" aria-label="${escapeHtml(r.label)}">${normal.map(o=>`<button type="button" data-action="matrix-choice" data-rowid="${r.id}" data-code="${o.code}" class="matrix-choice ${val===o.code?'active':''}" aria-pressed="${val===o.code}" aria-label="${escapeHtml(r.label)}: ${escapeHtml(o.label)}">${o.code}</button>`).join('')}</div>${extras.length?`<div class="matrix-extras">${extras.map(o=>`<button type="button" data-action="matrix-choice" data-rowid="${r.id}" data-code="${o.code}" class="matrix-extra-button ${val===o.code?'active':''}" aria-pressed="${val===o.code}">${escapeHtml(o.label)}</button>`).join('')}</div>`:''}</div>`;
- }).join('')}</div>`;
+function renderMatrixItem(q,row){
+  const ans=answers[q.id]?.rows?.[row.id]||'';
+  const normal=q.opts.filter(o=>/^[1-5]$/.test(o.code));
+  const extras=q.opts.filter(o=>!normal.includes(o));
+  const prefix=`<h3 class="battery-item-label">${escapeHtml(row.label)}</h3><p class="muted small battery-instruction">Per ogni aspetto indicato, seleziona una sola risposta.</p>`;
+  const choices=`<div class="scale-labeled" role="group" aria-label="${escapeHtml(row.label)}">${normal.map(o=>`<button type="button" class="scale-label ${ans===o.code?'active':''}" data-action="matrix-choice" data-rowid="${row.id}" data-code="${o.code}" aria-pressed="${ans===o.code}"><strong>${o.code}</strong><span>${escapeHtml(o.label)}</span></button>`).join('')}</div>`;
+  const special=extras.length?`<div class="specials">${extras.map(o=>`<label class="special-choice ${ans===o.code?'selected':''}"><input type="radio" name="matrix-${q.id}-${row.id}" data-action="matrix-radio" data-rowid="${row.id}" value="${escapeHtml(o.code)}" ${ans===o.code?'checked':''}>${escapeHtml(o.label)}</label>`).join('')}</div>`:'';
+  return prefix+choices+special;
 }
 function renderPostal(q){
  const ans=getAnswer(q)||{};
@@ -111,42 +117,44 @@ function renderComment(q){
  return `<div class="choice-list"><div class="choice-wrap"><label class="choice ${ans.v==='O01'?'selected':''}"><input type="radio" name="comment" data-action="radio" value="O01" ${ans.v==='O01'?'checked':''}><span>Vorrei aggiungere:</span></label>${ans.v==='O01'?`<div class="write-in"><label for="comment-input">Il tuo commento</label><textarea id="comment-input" data-action="comment-text" class="open-answer">${escapeHtml(ans.t||'')}</textarea></div>`:''}</div><label class="choice ${ans.v==='O02'?'selected':''}"><input type="radio" name="comment" data-action="radio" value="O02" ${ans.v==='O02'?'checked':''}><span>Non ho altro da aggiungere</span></label></div>`;
 }
 function renderQuestion(preserveScroll=false){
- const q=QUESTION_MAP[currentId];
- if(!q){screen='intro';renderIntro();return;}
- const y=window.scrollY;
- const content=q.type==='matrix'?renderMatrix(q):q.type==='scale'?renderScale(q):q.type==='multi'?renderMulti(q):q.type==='postal'?renderPostal(q):q.type==='comment'?renderComment(q):renderSingle(q);
- app.innerHTML=pageTop(q)+`<div class="question-card" aria-labelledby="question-title">${titleAndHint(q)}${content}${alertMessage?`<div class="alert" role="alert">${escapeHtml(alertMessage)}</div>`:''}</div><div class="actions"><button type="button" class="btn" data-action="back">← Indietro</button><button type="button" class="btn primary" data-action="next">${activeQuestions().at(-1)?.id===q.id?'Termina':'Avanti'} →</button></div></div>`;
- if(preserveScroll)window.scrollTo(0,y);else window.scrollTo(0,0);
+  const step=getStep();
+  if(!step){screen='intro';renderIntro();return;}
+  const {q,row}=step;
+  const y=window.scrollY;
+  const content=q.type==='matrix'?renderMatrixItem(q,row):q.type==='scale'?renderScale(q):q.type==='multi'?renderMulti(q):q.type==='postal'?renderPostal(q):q.type==='comment'?renderComment(q):renderSingle(q);
+  app.innerHTML=pageTop()+`<div class="question-card" aria-labelledby="question-title">${titleAndHint(q)}${content}${alertMessage?`<div class="alert" role="alert">${escapeHtml(alertMessage)}</div>`:''}</div><div class="actions"><button type="button" class="btn" data-action="back">← Indietro</button><button type="button" class="btn primary" data-action="next">${steps().at(-1)?.key===currentKey?'Termina':'Avanti'} →</button></div></div>`;
+  if(preserveScroll)window.scrollTo(0,y);else window.scrollTo(0,0);
 }
-function validate(q){
- const ans=getAnswer(q);
- if(!ans)return 'Seleziona una risposta per proseguire.';
- if(q.type==='matrix'){
-  for(const row of matrixRows(q))if(!ans.rows?.[row.id])return 'Rispondi a tutte le righe prima di proseguire.';
- }else if(q.type==='multi'){
-  if(!Array.isArray(ans.v)||!ans.v.length)return 'Seleziona almeno una risposta per proseguire.';
-  if(q.max && ans.v.length>q.max)return `Puoi selezionare al massimo ${q.max} risposte.`;
-  for(const opt of q.opts){
-   if(opt.other&&ans.v.includes(opt.code)&&!(ans.otherTexts?.[opt.code]||'').trim())return 'Specifica la risposta selezionata alla voce «Altro».';
+function validate(step){
+  const {q,row}=step;
+  const ans=getAnswer(q);
+  if(!ans)return 'Seleziona una risposta per proseguire.';
+  if(q.type==='matrix'){
+    if(!ans.rows?.[row.id])return 'Seleziona una risposta per proseguire.';
+  }else if(q.type==='multi'){
+    if(!Array.isArray(ans.v)||!ans.v.length)return 'Seleziona almeno una risposta per proseguire.';
+    if(q.max && ans.v.length>q.max)return `Puoi selezionare al massimo ${q.max} risposte.`;
+    for(const opt of q.opts){
+      if(opt.other&&ans.v.includes(opt.code)&&!(ans.otherTexts?.[opt.code]||'').trim())return 'Specifica la risposta selezionata alla voce «Altro».';
+    }
+  }else{
+    if(!ans.v)return 'Seleziona una risposta per proseguire.';
+    const opt=q.opts.find(o=>o.code===ans.v);
+    if(opt?.other && !opt.label.includes('facoltativamente') && !(ans.t||'').trim())return 'Completa la risposta selezionata.';
+    if(q.type==='postal' && ans.v==='O01' && !/^\d{5}$/.test(ans.t||''))return 'Inserisci un CAP di cinque cifre.';
+    if(q.type==='comment' && ans.v==='O01' && !(ans.t||'').trim())return 'Scrivi il commento oppure scegli «Non ho altro da aggiungere».';
   }
- }else{
-  if(!ans.v)return 'Seleziona una risposta per proseguire.';
-  const opt=q.opts.find(o=>o.code===ans.v);
-  if(opt?.other && !opt.label.includes('facoltativamente') && !(ans.t||'').trim())return 'Completa la risposta selezionata.';
-  if(q.type==='postal' && ans.v==='O01' && !/^\d{5}$/.test(ans.t||''))return 'Inserisci un CAP di cinque cifre.';
-  if(q.type==='comment' && ans.v==='O01' && !(ans.t||'').trim())return 'Scrivi il commento oppure scegli «Non ho altro da aggiungere».';
- }
- return '';
+  return '';
 }
 function updateChoice(code){
- const q=QUESTION_MAP[currentId];
+ const q=getStep().q;
  answers[q.id]={...(answers[q.id]||{}),v:code};
  if(q.type==='postal'&&code!=='O01')delete answers[q.id].t;
  if(q.type==='comment'&&code!=='O01')delete answers[q.id].t;
  alertMessage='';renderQuestion(true);
 }
 function updateMulti(code,checked){
- const q=QUESTION_MAP[currentId];
+ const q=getStep().q;
  const current=answers[q.id]||{v:[],otherTexts:{}};
  const option=q.opts.find(x=>x.code===code);
  let values=Array.isArray(current.v)?[...current.v]:[];
@@ -165,22 +173,22 @@ function updateMulti(code,checked){
  alertMessage='';renderQuestion(true);
 }
 function updateMatrix(rowid,code){
- const q=QUESTION_MAP[currentId];
+ const q=getStep().q;
  answers[q.id]={rows:{...(answers[q.id]?.rows||{}),[rowid]:code}};
  if(q.id==='B1-B5'&&rowid==='B1'&&!['2','3','4'].includes(code))delete answers[q.id].rows.B2;
  alertMessage='';renderQuestion(true);
 }
 function next(){
- const q=QUESTION_MAP[currentId];const error=validate(q);
- if(error){alertMessage=error;renderQuestion(true);return;}
- alertMessage='';
- const list=activeQuestions();const i=list.findIndex(p=>p.id===currentId);
- if(i<list.length-1){currentId=list[i+1].id;renderQuestion();}else{screen='done';renderDone();}
+  const step=getStep();const error=validate(step);
+  if(error){alertMessage=error;renderQuestion(true);return;}
+  alertMessage='';
+  const list=steps();const i=list.findIndex(s=>s.key===currentKey);
+  if(i<list.length-1){currentKey=list[i+1].key;renderQuestion();}else{screen='done';renderDone();}
 }
 function back(){
- const list=activeQuestions();const i=list.findIndex(q=>q.id===currentId);
- if(i>0){currentId=list[i-1].id;alertMessage='';renderQuestion();}
- else{screen='intro';renderIntro();window.scrollTo(0,0);}
+  const list=steps();const i=list.findIndex(s=>s.key===currentKey);
+  if(i>0){currentKey=list[i-1].key;alertMessage='';renderQuestion();}
+  else{screen='intro';renderIntro();window.scrollTo(0,0);}
 }
 function columnNames(){
  const cols=['id_rispondente'];
@@ -232,7 +240,7 @@ function renderDone(){
 app.addEventListener('click',e=>{
  const target=e.target.closest('[data-action]');if(!target)return;
  const action=target.dataset.action;
- if(action==='start'){screen='question';currentId=QUESTIONS[0].id;renderQuestion();}
+ if(action==='start'){screen='question';currentKey=steps()[0].key;renderQuestion();}
  else if(action==='choose')updateChoice(target.dataset.code);
  else if(action==='matrix-choice')updateMatrix(target.dataset.rowid,target.dataset.code);
  else if(action==='next')next();
@@ -242,10 +250,11 @@ app.addEventListener('click',e=>{
 app.addEventListener('change',e=>{
  const target=e.target;
  if(target.dataset.action==='radio')updateChoice(target.value);
+  if(target.dataset.action==='matrix-radio')updateMatrix(target.dataset.rowid,target.value);
  if(target.dataset.action==='check')updateMulti(target.value,target.checked);
 });
 app.addEventListener('input',e=>{
- const target=e.target,q=QUESTION_MAP[currentId];
+ const target=e.target,q=getStep().q;
  if(target.dataset.action==='other-text'){
   if(q.type==='multi'){
    answers[q.id]??={v:[],otherTexts:{}};
@@ -256,5 +265,5 @@ app.addEventListener('input',e=>{
  }
 });
 // Read-only interface for automated smoke testing; not displayed to respondents.
-window.BT_TEST={get activeIds(){return activeQuestions().map(q=>q.id);},get currentId(){return currentId;},get answers(){return JSON.parse(JSON.stringify(answers));},get csv(){return toCSV();},get pages(){return QUESTIONS;}};
+window.BT_TEST={get activeIds(){return activeQuestions().map(q=>q.id);},get activeKeys(){return steps().map(s=>s.key);},get currentId(){return getStep()?.q.id||null;},get currentRowId(){return getStep()?.row?.id||null;},get currentKey(){return currentKey;},get answers(){return JSON.parse(JSON.stringify(answers));},get csv(){return toCSV();},get pages(){return QUESTIONS;}};
 renderIntro();
