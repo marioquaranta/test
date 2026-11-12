@@ -312,3 +312,140 @@ h3{font-size:20px;font-weight:750;line-height:1.35;letter-spacing:-.02em}
 @media(max-width:550px){
   .battery-item-label{font-size:20px;}
 }
+
+
+/* INTERFACCIA PIU COMPATTA - VERSIONE 2
+   Un solo schema visivo per desktop e smartphone; item delle batterie singoli.
+   Le cinque categorie conservano etichette complete e caselle uguali per scala. */
+.site-top { min-height:89px; padding:8px 20px; }
+.brand-wordmark img { width:152px; max-height:78px; }
+.shell { padding-top:24px; }
+.eyebrow { margin-bottom:9px; }
+.progress-bg { margin-bottom:14px; }
+.question-card:not(.intro-card) { min-height:0; padding:24px 29px; }
+.question-card h2 { font-size:clamp(21px,2.05vw,24px); line-height:1.25; margin-bottom:12px; }
+.hint { font-size:13px; line-height:1.44; margin-bottom:10px; }
+.battery-item-label { font-size:18px; line-height:1.25; margin-bottom:5px; }
+.battery-instruction { margin-bottom:9px; }
+.scale-labeled {
+  display:grid; grid-template-columns:minmax(0,1fr);
+  grid-auto-rows:minmax(48px,1fr); gap:4px; margin:8px 0 10px;
+}
+.scale-label {
+  display:grid; grid-template-columns:30px minmax(0,1fr);
+  width:100%; height:auto; min-height:48px; align-items:center; justify-content:stretch;
+  gap:10px; padding:6px 12px; border-radius:9px; text-align:left;
+}
+.scale-label strong { width:28px; height:28px; font-size:13px; }
+.scale-label span { display:block !important; font-size:14px; line-height:1.3; overflow-wrap:normal; hyphens:none; }
+.mobile-scale-legend { display:none !important; }
+.choice-list { gap:6px; }
+.choice { min-height:44px; align-items:center; padding:9px 13px; font-size:14px; line-height:1.4; gap:10px; }
+.choice input { margin:0; }
+.specials { margin-top:10px; gap:6px; }
+.special-choice { min-height:44px; padding:8px 12px; font-size:14px; line-height:1.4; }
+.actions { margin:13px 0 10px; }
+@media(max-width:760px) {
+ .question-card:not(.intro-card) { padding:20px 19px; }
+}
+@media(max-width:550px) {
+ .site-top { min-height:78px; padding:8px 16px; }
+ .brand-wordmark img { width:137px; max-height:66px; }
+ .shell { padding-top:17px; }
+ .question-card:not(.intro-card) { padding:18px 16px; }
+ .question-card h2 { font-size:19px; line-height:1.27; margin-bottom:10px; }
+ .battery-item-label { font-size:17px; line-height:1.28; }
+ .scale-labeled { grid-template-columns:minmax(0,1fr); grid-auto-rows:minmax(48px,1fr); gap:4px; margin:8px 0 10px; }
+ .scale-label { height:auto; min-height:48px; padding:6px 10px; gap:10px; grid-template-columns:30px minmax(0,1fr); }
+ .scale-label strong { width:28px; height:28px; font-size:13px; }
+ .scale-label span { font-size:14px; line-height:1.3; }
+ .specials { margin-top:10px; }
+}
+@media(max-width:360px) {
+ .question-card:not(.intro-card) { padding:17px 12px; }
+ .scale-label { padding:6px 9px; }
+}
+
+
+/* PHONE-FIT: maggiore spazio utile durante la compilazione.
+   Nessuna modifica alle domande, ai codici, all'ordine delle risposte o ai filtri.
+   La struttura delle categorie rimane identica su tutti i dispositivi. */
+body[data-survey-screen="question"] { min-height:100dvh; display:flex; flex-direction:column; }
+body[data-survey-screen="question"] .site-footer { display:none; }
+body[data-survey-screen="question"] .site-top { min-height:54px; padding:5px 17px; }
+body[data-survey-screen="question"] .brand-wordmark img { width:100px; max-height:48px; }
+body[data-survey-screen="question"] .header-kicker { font-size:9px; }
+body[data-survey-screen="question"] .shell {
+  flex:1; width:100%; min-height:0; padding:12px 16px 10px;
+}
+body[data-survey-screen="question"] .single-flow {
+  display:flex; flex-direction:column; min-height:calc(100dvh - 76px);
+}
+body[data-survey-screen="question"] .eyebrow {font-size:10px; letter-spacing:.08em; margin-bottom:5px;}
+body[data-survey-screen="question"] .progress-bg {height:4px; margin-bottom:9px;}
+body[data-survey-screen="question"] .question-card {padding:18px 20px; border-radius:15px;}
+body[data-survey-screen="question"] .question-card h2 {
+  font-size:clamp(18px,2vw,21px); line-height:1.23; margin-bottom:10px;
+}
+body[data-survey-screen="question"] .hint {font-size:12px; line-height:1.33; margin-bottom:7px;}
+body[data-survey-screen="question"] .battery-item-label {font-size:16px; margin-bottom:3px; line-height:1.24;}
+body[data-survey-screen="question"] .battery-instruction {font-size:11px; line-height:1.3; margin:0 0 7px;}
+body[data-survey-screen="question"] .scale-labeled {gap:3px; margin:5px 0 6px; grid-auto-rows:minmax(44px,1fr);}
+body[data-survey-screen="question"] .scale-label {min-height:44px; padding:5px 10px; gap:10px;}
+body[data-survey-screen="question"] .scale-label strong {width:26px; height:26px; font-size:12px;}
+body[data-survey-screen="question"] .scale-label span {font-size:13px; line-height:1.25;}
+body[data-survey-screen="question"] .specials {gap:4px; margin-top:7px;}
+body[data-survey-screen="question"] .special-choice {min-height:44px; padding:7px 10px; font-size:12px; line-height:1.3; gap:8px;}
+body[data-survey-screen="question"] .special-choice input {flex-shrink:0;}
+body[data-survey-screen="question"] .choice-list {gap:4px;}
+body[data-survey-screen="question"] .choice {min-height:44px; padding:7px 11px; font-size:13px; line-height:1.25;}
+body[data-survey-screen="question"] .choice input {width:18px; height:18px;}
+body[data-survey-screen="question"] .actions {margin:9px 0 2px; padding-bottom:env(safe-area-inset-bottom,0px);}
+body[data-survey-screen="question"] .single-flow > .actions {margin-top:auto; padding-top:9px;}
+body[data-survey-screen="question"] .actions .btn {min-height:44px; padding:9px 17px; font-size:13px;}
+body[data-survey-screen="question"] .write-in {margin-top:5px;}
+body[data-survey-screen="question"] .write-in input {padding:9px 11px;}
+body[data-survey-screen="question"] .alert {margin-top:6px; padding:7px 9px; font-size:12px;}
+
+@media(max-width:550px){
+ body[data-survey-screen="question"] .site-top {min-height:45px; height:45px; padding:3px 13px;}
+ body[data-survey-screen="question"] .brand-wordmark img {width:83px; max-height:40px;}
+ body[data-survey-screen="question"] .shell {padding:6px 10px 4px;}
+ body[data-survey-screen="question"] .single-flow {min-height:calc(100dvh - 55px);}
+ body[data-survey-screen="question"] .eyebrow {font-size:9px; margin-bottom:4px;}
+ body[data-survey-screen="question"] .progress-bg {height:3px; margin-bottom:7px;}
+ body[data-survey-screen="question"] .question-card {padding:12px 13px; border-radius:13px;}
+ body[data-survey-screen="question"] .question-card h2 {font-size:17px; line-height:1.21; margin-bottom:7px;}
+ body[data-survey-screen="question"] .hint {font-size:11px; margin-bottom:6px; line-height:1.3;}
+ body[data-survey-screen="question"] .battery-item-label {font-size:15px; margin-bottom:2px;}
+ body[data-survey-screen="question"] .battery-instruction {font-size:11px; margin-bottom:5px;}
+ body[data-survey-screen="question"] .scale-labeled {gap:3px; margin:5px 0 5px; grid-auto-rows:minmax(44px,1fr);}
+ body[data-survey-screen="question"] .scale-label {min-height:44px; height:auto; padding:5px 9px; grid-template-columns:26px minmax(0,1fr); gap:8px;}
+ body[data-survey-screen="question"] .scale-label span {font-size:13px;}
+ body[data-survey-screen="question"] .specials {gap:3px; margin-top:5px;}
+ body[data-survey-screen="question"] .special-choice {min-height:44px; font-size:12px; padding:5px 9px;}
+ body[data-survey-screen="question"] .choice {min-height:44px; padding:5px 9px; font-size:12.5px; line-height:1.25;}
+ body[data-survey-screen="question"] .actions {margin-bottom:0;}
+ body[data-survey-screen="question"] .single-flow > .actions {padding-top:6px;}
+ body[data-survey-screen="question"] .actions .btn {min-height:44px; padding:7px 15px;}
+}
+@media(max-width:360px) and (max-height:700px){
+ body[data-survey-screen="question"] .shell {padding:4px 8px;}
+ body[data-survey-screen="question"] .question-card {padding:10px 11px;}
+ body[data-survey-screen="question"] .question-card h2 {font-size:16px;}
+ body[data-survey-screen="question"] .scale-label span {font-size:12.5px;}
+}
+
+/* Rifinitura: rimuove la riga ridondante sopra la barra di avanzamento.
+   Le domande e le risposte restano identiche su desktop e smartphone. */
+body[data-survey-screen="question"] .eyebrow {display:none;}
+body[data-survey-screen="question"] .progress-bg {margin-bottom:7px;}
+body[data-survey-screen="question"] .single-flow {min-height:calc(100dvh - 88px);}
+body[data-survey-screen="question"] .question-card .muted.small:not(.battery-instruction) {font-size:12px;line-height:1.3;margin-bottom:8px!important;}
+@media(max-width:550px){
+ body[data-survey-screen="question"] .site-top {height:40px;min-height:40px;padding:2px 10px;}
+ body[data-survey-screen="question"] .brand-wordmark img {width:77px;max-height:36px;}
+ body[data-survey-screen="question"] .single-flow {min-height:calc(100dvh - 50px);}
+ body[data-survey-screen="question"] .shell {padding:5px 10px 3px;}
+ body[data-survey-screen="question"] .progress-bg {margin-bottom:5px;}
+}

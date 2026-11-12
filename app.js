@@ -66,6 +66,7 @@ function titleAndHint(q){
  return `<h2 id="question-title">${escapeHtml(q.text)}</h2>${(q.hint||[]).map(h=>`<p class="hint">${escapeHtml(h)}</p>`).join('')}`;
 }
 function renderIntro(){
+ document.body.dataset.surveyScreen="intro";
  app.innerHTML=`<div class="single-flow"><div class="question-card intro-card"><h1>La tua esperienza<br>con Better Together</h1><div class="intro-text">${SURVEY.intro.map(x=>`<p>${escapeHtml(x)}</p>`).join('')}</div></div><div class="actions"><span></span><button type="button" class="btn primary" data-action="start">Inizia il questionario →</button></div></div>`;
 }
 function renderScale(q){
@@ -99,7 +100,14 @@ function renderMatrixItem(q,row){
   const ans=answers[q.id]?.rows?.[row.id]||'';
   const normal=q.opts.filter(o=>/^[1-5]$/.test(o.code));
   const extras=q.opts.filter(o=>!normal.includes(o));
-  const prefix=`<h3 class="battery-item-label">${escapeHtml(row.label)}</h3><p class="muted small battery-instruction">Per ogni aspetto indicato, seleziona una sola risposta.</p>`;
+  const instructionByBattery={
+    'A5-A6':'Per ogni figura indicata, seleziona una sola risposta.',
+    'B1-B5':'Per ogni situazione descritta, seleziona una sola risposta.',
+    'B9V':'Per ogni aspetto indicato, seleziona una sola risposta.',
+    'B13':'Per ogni caratteristica indicata, seleziona una sola risposta.'
+  };
+  const instruction=instructionByBattery[q.id]||'Seleziona una sola risposta.';
+  const prefix=`<h3 class="battery-item-label">${escapeHtml(row.label)}</h3><p class="muted small battery-instruction">${escapeHtml(instruction)}</p>`;
   const choices=`<div class="scale-labeled" role="group" aria-label="${escapeHtml(row.label)}">${normal.map(o=>`<button type="button" class="scale-label ${ans===o.code?'active':''}" data-action="matrix-choice" data-rowid="${row.id}" data-code="${o.code}" aria-pressed="${ans===o.code}"><strong>${o.code}</strong><span>${escapeHtml(o.label)}</span></button>`).join('')}</div>`;
   const special=extras.length?`<div class="specials">${extras.map(o=>`<label class="special-choice ${ans===o.code?'selected':''}"><input type="radio" name="matrix-${q.id}-${row.id}" data-action="matrix-radio" data-rowid="${row.id}" value="${escapeHtml(o.code)}" ${ans===o.code?'checked':''}>${escapeHtml(o.label)}</label>`).join('')}</div>`:'';
   return prefix+choices+special;
@@ -117,6 +125,7 @@ function renderComment(q){
  return `<div class="choice-list"><div class="choice-wrap"><label class="choice ${ans.v==='O01'?'selected':''}"><input type="radio" name="comment" data-action="radio" value="O01" ${ans.v==='O01'?'checked':''}><span>Vorrei aggiungere:</span></label>${ans.v==='O01'?`<div class="write-in"><label for="comment-input">Il tuo commento</label><textarea id="comment-input" data-action="comment-text" class="open-answer">${escapeHtml(ans.t||'')}</textarea></div>`:''}</div><label class="choice ${ans.v==='O02'?'selected':''}"><input type="radio" name="comment" data-action="radio" value="O02" ${ans.v==='O02'?'checked':''}><span>Non ho altro da aggiungere</span></label></div>`;
 }
 function renderQuestion(preserveScroll=false){
+ document.body.dataset.surveyScreen="question";
   const step=getStep();
   if(!step){screen='intro';renderIntro();return;}
   const {q,row}=step;
@@ -234,6 +243,7 @@ function saveCSV(){
  const el=document.createElement('a');el.href=url;el.download=`better_together_${invitation}.csv`;document.body.appendChild(el);el.click();el.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
 }
 function renderDone(){
+ document.body.dataset.surveyScreen="done";
  app.innerHTML=`<div class="single-flow"><div class="question-card intro-card"><div class="finish-icon">✓</div><h1>Grazie!</h1><p class="lead">${escapeHtml(SURVEY.outro)}</p><p class="muted small">Questa è una prova locale: le risposte non sono inviate online. Puoi esportarle in un file CSV.</p><div class="actions"><button class="btn primary" type="button" data-action="csv">Scarica le risposte CSV ↓</button></div></div></div>`;
  window.scrollTo(0,0);
 }
