@@ -1,0 +1,16 @@
+# Better Together — prova con i volontari
+
+Sito di test, senza soci fittizi e senza link individuali.
+
+## Pubblicazione su GitHub Pages
+Sostituisci in root i cinque file `index.html`, `styles.css`, `questions.js`, `app.js`, `logo.png`.
+**Elimina** dal repository l'eventuale vecchio file `demo-soci.js` (non è più usato).
+
+Il questionario apre direttamente la pagina iniziale, senza elenco di soci fittizi. Il riquadro sulla ripresa è sotto l'introduzione e **sopra il pulsante di avvio**.
+
+## Ripresa
+Durante la compilazione, ogni scelta e ogni testo vengono salvati automaticamente nel `localStorage` del browser. Chi chiude e riapre lo stesso indirizzo nello **stesso browser e dispositivo** vede la pagina iniziale con il pulsante **Riprendi il questionario**; tornando alle domande ritrova risposte, posizione e ordine randomizzato.
+
+Il salvataggio locale non è sincronizzato tra dispositivi, può essere cancellato dall'utente ed è assente in alcune modalità di navigazione privata. **Non raccoglie dati sul server né su GitHub.** Per ripetere la prova dallo stesso browser è disponibile `Ricomincia la prova` dopo il completamento.
+
+Gli elenchi B7N e B9 sono ancora dimostrativi. Non utilizzare questa versione per la raccolta dei soci reali.

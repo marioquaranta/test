@@ -1,14 +1,12 @@
 'use strict';
-/* DEMO: link fittizi e salvataggio locale nel browser. Nessun backend. */
+/* Test con volontari: ripresa locale nel browser, senza raccolta centralizzata. */
 const SURVEY=window.BT_SURVEY;
 const QUESTIONS=SURVEY.questions;
 const QUESTION_MAP=Object.fromEntries(QUESTIONS.map(q=>[q.id,q]));
 const app=document.getElementById('app');
-const query=new URLSearchParams(location.search);
-const demoSocios=window.BT_DEMO_SOCIOS||[];
-const invitation=query.get('token')||'';
-const socio=demoSocios.find(s=>s.token===invitation)||null;
-const storeKey=socio?`BT_DEMO_V2_${invitation}`:null;
+const invitation='TEST_VOLONTARI';
+const STORAGE_KEY='BT_TEST_VOLONTARI_PROGRESS_V1';
+let started=false;
 let screen='intro';
 let currentKey=QUESTIONS[0].id;
 let answers={};
@@ -30,51 +28,34 @@ for(const q of QUESTIONS){
     }
   }
 }
-// Demo state is isolated by token and by browser origin.
-function readDemoState(token){
- const person=demoSocios.find(s=>s.token===token);if(!person)return null;
- try{const p=JSON.parse(localStorage.getItem(`BT_DEMO_V2_${token}`)||'null');
-  return p&&p.version===2&&p.answers&&typeof p.answers==='object'?p:null;
- }catch{return null;}
+// I progressi del test rimangono esclusivamente in questo browser e dispositivo.
+function saveProgress(){
+ try{localStorage.setItem(STORAGE_KEY,JSON.stringify({version:1,started,screen,currentKey,answers,optionOrders:Object.fromEntries(Object.entries(optionOrders).map(([id,opts])=>[id,opts.map(o=>o.code)])),rowOrders:Object.fromEntries(Object.entries(rowOrders).map(([id,rows])=>[id,rows.map(r=>r.id)])),savedAt:new Date().toISOString()}));}
+ catch(err){console.warn('Salvataggio locale non disponibile',err);}
 }
-function storeDemoState(){
- if(!socio)return;
- try{localStorage.setItem(storeKey,JSON.stringify({version:2,answers,screen,currentKey,optionOrders,rowOrders,updatedAt:new Date().toISOString()}));}
- catch(e){console.warn('Demo storage unavailable',e);}
-}
-function restoreDemoState(){
- const st=readDemoState(invitation);if(!st)return;
- answers=st.answers||{};
+function restoreProgress(){
+ let st;
+ try{st=JSON.parse(localStorage.getItem(STORAGE_KEY)||'null');}catch{return;}
+ if(!st||st.version!==1||!st.started||typeof st.answers!=='object'||!st.answers)return;
+ started=true;
+ answers=st.answers;
  for(const q of QUESTIONS){
   const prev=st.optionOrders?.[q.id];
-  if(Array.isArray(prev)&&prev.length===q.opts.length&&prev.every(o=>q.opts.some(opt=>opt.code===o.code))){
-   optionOrders[q.id]=prev.map(o=>q.opts.find(opt=>opt.code===o.code));
-  }
+  if(Array.isArray(prev)&&prev.length===q.opts.length&&new Set(prev).size===prev.length&&prev.every(c=>q.opts.some(opt=>opt.code===c)))
+   optionOrders[q.id]=prev.map(c=>q.opts.find(o=>o.code===c));
   if(q.type==='matrix'){
-   const prior=st.rowOrders?.[q.id];
-   const expected=q.id==='B1-B5'?q.rows.filter(r=>r.id!=='B2'):q.rows;
-   if(Array.isArray(prior)&&prior.length===expected.length&&prior.every(r=>expected.some(e=>e.id===r.id))){
-    rowOrders[q.id]=prior.map(r=>expected.find(e=>e.id===r.id));
-   }
+   const previous=st.rowOrders?.[q.id];
+   const eligible=q.id==='B1-B5'?q.rows.filter(r=>r.id!=='B2'):q.rows;
+   if(Array.isArray(previous)&&previous.length===eligible.length&&new Set(previous).size===previous.length&&previous.every(id=>eligible.some(r=>r.id===id)))
+    rowOrders[q.id]=previous.map(id=>eligible.find(r=>r.id===id));
   }
  }
- screen=['intro','question','done'].includes(st.screen)?st.screen:'intro';
- currentKey=st.currentKey||QUESTIONS[0].id;
-}
-function demoStatus(token){const st=readDemoState(token);if(!st)return 'Non iniziato';return st.screen==='done'?'Completato':'In corso';}
-function demoPrefix(){return `<p class="demo-info" role="note">PROVA CON SOCI FITTIZI · Salvataggio solo in questo browser · <a href="${escapeHtml(location.pathname)}">Elenco prove</a></p>`;}
-function renderRoster(){
- document.body.dataset.surveyScreen='intro';
- const links=demoSocios.map(p=>`<tr><td>${escapeHtml(p.id)}</td><td><a href="?token=${encodeURIComponent(p.token)}">Apri il questionario</a></td><td>${escapeHtml(demoStatus(p.token))}</td></tr>`).join('');
- app.innerHTML=`<div class="single-flow"><div class="question-card intro-card"><h1>Prova con soci fittizi</h1><p>Questa pagina serve a verificare i link individuali e la ripresa di una compilazione interrotta.</p><p class="demo-notice"><strong>Attenzione:</strong> le risposte vengono salvate soltanto nel browser in uso. Non vengono trasmesse a GitHub o raccolte in un archivio centralizzato. Utilizza esclusivamente dati inventati.</p><div class="demo-table-wrapper"><table class="demo-table"><thead><tr><th>Codice</th><th>Link personalizzato</th><th>In questo browser</th></tr></thead><tbody>${links}</tbody></table></div><div class="demo-buttons"><button class="btn primary" type="button" data-action="all-csv">Esporta CSV delle prove locali</button><button class="btn" type="button" data-action="reset-all">Azzera prove locali</button></div><p class="muted small">Ogni link apre lo stesso questionario con un codice diverso. Da un altro telefono, i progressi non saranno visibili: per quello servirà il backend della raccolta definitiva.</p></div></div>`;
-}
-function renderBadToken(){
- document.body.dataset.surveyScreen='intro';
- app.innerHTML=`<div class="single-flow"><div class="question-card intro-card"><h1>Link di prova non valido</h1><p>Questo codice non appartiene all'elenco dei soci fittizi.</p><a href="${escapeHtml(location.pathname)}">Torna ai link di prova</a></div></div>`;
+ currentKey=typeof st.currentKey==='string'?st.currentKey:QUESTIONS[0].id;
+ screen=st.screen==='done'?'done':'intro';
 }
 function getAnswer(q){return answers[q.id]||null;}
-function active(q,state=answers){
- const value=(id)=>state[id]?.v;
+function active(q){
+ const value=(id)=>answers[id]?.v;
  if(q.id==='P3')return ['O03','O04'].includes(value('P2')) && ['O02','O03'].includes(value('P1'));
  if(q.id==='B8')return /^F\d+$/.test(value('B7N')||'');
  if(['B9V','B12S'].includes(q.id))return /^F\d+$/.test(value('B9')||'');
@@ -82,7 +63,7 @@ function active(q,state=answers){
  if(q.id==='G4')return ['O01','O02'].includes(value('G3'));
  return true;
 }
-function activeQuestions(){return QUESTIONS.filter(q=>active(q));}
+function activeQuestions(){return QUESTIONS.filter(active);}
 function matrixRows(q){
  const rows=rowOrders[q.id]||[];
  if(q.id==='B1-B5'){
@@ -105,14 +86,14 @@ function getStep(){return steps().find(s=>s.key===currentKey)||null;}
 function pageTop(){
   const list=steps();const i=Math.max(0,list.findIndex(s=>s.key===currentKey));
   const percent=Math.round(((i+1)/list.length)*100);
-  return `<div class="single-flow"><div class="eyebrow">QUESTIONARIO SOCI · DICEMBRE 2026 · DEMO</div><div class="progress-bg" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${percent}" aria-label="Avanzamento"><div class="progress-fill" style="width:${percent}%"></div></div>`;
+  return `<div class="single-flow"><div class="eyebrow">QUESTIONARIO SOCI · DICEMBRE 2026</div><div class="progress-bg" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${percent}" aria-label="Avanzamento"><div class="progress-fill" style="width:${percent}%"></div></div>`;
 }
 function titleAndHint(q){
  return `<h2 id="question-title">${escapeHtml(q.text)}</h2>${(q.hint||[]).map(h=>`<p class="hint">${escapeHtml(h)}</p>`).join('')}`;
 }
 function renderIntro(){
  document.body.dataset.surveyScreen="intro";
- app.innerHTML=`<div class="single-flow">${demoPrefix()}<div class="question-card intro-card"><h1>La tua esperienza<br>con Better Together</h1><p class="demo-notice"><strong>Puoi interrompere la compilazione in qualsiasi momento e riprenderla dal punto in cui l’avevi lasciata</strong>, riaprendo questo stesso link. In questa versione di prova, il recupero funziona soltanto usando lo stesso browser e dispositivo.</p><div class="intro-text">${SURVEY.intro.map(x=>`<p>${escapeHtml(x)}</p>`).join('')}</div><p class="demo-notice">Questo è un test con un socio fittizio (${escapeHtml(socio?.id||'')}). Le risposte sono salvate solo nel browser e non vengono inviate all’associazione.</p></div><div class="actions"><span></span><button type="button" class="btn primary" data-action="start">Inizia il questionario →</button></div></div>`;
+ app.innerHTML=`<div class="single-flow"><div class="question-card intro-card"><h1>La tua esperienza<br>con Better Together</h1><div class="intro-text">${SURVEY.intro.map(x=>`<p>${escapeHtml(x)}</p>`).join('')}</div><div class="resume-notice" role="note"><strong>Puoi interrompere la compilazione in qualsiasi momento e riprenderla dal punto in cui l’avevi lasciata</strong>, riaprendo questo stesso link. In questa versione di prova, il recupero funziona soltanto usando lo stesso browser e dispositivo.</div></div><div class="actions"><span></span><button type="button" class="btn primary" data-action="start">${started?'Riprendi il questionario →':'Inizia il questionario →'}</button></div></div>`;
 }
 function renderScale(q){
  const ans=getAnswer(q)?.v;
@@ -205,7 +186,7 @@ function updateChoice(code){
  answers[q.id]={...(answers[q.id]||{}),v:code};
  if(q.type==='postal'&&code!=='O01')delete answers[q.id].t;
  if(q.type==='comment'&&code!=='O01')delete answers[q.id].t;
- alertMessage='';storeDemoState();renderQuestion(true);
+ alertMessage='';saveProgress();renderQuestion(true);
 }
 function updateMulti(code,checked){
  const q=getStep().q;
@@ -224,25 +205,25 @@ function updateMulti(code,checked){
   renderQuestion(true);return;
  }
  answers[q.id]={v:values,otherTexts:current.otherTexts||{}};
- alertMessage='';storeDemoState();renderQuestion(true);
+ alertMessage='';saveProgress();renderQuestion(true);
 }
 function updateMatrix(rowid,code){
  const q=getStep().q;
  answers[q.id]={rows:{...(answers[q.id]?.rows||{}),[rowid]:code}};
  if(q.id==='B1-B5'&&rowid==='B1'&&!['2','3','4'].includes(code))delete answers[q.id].rows.B2;
- alertMessage='';storeDemoState();renderQuestion(true);
+ alertMessage='';saveProgress();renderQuestion(true);
 }
 function next(){
   const step=getStep();const error=validate(step);
   if(error){alertMessage=error;renderQuestion(true);return;}
   alertMessage='';
   const list=steps();const i=list.findIndex(s=>s.key===currentKey);
-  if(i<list.length-1){currentKey=list[i+1].key;storeDemoState();renderQuestion();}else{screen='done';storeDemoState();renderDone();}
+  if(i<list.length-1){currentKey=list[i+1].key;saveProgress();renderQuestion();}else{screen='done';saveProgress();renderDone();}
 }
 function back(){
   const list=steps();const i=list.findIndex(s=>s.key===currentKey);
-  if(i>0){currentKey=list[i-1].key;alertMessage='';storeDemoState();renderQuestion();}
-  else{screen='intro';storeDemoState();renderIntro();window.scrollTo(0,0);}
+  if(i>0){currentKey=list[i-1].key;alertMessage='';saveProgress();renderQuestion();}
+  else{screen='intro';saveProgress();renderIntro();window.scrollTo(0,0);}
 }
 function columnNames(){
  const cols=['id_rispondente'];
@@ -256,10 +237,10 @@ function columnNames(){
  }
  return cols;
 }
-function valueRows(state=answers,id=invitation){
- const result={id_rispondente:id};
+function valueRows(){
+ const result={id_rispondente:invitation};
  for(const q of QUESTIONS){
-   const shown=active(q,state),a=shown?state[q.id]:null;
+   const shown=active(q),a=shown?answers[q.id]:null;
    if(q.type==='matrix'){
     for(const r of q.rows){
      const eligible=shown&&(q.id!=='B1-B5'||r.id!=='B2'||['2','3','4'].includes(a?.rows?.B1));
@@ -278,55 +259,30 @@ function valueRows(state=answers,id=invitation){
  }
  return result;
 }
-function makeCSV(names,rows){
- const quote=s=>'"'+String(s??'').replace(/"/g,'""')+'"';
- return '\ufeff'+names.map(quote).join(',')+'\r\n'+rows.map(row=>names.map(k=>quote(row[k])).join(',')).join('\r\n')+'\r\n';
-}
-function toCSV(){return makeCSV(columnNames(),[valueRows()]);}
-function allCSV(){
- const names=['stato_compilazione','aggiornato_il',...columnNames()];
- const rows=[];
- for(const p of demoSocios){
-  const st=readDemoState(p.token);
-  if(!st)continue;
-  rows.push({stato_compilazione:st.screen==='done'?'COMPLETATO':'IN_CORSO',aggiornato_il:st.updatedAt||'',...valueRows(st.answers,p.id)});
- }
- return makeCSV(names,rows);
+function toCSV(){
+ const names=columnNames();const data=valueRows();
+ const quote=(s)=>'"'+String(s??'').replace(/"/g,'""')+'"';
+ return '\ufeff'+names.map(quote).join(',')+'\r\n'+names.map(k=>quote(data[k])).join(',')+'\r\n';
 }
 function saveCSV(){
  const csv=toCSV();const blob=new Blob([csv],{type:'text/csv;charset=utf-8'});const url=URL.createObjectURL(blob);
- const el=document.createElement('a');el.href=url;el.download=`better_together_${socio?.id||'demo'}.csv`;document.body.appendChild(el);el.click();el.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
-}
-function saveAllCSV(){
- const csv=allCSV(); const blob=new Blob([csv],{type:'text/csv;charset=utf-8'});
- const u=URL.createObjectURL(blob);const a=document.createElement('a');a.href=u;a.download='better_together_risposte_demo_locali.csv';
- document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),1000);
-}
-function resetCurrent(){
- if(!socio)return;
- localStorage.removeItem(storeKey);location.reload();
-}
-function resetAll(){
- if(!confirm('Eliminare tutte le risposte fittizie salvate in questo browser?'))return;
- demoSocios.forEach(p=>localStorage.removeItem(`BT_DEMO_V2_${p.token}`));renderRoster();
+ const el=document.createElement('a');el.href=url;el.download=`better_together_${invitation}.csv`;document.body.appendChild(el);el.click();el.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
 }
 function renderDone(){
  document.body.dataset.surveyScreen="done";
- app.innerHTML=`<div class="single-flow"><div class="question-card intro-card"><div class="finish-icon">✓</div><h1>Grazie!</h1><p class="lead">${escapeHtml(SURVEY.outro)}</p><p class="muted small">Questionario fittizio completato. Le risposte sono conservate soltanto in questo browser e non vengono inviate online.</p><div class="actions"><button class="btn primary" type="button" data-action="csv">Scarica CSV di questa prova ↓</button><button class="btn" type="button" data-action="reset-current">Ricomincia questa prova</button><a class="btn" href="${escapeHtml(location.pathname)}">Elenco soci fittizi</a></div></div></div>`;
+ app.innerHTML=`<div class="single-flow"><div class="question-card intro-card"><div class="finish-icon">✓</div><h1>Grazie!</h1><p class="lead">${escapeHtml(SURVEY.outro)}</p><p class="muted small">Questa è una prova locale: le risposte non sono inviate online. Puoi esportarle in un file CSV.</p><div class="actions"><button class="btn primary" type="button" data-action="csv">Scarica le risposte CSV ↓</button><button class="btn" type="button" data-action="restart">Ricomincia la prova</button></div></div></div>`;
  window.scrollTo(0,0);
 }
 app.addEventListener('click',e=>{
  const target=e.target.closest('[data-action]');if(!target)return;
  const action=target.dataset.action;
- if(action==='start'){screen='question';currentKey=steps()[0].key;storeDemoState();renderQuestion();}
+ if(action==='start'){if(!started||!steps().some(s=>s.key===currentKey))currentKey=steps()[0].key;started=true;screen='question';saveProgress();renderQuestion();}
  else if(action==='choose')updateChoice(target.dataset.code);
  else if(action==='matrix-choice')updateMatrix(target.dataset.rowid,target.dataset.code);
  else if(action==='next')next();
  else if(action==='back')back();
  else if(action==='csv')saveCSV();
- else if(action==='all-csv')saveAllCSV();
- else if(action==='reset-current')resetCurrent();
- else if(action==='reset-all')resetAll();
+ else if(action==='restart'){if(confirm('Vuoi ricominciare la compilazione di prova? Le risposte salvate in questo browser verranno eliminate.')){localStorage.removeItem(STORAGE_KEY);location.reload();}}
 });
 app.addEventListener('change',e=>{
  const target=e.target;
@@ -344,10 +300,9 @@ app.addEventListener('input',e=>{
  }else if(['postal-input','comment-text'].includes(target.dataset.action)){
   answers[q.id]??={};answers[q.id].t=target.value;
  }
- storeDemoState();
+ saveProgress();
 });
 // Read-only interface for automated smoke testing; not displayed to respondents.
 window.BT_TEST={get activeIds(){return activeQuestions().map(q=>q.id);},get activeKeys(){return steps().map(s=>s.key);},get currentId(){return getStep()?.q.id||null;},get currentRowId(){return getStep()?.row?.id||null;},get currentKey(){return currentKey;},get answers(){return JSON.parse(JSON.stringify(answers));},get csv(){return toCSV();},get pages(){return QUESTIONS;}};
-if(!invitation)renderRoster();
-else if(!socio)renderBadToken();
-else{restoreDemoState();if(screen==='done')renderDone();else if(screen==='question'&&getStep())renderQuestion();else renderIntro();}
+restoreProgress();
+if(screen==='done')renderDone();else renderIntro();

@@ -678,3 +678,7 @@ body[data-survey-screen="question"] .single-flow > .actions {
   .demo-table td:nth-child(2){grid-column:1}
   .demo-table td:nth-child(3){grid-column:2;grid-row:1 / span 2;align-self:center;font-size:12px;color:#695d6d;text-align:right}
 }
+
+/* Avviso di ripresa: in fondo al riquadro iniziale, sopra il pulsante. */
+.resume-notice{border-left:3px solid #8a5d94;padding:8px 10px;background:#f7f2f8;font-size:14px;line-height:1.45;margin:18px 0 0;color:#49364f;}
+.resume-notice strong{font-weight:750;}
