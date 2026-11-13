@@ -17,7 +17,7 @@ function escapeHtml(value){return String(value??'').replace(/[&<>"']/g,c=>({'&':
 function shuffle(items){let arr=[...items];for(let i=arr.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}return arr;}
 for(const q of QUESTIONS){
   const o=q.opts||[];
-  const fixed=o.filter(x=>x.other||x.exclusive||x.label==='Non ricordo'||x.label==='Non so');
+  const fixed=o.filter(x=>x.fixed||x.other||x.exclusive||x.label==='Non ricordo'||x.label==='Non so');
   optionOrders[q.id]=q.random?[...shuffle(o.filter(x=>!fixed.includes(x))),...fixed]:o;
   if(q.type==='matrix'){
     if(q.id==='B1-B5'){
@@ -122,7 +122,7 @@ function renderPostal(q){
 }
 function renderComment(q){
  const ans=getAnswer(q)||{};
- return `<div class="choice-list"><div class="choice-wrap"><label class="choice ${ans.v==='O01'?'selected':''}"><input type="radio" name="comment" data-action="radio" value="O01" ${ans.v==='O01'?'checked':''}><span>Vorrei aggiungere:</span></label>${ans.v==='O01'?`<div class="write-in"><label for="comment-input">Il tuo commento</label><textarea id="comment-input" data-action="comment-text" class="open-answer">${escapeHtml(ans.t||'')}</textarea></div>`:''}</div><label class="choice ${ans.v==='O02'?'selected':''}"><input type="radio" name="comment" data-action="radio" value="O02" ${ans.v==='O02'?'checked':''}><span>Non ho altro da aggiungere</span></label></div>`;
+ return `<div class="choice-list"><div class="choice-wrap"><label class="choice ${ans.v==='O01'?'selected':''}"><input type="radio" name="comment" data-action="radio" value="O01" ${ans.v==='O01'?'checked':''}><span>${escapeHtml(q.opts.find(o=>o.code==='O01').label)}</span></label>${ans.v==='O01'?`<div class="write-in"><label for="comment-input">Il tuo commento</label><textarea id="comment-input" data-action="comment-text" class="open-answer">${escapeHtml(ans.t||'')}</textarea></div>`:''}</div><label class="choice ${ans.v==='O02'?'selected':''}"><input type="radio" name="comment" data-action="radio" value="O02" ${ans.v==='O02'?'checked':''}><span>${escapeHtml(q.opts.find(o=>o.code==='O02').label)}</span></label></div>`;
 }
 function renderQuestion(preserveScroll=false){
  document.body.dataset.surveyScreen="question";
