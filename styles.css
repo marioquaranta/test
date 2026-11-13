@@ -449,3 +449,209 @@ body[data-survey-screen="question"] .question-card .muted.small:not(.battery-ins
  body[data-survey-screen="question"] .shell {padding:5px 10px 3px;}
  body[data-survey-screen="question"] .progress-bg {margin-bottom:5px;}
 }
+
+
+/* PROVA: caratteri leggibili e caselle basse, senza cambiare identita visiva,
+   numero/ordine delle risposte, o schema di somministrazione. */
+@media (max-width: 550px) {
+ body[data-survey-screen="question"] .site-top {height:36px;min-height:36px;padding:1px 10px;}
+ body[data-survey-screen="question"] .brand-wordmark img {width:74px;max-height:34px;}
+ body[data-survey-screen="question"] .shell {padding:4px 8px 2px;}
+ body[data-survey-screen="question"] .single-flow {min-height:calc(100dvh - 42px);}
+ body[data-survey-screen="question"] .progress-bg {height:3px;margin-bottom:4px;}
+ body[data-survey-screen="question"] .question-card {padding:10px 12px;border-radius:12px;}
+ body[data-survey-screen="question"] .question-card h2 {font-size:20px;line-height:1.19;margin:0 0 6px;}
+ body[data-survey-screen="question"] .hint {font-size:13.5px;line-height:1.24;margin:0 0 5px;}
+ body[data-survey-screen="question"] .battery-item-label {font-size:17px;line-height:1.2;margin-bottom:2px;}
+ body[data-survey-screen="question"] .battery-instruction {font-size:13px;line-height:1.23;margin-bottom:5px;}
+ body[data-survey-screen="question"] .scale-labeled {gap:2px;margin:4px 0 4px;grid-auto-rows:minmax(44px,auto);}
+ body[data-survey-screen="question"] .scale-label {height:auto;min-height:44px;padding:3px 10px;grid-template-columns:26px minmax(0,1fr);gap:9px;border-radius:8px;}
+ body[data-survey-screen="question"] .scale-label strong {height:26px;width:26px;font-size:13px;}
+ body[data-survey-screen="question"] .scale-label span {font-size:16px;line-height:1.21;}
+ body[data-survey-screen="question"] .specials {gap:2px;margin-top:4px;}
+ body[data-survey-screen="question"] .special-choice {min-height:44px;padding:3px 10px;font-size:15px;line-height:1.22;gap:9px;}
+ body[data-survey-screen="question"] .special-choice input {width:18px;height:18px;}
+ body[data-survey-screen="question"] .choice-list {gap:3px;}
+ body[data-survey-screen="question"] .choice {min-height:44px;padding:5px 10px;font-size:15.5px;line-height:1.24;gap:9px;}
+ body[data-survey-screen="question"] .choice input {width:18px;height:18px;}
+ body[data-survey-screen="question"] .question-card .muted.small:not(.battery-instruction) {font-size:13px;line-height:1.24;margin-bottom:6px!important;}
+ body[data-survey-screen="question"] .actions {margin:4px 0 0;}
+ body[data-survey-screen="question"] .single-flow > .actions {padding-top:4px;}
+ body[data-survey-screen="question"] .actions .btn {min-height:44px;font-size:14.5px;padding:5px 14px;}
+}
+
+/* ADATTAMENTO RESPONSIVE 13 NOV 2026
+   Condivisione della stessa struttura su tutti i dispositivi.
+   Spaziature proporzionate all'altezza utile (dvh); testi e bersagli
+   conservano soglie minime leggibili, senza zoom/ridimensionamento globale. */
+body[data-survey-screen="question"] .scale-label span {
+  font-size:16px;
+  line-height:1.22;
+}
+body[data-survey-screen="question"] .special-choice,
+body[data-survey-screen="question"] .choice {
+  font-size:16px;
+  line-height:1.25;
+}
+body[data-survey-screen="question"] .actions {
+  position:sticky;
+  bottom:0;
+  z-index:5;
+  background:var(--canvas);
+  border-radius:12px;
+  margin-bottom:0;
+  padding:5px 0 max(4px, env(safe-area-inset-bottom, 0px));
+}
+body[data-survey-screen="question"] .single-flow > .actions {
+  padding-top:5px;
+}
+@media(max-width:550px){
+  body[data-survey-screen="question"] {
+    --ui-text:clamp(15px,2.40dvh,16px);
+    --ui-question:clamp(18px,2.94dvh,20px);
+    --ui-header:clamp(32px,5.4dvh,40px);
+    --ui-compact-gap:clamp(1px,.37dvh,3px);
+  }
+  body[data-survey-screen="question"] .site-top {
+    height:var(--ui-header);
+    min-height:var(--ui-header);
+    padding:1px 9px;
+  }
+  body[data-survey-screen="question"] .brand-wordmark img {
+    width:clamp(65px,11dvh,80px);
+    max-height:calc(var(--ui-header) - 3px);
+  }
+  body[data-survey-screen="question"] .shell {
+    padding:clamp(2px,.5dvh,4px) 8px 0;
+  }
+  body[data-survey-screen="question"] .single-flow {
+    min-height:calc(100dvh - var(--ui-header) - 5px);
+  }
+  body[data-survey-screen="question"] .progress-bg {
+    height:3px;
+    margin-bottom:clamp(2px,.55dvh,4px);
+  }
+  body[data-survey-screen="question"] .question-card {
+    padding:clamp(7px,1.3dvh,11px) 10px;
+    border-radius:11px;
+  }
+  body[data-survey-screen="question"] .question-card h2 {
+    font-size:var(--ui-question);
+    line-height:1.17;
+    margin-bottom:clamp(3px,.67dvh,6px);
+  }
+  body[data-survey-screen="question"] .hint {
+    font-size:clamp(13px,2.1dvh,14px);
+    line-height:1.2;
+    margin-bottom:4px;
+  }
+  body[data-survey-screen="question"] .battery-item-label {
+    font-size:clamp(16px,2.55dvh,18px);
+    line-height:1.17;
+    margin-bottom:1px;
+  }
+  body[data-survey-screen="question"] .battery-instruction {
+    font-size:13px;
+    line-height:1.18;
+    margin-bottom:3px;
+  }
+  body[data-survey-screen="question"] .scale-labeled {
+    grid-auto-rows:minmax(44px,auto);
+    gap:var(--ui-compact-gap);
+    margin:clamp(2px,.4dvh,4px) 0;
+  }
+  body[data-survey-screen="question"] .scale-label {
+    min-height:44px;
+    padding:3px 8px;
+    grid-template-columns:26px minmax(0,1fr);
+    gap:8px;
+    border-radius:8px;
+  }
+  body[data-survey-screen="question"] .scale-label strong {
+    width:26px;
+    height:26px;
+    font-size:13px;
+  }
+  body[data-survey-screen="question"] .scale-label span {
+    font-size:var(--ui-text);
+    line-height:1.18;
+  }
+  body[data-survey-screen="question"] .specials {
+    margin-top:clamp(2px,.43dvh,4px);
+    gap:var(--ui-compact-gap);
+  }
+  body[data-survey-screen="question"] .special-choice {
+    min-height:44px;
+    padding:3px 8px;
+    gap:8px;
+    font-size:var(--ui-text);
+    line-height:1.2;
+  }
+  body[data-survey-screen="question"] .choice-list {gap:var(--ui-compact-gap);}
+  body[data-survey-screen="question"] .choice {
+    min-height:44px;
+    padding:4px 8px;
+    gap:9px;
+    font-size:var(--ui-text);
+    line-height:1.22;
+  }
+  body[data-survey-screen="question"] .question-card .muted.small:not(.battery-instruction) {
+    font-size:13px;
+    line-height:1.2;
+    margin-bottom:4px!important;
+  }
+  body[data-survey-screen="question"] .single-flow > .actions {
+    margin-top:auto;
+    padding-top:clamp(2px,.5dvh,5px);
+  }
+  body[data-survey-screen="question"] .actions .btn {
+    min-height:44px;
+    font-size:14px;
+    padding:6px 13px;
+  }
+}
+@media(max-width:550px) and (max-height:610px) {
+  body[data-survey-screen="question"] .site-top {padding-block:0;}
+  body[data-survey-screen="question"] .shell {padding-top:2px;}
+  body[data-survey-screen="question"] .question-card {padding-block:6px;}
+  body[data-survey-screen="question"] .question-card h2 {margin-bottom:3px;}
+  body[data-survey-screen="question"] .battery-instruction {margin-bottom:2px;}
+  body[data-survey-screen="question"] .scale-labeled {margin-block:2px;}
+  body[data-survey-screen="question"] .actions {padding-top:2px;padding-bottom:max(2px,env(safe-area-inset-bottom,0px));}
+}
+/* Un livello aggiuntivo di compattazione per schermi stretti e bassi.
+   Non si riduce la dimensione delle risposte o l'area cliccabile. */
+@media(max-width:360px) and (max-height:610px){
+ body[data-survey-screen="question"]{--ui-header:29px;--ui-compact-gap:1px;}
+ body[data-survey-screen="question"] .site-top{padding:0 9px;}
+ body[data-survey-screen="question"] .brand-wordmark img{width:65px;max-height:27px;}
+ body[data-survey-screen="question"] .shell{padding:1px 6px 0;}
+ body[data-survey-screen="question"] .progress-bg{margin-bottom:2px;}
+ body[data-survey-screen="question"] .question-card{padding:4px 8px;}
+ body[data-survey-screen="question"] .question-card h2{font-size:18px;line-height:1.12;margin-bottom:2px;letter-spacing:-.016em;}
+ body[data-survey-screen="question"] .hint{line-height:1.16;margin-bottom:2px;}
+ body[data-survey-screen="question"] .battery-item-label{line-height:1.14;margin-bottom:0;}
+ body[data-survey-screen="question"] .battery-instruction{line-height:1.14;margin-bottom:1px;}
+ body[data-survey-screen="question"] .scale-labeled{margin:1px 0;}
+ body[data-survey-screen="question"] .specials{margin-top:1px;}
+ body[data-survey-screen="question"] .single-flow > .actions{padding-top:0;}
+ body[data-survey-screen="question"] .actions{padding-top:0;padding-bottom:0;}
+}
+@media(max-width:550px) and (max-height:610px){
+ body[data-survey-screen="question"]{--ui-header:clamp(29px,5.15dvh,32px);--ui-compact-gap:1px;}
+ body[data-survey-screen="question"] .question-card h2{line-height:1.14;}
+ body[data-survey-screen="question"] .hint{line-height:1.17;}
+}
+@media(max-width:360px) and (max-height:610px){
+ body[data-survey-screen="question"] .question-card h2{line-height:1.10;}
+ body[data-survey-screen="question"] .hint{line-height:1.13;}
+ body[data-survey-screen="question"] .special-choice{line-height:1.16;}
+}
+@media(max-width:360px) and (max-height:610px){
+ body[data-survey-screen="question"]{--ui-header:27px;}
+ body[data-survey-screen="question"] .brand-wordmark img{width:62px;max-height:25px;}
+ body[data-survey-screen="question"] .question-card{padding-block:3px;}
+ body[data-survey-screen="question"] .progress-bg{height:2px;margin-bottom:1px;}
+ body[data-survey-screen="question"] .question-card h2{margin-bottom:1px;}
+ body[data-survey-screen="question"] .hint{margin-bottom:1px;}
+}
