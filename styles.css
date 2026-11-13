@@ -655,3 +655,26 @@ body[data-survey-screen="question"] .single-flow > .actions {
  body[data-survey-screen="question"] .question-card h2{margin-bottom:1px;}
  body[data-survey-screen="question"] .hint{margin-bottom:1px;}
 }
+
+/* Only the demo tools. Survey question layout stays unchanged. */
+.demo-info{font-size:12px;color:#5c465f;margin:0 0 8px;line-height:1.35}
+.demo-info a{color:inherit;text-decoration:underline}
+.demo-notice{border-left:3px solid #8a5d94;padding:8px 10px;background:#f7f2f8;font-size:14px;line-height:1.45;margin:14px 0}
+.demo-table-wrapper{overflow-x:auto;margin:12px 0}
+.demo-table{border-collapse:collapse;width:100%;font-size:14px;white-space:nowrap}
+.demo-table th,.demo-table td{padding:10px 8px;text-align:left;border-bottom:1px solid #e8e2e8}
+.demo-table th{font-weight:700}
+.demo-table a{color:#663877;text-decoration:underline}
+.demo-buttons{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+.demo-buttons .btn{font-size:14px}
+@media(max-width:550px){.demo-table{font-size:13px}.demo-buttons .btn{width:100%}}
+@media(max-width:550px){
+  .demo-table{white-space:normal}
+  .demo-table thead{display:none}
+  .demo-table tbody{display:grid;gap:9px}
+  .demo-table tr{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 8px;border:1px solid #e8e2e8;border-radius:10px;padding:9px;background:#fff}
+  .demo-table td{display:block;border:0;padding:1px 0;min-width:0}
+  .demo-table td:first-child{font-weight:700}
+  .demo-table td:nth-child(2){grid-column:1}
+  .demo-table td:nth-child(3){grid-column:2;grid-row:1 / span 2;align-self:center;font-size:12px;color:#695d6d;text-align:right}
+}
