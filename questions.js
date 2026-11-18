@@ -1,1 +1,1884 @@
-window.BT_SURVEY = {"intro":["Carə sociə, ti chiediamo di raccontarci come valuti Better Together, quali relazioni hai sviluppato e che cosa ti invoglia a partecipare o ti trattiene dal farlo. La tua opinione è utile anche se hai partecipato una sola volta, vieni saltuariamente, non frequenti più.","Rispondi sulla base della tua esperienza e della tua situazione attuale. Non c’è un periodo di riferimento uguale per tutte le domande: quando serve, lo troverai indicato. Se non hai esperienza o elementi sufficienti, puoi segnalarlo nelle risposte.","La partecipazione è volontaria. Per proseguire è necessario rispondere a ogni domanda visualizzata; quando previsto, puoi indicare che non sai rispondere o preferisci non rispondere. Le risposte saranno collegate successivamente alle presenze e ai versamenti registrati dall’associazione per studiare la partecipazione. I risultati saranno presentati in forma aggregata."],"questions":[{"id":"P1","text":"Complessivamente, quante volte hai partecipato ai ritrovi?","type":"single","opts":[{"code":"O01","label":"Una volta","exclusive":false,"other":false},{"code":"O02","label":"Due o tre volte","exclusive":false,"other":false},{"code":"O03","label":"Quattro o più volte","exclusive":false,"other":false},{"code":"O04","label":"Non ricordo","exclusive":false,"other":false}],"hint":[],"random":false},{"id":"P2","text":"Quale delle seguenti affermazioni descrive meglio la tua partecipazione attuale ai ritrovi?","type":"single","opts":[{"code":"O01","label":"Vengo con continuità, per esempio ogni settimana o quasi","exclusive":false,"other":false},{"code":"O02","label":"Vengo quando posso, anche dopo alcune settimane di assenza","exclusive":false,"other":false},{"code":"O03","label":"In questo periodo non partecipo, ma penso di riprendere","exclusive":false,"other":false},{"code":"O04","label":"In questo periodo non partecipo, ma non ho deciso se tornerò","exclusive":false,"other":false},{"code":"O05","label":"Ho partecipato in passato e non tornerò ai ritrovi","exclusive":false,"other":false}],"hint":[],"random":false},{"id":"P3","text":"Prima di sospendere o interrompere la partecipazione, con quale regolarità venivi ai ritrovi?","type":"single","opts":[{"code":"O01","label":"Venivo con continuità, per esempio ogni settimana o quasi","exclusive":false,"other":false},{"code":"O02","label":"Venivo quando potevo, anche dopo alcune settimane di assenza","exclusive":false,"other":false},{"code":"O03","label":"Non ricordo","exclusive":false,"other":false}],"hint":[],"random":false},{"id":"A1","text":"Nel complesso, quanto sei soddisfattə dell’esperienza che hai avuto nei ritrovi?","type":"scale","opts":[{"code":"1","label":"Per niente soddisfattə","exclusive":false,"other":false},{"code":"2","label":"Poco soddisfattə","exclusive":false,"other":false},{"code":"3","label":"Abbastanza soddisfattə","exclusive":false,"other":false},{"code":"4","label":"Molto soddisfattə","exclusive":false,"other":false},{"code":"5","label":"Completamente soddisfattə","exclusive":false,"other":false},{"code":"O06","label":"Non so","exclusive":true,"other":false}],"hint":["Considera l’esperienza avuta finora, anche se hai partecipato una sola volta o oggi non frequenti più."],"random":false},{"id":"A2a","type":"single","random":false,"text":"Su quale canale ti capita più spesso di cercare le informazioni pratiche sui ritrovi, come date, orari e sedi?","hint":[],"opts":[{"code":"O01","label":"App di Better Together","exclusive":false,"other":false},{"code":"O02","label":"Profilo Instagram di Better Together","exclusive":false,"other":false},{"code":"O03","label":"Eventbrite","exclusive":false,"other":false}]},{"id":"A2b","type":"scale","random":false,"text":"Quanto ti risultano chiare le informazioni su [Risposta a A2a]?","hint":[],"opts":[{"code":"1","label":"Per niente chiare","exclusive":false,"other":false},{"code":"2","label":"Poco chiare","exclusive":false,"other":false},{"code":"3","label":"Abbastanza chiare","exclusive":false,"other":false},{"code":"4","label":"Molto chiare","exclusive":false,"other":false},{"code":"5","label":"Del tutto chiare","exclusive":false,"other":false},{"code":"O06","label":"Non so","exclusive":true,"other":false}]},{"id":"A3","text":"Pensando alle occasioni in cui ti sei iscrittə a un ritrovo con Eventbrite, quanto è stato facile completare l’iscrizione?","type":"scale","opts":[{"code":"1","label":"Per niente facile","exclusive":false,"other":false},{"code":"2","label":"Poco facile","exclusive":false,"other":false},{"code":"3","label":"Abbastanza facile","exclusive":false,"other":false},{"code":"4","label":"Molto facile","exclusive":false,"other":false},{"code":"5","label":"Estremamente facile","exclusive":false,"other":false},{"code":"O06","label":"Non l’ho mai usato","exclusive":true,"other":false}],"hint":["Considera anche la prima iscrizione a un ritrovo ed eventuali tentativi non riusciti."],"random":false,"highlights":["Eventbrite"]},{"id":"A4","text":"Pensando alle occasioni in cui ti sei iscrittə a un ritrovo con la app di Better Together, quanto è stato facile completare l’iscrizione?","type":"scale","opts":[{"code":"1","label":"Per niente facile","exclusive":false,"other":false},{"code":"2","label":"Poco facile","exclusive":false,"other":false},{"code":"3","label":"Abbastanza facile","exclusive":false,"other":false},{"code":"4","label":"Molto facile","exclusive":false,"other":false},{"code":"5","label":"Estremamente facile","exclusive":false,"other":false},{"code":"O06","label":"Non l’ho mai usato","exclusive":true,"other":false}],"hint":["Considera anche la prima iscrizione a un ritrovo ed eventuali tentativi non riusciti."],"random":false,"highlights":["app"]},{"text":"Pensando alla tua esperienza nei ritrovi, quanto ti sei sentitə accoltə dalle seguenti figure?","opts":[{"label":"Per niente accoltə","code":"1","other":false,"exclusive":false},{"label":"Poco accoltə","code":"2","other":false,"exclusive":false},{"label":"Abbastanza accoltə","code":"3","other":false,"exclusive":false},{"label":"Molto accoltə","code":"4","other":false,"exclusive":false},{"label":"Completamente accoltə","code":"5","other":false,"exclusive":false},{"label":"Non ho avuto interazioni a sufficienza","code":"NI","other":false,"exclusive":false},{"label":"Non so distinguere questa figura dalle altre persone","code":"ND","other":false,"exclusive":true},{"label":"Non ricordo","code":"NR","other":false,"exclusive":true}],"id":"A6-A7","type":"matrix","random":false,"rows":[{"id":"A6","label":"Organizzatori","question":"Pensando alla tua esperienza nei ritrovi, quanto ti sei sentitə accoltə dagli Organizzatori?","highlights":["Organizzatori"]},{"id":"A7","label":"Volontari","question":"Pensando alla tua esperienza nei ritrovi, quanto ti sei sentitə accoltə dai Volontari?","highlights":["Volontari"]}],"hint":[]},{"id":"B1-B5","text":"Pensando alla tua esperienza complessiva nei ritrovi, indicativamente quante volte ti è capitato di fare le seguenti cose?","type":"matrix","rows":[{"id":"B1","label":"Lavorare o studiare durante un ritrovo"},{"id":"B2","label":"Rimanere a socializzare dopo aver lavorato o studiato al ritrovo"},{"id":"B3","label":"Arrivare dopo aver lavorato o studiato altrove"},{"id":"B4","label":"Partecipare perché era prevista un’attività che ti interessava"},{"id":"B5","label":"Trattenersi più del previsto per partecipare a un’attività"}],"opts":[{"label":"Mai","code":"1","other":false,"exclusive":false},{"label":"Una volta","code":"2","other":false,"exclusive":false},{"label":"Due o tre volte","code":"3","other":false,"exclusive":false},{"label":"Quattro o più volte","code":"4","other":false,"exclusive":false},{"label":"Non ricordo","code":"NR","other":false,"exclusive":true}],"hint":[],"random":true},{"id":"A5","text":"Nel complesso, quanto trovi interessanti le attività attualmente proposte nel calendario?","type":"scale","opts":[{"code":"1","label":"Per niente interessanti","exclusive":false,"other":false},{"code":"2","label":"Poco interessanti","exclusive":false,"other":false},{"code":"3","label":"Abbastanza interessanti","exclusive":false,"other":false},{"code":"4","label":"Molto interessanti","exclusive":false,"other":false},{"code":"5","label":"Estremamente interessanti","exclusive":false,"other":false},{"code":"O06","label":"Non so","exclusive":true,"other":false}],"hint":[],"random":false},{"id":"B6","text":"Pensando alla tua esperienza complessiva, a quali dei seguenti tipi di attività organizzate hai partecipato almeno una volta?","type":"multi","opts":[{"code":"O01","label":"Attività sportive o di movimento","exclusive":false,"other":false},{"code":"O02","label":"Giochi e attività ludiche","exclusive":false,"other":false},{"code":"O03","label":"Attività culturali","exclusive":false,"other":false},{"code":"O04","label":"Laboratori o attività creative","exclusive":false,"other":false},{"code":"O05","label":"Gruppi di dialogo o discussione","exclusive":false,"other":false},{"code":"O06","label":"Altre attività (specificare):","exclusive":false,"other":true},{"code":"O07","label":"Non ho partecipato ad attività organizzate","exclusive":true,"other":false},{"code":"O08","label":"Non ricordo","exclusive":true,"other":false}],"hint":[],"random":true,"max":null},{"id":"B7","text":"Qual è l’attività a cui hai partecipato più recentemente?","type":"single","opts":[{"label":"Attività dimostrativa 1","code":"F1","other":false,"exclusive":false},{"label":"Attività dimostrativa 2","code":"F2","other":false,"exclusive":false},{"label":"Attività dimostrativa 3","code":"F3","other":false,"exclusive":false},{"label":"Non ho mai partecipato ad attività organizzate","code":"O02","other":false,"exclusive":true},{"label":"Non ricordo","code":"O03","other":false,"exclusive":true}],"hint":[],"random":true,"demoList":true},{"id":"B8","text":"Quanto sei soddisfattə dell’attività [inserire risposta da elenco delle singole attività effettivamente organizzate]?","type":"scale","opts":[{"code":"1","label":"Per niente soddisfattə","exclusive":false,"other":false},{"code":"2","label":"Poco soddisfattə","exclusive":false,"other":false},{"code":"3","label":"Abbastanza soddisfattə","exclusive":false,"other":false},{"code":"4","label":"Molto soddisfattə","exclusive":false,"other":false},{"code":"5","label":"Completamente soddisfattə","exclusive":false,"other":false},{"code":"O06","label":"Non ricordo","exclusive":true,"other":false}],"hint":[],"random":false},{"id":"B9","text":"Quali tipi di attività vorresti che Better Together proponesse più frequentemente?","type":"multi","opts":[{"code":"O01","label":"Attività sportive o di movimento","exclusive":false,"other":false},{"code":"O02","label":"Giochi e attività ludiche","exclusive":false,"other":false},{"code":"O03","label":"Attività culturali","exclusive":false,"other":false},{"code":"O04","label":"Laboratori o attività creative","exclusive":false,"other":false},{"code":"O05","label":"Gruppi di dialogo o discussione","exclusive":false,"other":false},{"code":"O06","label":"Momenti di socialità organizzata","exclusive":false,"other":false},{"code":"O07","label":"Altre attività (specificare):","exclusive":false,"other":true},{"code":"O08","label":"Nessuna in particolare","exclusive":true,"other":false},{"code":"O09","label":"Non so","exclusive":true,"other":false}],"hint":[],"random":true,"max":2},{"id":"B10","text":"In quale sede si è svolto l’ultimo ritrovo a cui hai partecipato?","type":"single","opts":[{"label":"Sede dimostrativa 1","code":"F1","other":false,"exclusive":false},{"label":"Sede dimostrativa 2","code":"F2","other":false,"exclusive":false},{"label":"Sede dimostrativa 3","code":"F3","other":false,"exclusive":false},{"label":"Non ricordo","code":"O02","other":false,"exclusive":true}],"hint":[],"random":true,"demoList":true},{"id":"B11","text":"Pensando alla sede [inserire risposta da elenco aggiornato delle sedi effettive], quanto hai trovato adeguati alle tue esigenze i seguenti aspetti?","type":"matrix","opts":[{"label":"Per niente adeguato","code":"1","other":false,"exclusive":false},{"label":"Poco adeguato","code":"2","other":false,"exclusive":false},{"label":"Abbastanza adeguato","code":"3","other":false,"exclusive":false},{"label":"Molto adeguato","code":"4","other":false,"exclusive":false},{"label":"Del tutto adeguato","code":"5","other":false,"exclusive":false},{"label":"Non ho utilizzato il servizio","code":"NU","other":false,"exclusive":false},{"label":"Non so","code":"NS","other":false,"exclusive":true},{"code":"NP","label":"Non presente","exclusive":true,"other":false,"onlyRows":["B11_5"]}],"hint":[],"random":true,"rows":[{"id":"B11_1","label":"Spazi per lavorare o studiare"},{"id":"B11_2","label":"Spazi per socializzare"},{"id":"B11_3","label":"Connessione Wi-Fi"},{"id":"B11_4","label":"Prese elettriche"},{"id":"B11_5","label":"Microonde"},{"id":"B11_6","label":"Comfort acustico"},{"id":"B11_7","label":"Comfort termico"},{"id":"B11_8","label":"Servizi igienici"}]},{"id":"B12","text":"Quanto è stato facile per te raggiungere la sede [inserire risposta da elenco aggiornato delle sedi effettive]?","type":"scale","opts":[{"code":"1","label":"Per niente facile","exclusive":false,"other":false},{"code":"2","label":"Poco facile","exclusive":false,"other":false},{"code":"3","label":"Abbastanza facile","exclusive":false,"other":false},{"code":"4","label":"Molto facile","exclusive":false,"other":false},{"code":"5","label":"Estremamente facile","exclusive":false,"other":false},{"code":"O06","label":"Non ricordo","exclusive":true,"other":false}],"hint":[],"random":false},{"id":"B13","text":"Attualmente, quanto sarebbe facile per te raggiungere almeno una delle sedi dei ritrovi?","type":"scale","opts":[{"code":"1","label":"Per niente facile","exclusive":false,"other":false},{"code":"2","label":"Poco facile","exclusive":false,"other":false},{"code":"3","label":"Abbastanza facile","exclusive":false,"other":false},{"code":"4","label":"Molto facile","exclusive":false,"other":false},{"code":"5","label":"Estremamente facile","exclusive":false,"other":false},{"code":"O06","label":"Non so","exclusive":true,"other":false}],"hint":[],"random":false},{"id":"B14","text":"Indipendentemente dalla tua esperienza nelle sedi attuali, quanto sono importanti per te le seguenti caratteristiche di una sede dei ritrovi?","type":"matrix","opts":[{"label":"Per niente importante","code":"1","other":false,"exclusive":false},{"label":"Poco importante","code":"2","other":false,"exclusive":false},{"label":"Abbastanza importante","code":"3","other":false,"exclusive":false},{"label":"Molto importante","code":"4","other":false,"exclusive":false},{"label":"Estremamente importante","code":"5","other":false,"exclusive":false},{"label":"Non so","code":"NS","other":false,"exclusive":true}],"hint":[],"random":true,"rows":[{"id":"B14_1","label":"Posizione della sede e facilità di raggiungerla"},{"id":"B14_2","label":"Spazi tranquilli per lavorare o studiare"},{"id":"B14_3","label":"Spazi comodi per socializzare"},{"id":"B14_4","label":"Possibilità di consumare cibo dall’esterno"},{"id":"B14_5","label":"Disponibilità di un forno a microonde"},{"id":"B14_6","label":"Spazi adeguati per le attività"},{"id":"B14_7","label":"Supermercati nelle vicinanze"}]},{"id":"C1","text":"Pensando alla tua esperienza complessiva, in che misura ritieni che i ritrovi abbiano ampliato la tua cerchia di conoscenze?","type":"scale","opts":[{"code":"1","label":"Per niente","exclusive":false,"other":false},{"code":"2","label":"Poco","exclusive":false,"other":false},{"code":"3","label":"Abbastanza","exclusive":false,"other":false},{"code":"4","label":"Molto","exclusive":false,"other":false},{"code":"5","label":"Moltissimo","exclusive":false,"other":false},{"code":"O06","label":"Non so","exclusive":true,"other":false}],"hint":[],"random":false},{"id":"C2","text":"Con quante persone conosciute attraverso Better Together mantieni attualmente contatti personali anche al di fuori dei ritrovi?","type":"single","opts":[{"code":"O01","label":"Nessuna","exclusive":false,"other":false},{"code":"O02","label":"Una","exclusive":false,"other":false},{"code":"O03","label":"Due o tre","exclusive":false,"other":false},{"code":"O04","label":"Quattro o più","exclusive":false,"other":false},{"code":"O05","label":"Non so indicare","exclusive":false,"other":false},{"code":"O06","label":"Preferisco non rispondere","exclusive":true,"other":false}],"hint":["Considera incontri, conversazioni o scambi personali, anche a distanza. Non contare la semplice presenza nello stesso gruppo di messaggistica."],"random":false},{"id":"C3","text":"Attualmente, quante delle persone che hai conosciuto attraverso Better Together consideri importanti nella tua vita personale?","type":"single","opts":[{"code":"O01","label":"Nessuna","exclusive":false,"other":false},{"code":"O02","label":"Una","exclusive":false,"other":false},{"code":"O03","label":"Due o tre","exclusive":false,"other":false},{"code":"O04","label":"Quattro o più","exclusive":false,"other":false},{"code":"O05","label":"Non so","exclusive":false,"other":false},{"code":"O06","label":"Preferisco non rispondere","exclusive":true,"other":false}],"hint":[],"random":false},{"id":"C4","text":"Quanto sei soddisfattə delle relazioni personali che hai sviluppato attraverso Better Together?","type":"scale","opts":[{"code":"1","label":"Per niente soddisfattə","exclusive":false,"other":false},{"code":"2","label":"Poco soddisfattə","exclusive":false,"other":false},{"code":"3","label":"Abbastanza soddisfattə","exclusive":false,"other":false},{"code":"4","label":"Molto soddisfattə","exclusive":false,"other":false},{"code":"5","label":"Completamente soddisfattə","exclusive":false,"other":false},{"code":"O06","label":"Non ho sviluppato relazioni personali attraverso Better Together","exclusive":true,"other":false},{"code":"O07","label":"Non so","exclusive":true,"other":false},{"code":"O08","label":"Preferisco non rispondere","exclusive":true,"other":false}],"hint":[],"random":false},{"id":"C5","text":"Attualmente, quanto ti senti parte della comunità di Better Together?","type":"scale","opts":[{"code":"1","label":"Per niente","exclusive":false,"other":false},{"code":"2","label":"Poco","exclusive":false,"other":false},{"code":"3","label":"Abbastanza","exclusive":false,"other":false},{"code":"4","label":"Molto","exclusive":false,"other":false},{"code":"5","label":"Moltissimo","exclusive":false,"other":false},{"code":"O06","label":"Non so","exclusive":true,"other":false}],"hint":[],"random":false},{"id":"C6","text":"Pensando alla tua esperienza complessiva con Better Together, in che misura ritieni che la partecipazione ai ritrovi abbia contribuito a farti sentire meno solə?","type":"scale","opts":[{"code":"1","label":"Per niente","exclusive":false,"other":false},{"code":"2","label":"Poco","exclusive":false,"other":false},{"code":"3","label":"Abbastanza","exclusive":false,"other":false},{"code":"4","label":"Molto","exclusive":false,"other":false},{"code":"5","label":"Moltissimo","exclusive":false,"other":false},{"code":"O06","label":"Non mi sentivo solə","exclusive":true,"other":false},{"code":"O07","label":"Non so","exclusive":true,"other":false},{"code":"O08","label":"Preferisco non rispondere","exclusive":true,"other":false}],"hint":[],"random":false},{"id":"D1","text":"Quanto ritieni probabile che parteciperai ad almeno un ritrovo durante il mese di gennaio 2027?","type":"scale","opts":[{"code":"1","label":"Per niente probabile","exclusive":false,"other":false},{"code":"2","label":"Poco probabile","exclusive":false,"other":false},{"code":"3","label":"Abbastanza probabile","exclusive":false,"other":false},{"code":"4","label":"Molto probabile","exclusive":false,"other":false},{"code":"5","label":"Estremamente probabile","exclusive":false,"other":false},{"code":"O06","label":"Non so","exclusive":true,"other":false}],"hint":["Considera qualsiasi modalità di partecipazione, compreso l’ingresso giornaliero."],"random":false},{"id":"D2","text":"Quali aspetti ti invogliano oggi a partecipare ai ritrovi?","type":"multi","opts":[{"code":"O01","label":"Conoscere persone nuove","exclusive":false,"other":false},{"code":"O02","label":"Incontrare persone già conosciute attraverso Better Together","exclusive":false,"other":false},{"code":"O03","label":"Lavorare o studiare in uno spazio condiviso","exclusive":false,"other":false},{"code":"O04","label":"Partecipare ad attività che mi interessano","exclusive":false,"other":false},{"code":"O05","label":"Sentirmi parte di una comunità","exclusive":false,"other":false},{"code":"O06","label":"Avere un’occasione per uscire di casa","exclusive":false,"other":false},{"code":"O07","label":"Altro (specificare):","exclusive":false,"other":true},{"code":"O08","label":"Al momento non c’è un aspetto che mi invogli a partecipare","exclusive":true,"other":false},{"code":"O09","label":"Non so","exclusive":true,"other":false}],"hint":[],"random":true,"max":2},{"id":"D3","text":"Quali dei seguenti aspetti, se presenti, limitano o scoraggiano attualmente la tua partecipazione ai ritrovi?","type":"multi","opts":[{"code":"O01","label":"Impegni di lavoro o studio","exclusive":false,"other":false},{"code":"O02","label":"Impegni personali o familiari","exclusive":false,"other":false},{"code":"O03","label":"Giorni o orari dei ritrovi poco adatti a me","exclusive":false,"other":false},{"code":"O04","label":"Difficoltà a raggiungere le sedi","exclusive":false,"other":false},{"code":"O05","label":"Costi della partecipazione difficili da sostenere","exclusive":false,"other":false},{"code":"O06","label":"Motivi di salute","exclusive":false,"other":false},{"code":"O07","label":"Difficoltà nel conoscere persone o inserirmi nel gruppo","exclusive":false,"other":false},{"code":"O08","label":"Attività proposte poco interessanti per me","exclusive":false,"other":false},{"code":"O09","label":"Esperienze precedenti poco soddisfacenti","exclusive":false,"other":false},{"code":"O10","label":"Informazioni insufficienti","exclusive":false,"other":false},{"code":"O11","label":"Al momento non sento il bisogno di partecipare","exclusive":true,"other":false},{"code":"O12","label":"Altro (specificare):","exclusive":false,"other":true},{"code":"O13","label":"Nessun aspetto mi limita o scoraggia attualmente","exclusive":true,"other":false},{"code":"O14","label":"Non so","exclusive":true,"other":false}],"hint":[],"random":true,"max":3},{"id":"D4","text":"Indipendentemente da quanto spesso partecipi attualmente, quali cambiamenti renderebbero i ritrovi più adatti alle tue esigenze?","type":"multi","opts":[{"code":"O01","label":"Sedi più comode da raggiungere","exclusive":false,"other":false},{"code":"O02","label":"Migliori spazi e servizi delle sedi","exclusive":false,"other":false},{"code":"O03","label":"Attività più vicine ai miei interessi","exclusive":false,"other":false},{"code":"O04","label":"Maggiori occasioni per conoscere persone o socializzare","exclusive":false,"other":false},{"code":"O05","label":"Costi di partecipazione inferiori","exclusive":false,"other":false},{"code":"O06","label":"Informazioni o modalità di prenotazione più semplici","exclusive":false,"other":false},{"code":"O07","label":"Altro (specificare):","exclusive":false,"other":true},{"code":"O08","label":"Nessun cambiamento in particolare","exclusive":true,"other":false},{"code":"O09","label":"Non so","exclusive":true,"other":false}],"hint":[],"random":true,"max":2},{"id":"D5","text":"Quali sono stati i principali motivi per cui hai sospeso o interrotto la partecipazione?","type":"multi","opts":[{"code":"O01","label":"Impegni di lavoro o studio","exclusive":false,"other":false},{"code":"O02","label":"Impegni personali o familiari","exclusive":false,"other":false},{"code":"O03","label":"Giorni o orari dei ritrovi poco adatti a me","exclusive":false,"other":false},{"code":"O04","label":"Distanza dalle sedi o difficoltà negli spostamenti","exclusive":false,"other":false},{"code":"O05","label":"Trasferimento in un’altra zona o città","exclusive":false,"other":false},{"code":"O06","label":"Motivi di salute","exclusive":false,"other":false},{"code":"O07","label":"Difficoltà a sostenere i costi della partecipazione","exclusive":false,"other":false},{"code":"O08","label":"Attività proposte poco interessanti per me","exclusive":false,"other":false},{"code":"O09","label":"Difficoltà nel conoscere persone o inserirmi nel gruppo","exclusive":false,"other":false},{"code":"O10","label":"Esperienze nei ritrovi poco soddisfacenti","exclusive":false,"other":false},{"code":"O11","label":"Informazioni insufficienti","exclusive":false,"other":false},{"code":"O12","label":"Le relazioni nate in Better Together proseguono fuori dai ritrovi e sento meno il bisogno di frequentarli","exclusive":false,"other":false},{"code":"O13","label":"Preferisco altre occasioni di socialità o altre attività","exclusive":false,"other":false},{"code":"O14","label":"Non sento più il bisogno di partecipare, per altre ragioni","exclusive":false,"other":false},{"code":"O15","label":"Altro (specificare):","exclusive":false,"other":true},{"code":"O16","label":"Non so","exclusive":true,"other":false}],"hint":["Riferisciti alla pausa o interruzione attuale."],"random":true,"max":2},{"id":"E1","text":"Considerando la tua esperienza con Better Together, quali sono gli aspetti che apprezzi maggiormente?","type":"multi","opts":[{"code":"O01","label":"Comunicazione e organizzazione dei ritrovi","exclusive":false,"other":false},{"code":"O02","label":"Giorni e orari dei ritrovi","exclusive":false,"other":false},{"code":"O03","label":"Attività proposte","exclusive":false,"other":false},{"code":"O04","label":"Accoglienza e facilità di inserirsi nel gruppo","exclusive":false,"other":false},{"code":"O05","label":"Opportunità di conoscere persone e sviluppare relazioni significative","exclusive":false,"other":false},{"code":"O06","label":"Posizione, comfort e servizi delle sedi","exclusive":false,"other":false},{"code":"O07","label":"Coinvolgimento dei soci nelle decisioni dell’associazione","exclusive":false,"other":false},{"code":"O08","label":"Quota mensile e valore dell’offerta","exclusive":false,"other":false},{"code":"O09","label":"Altro (specificare):","exclusive":false,"other":true},{"code":"O10","label":"Non so","exclusive":true,"other":false}],"hint":[],"random":true,"max":2},{"id":"E2","text":"Su quali aspetti Better Together dovrebbe intervenire con maggiore priorità?","type":"multi","opts":[{"code":"O01","label":"Comunicazione e organizzazione dei ritrovi","exclusive":false,"other":false},{"code":"O02","label":"Attività proposte","exclusive":false,"other":false},{"code":"O03","label":"Accoglienza e facilità di inserirsi nel gruppo","exclusive":false,"other":false},{"code":"O04","label":"Opportunità di conoscere persone e sviluppare relazioni significative","exclusive":false,"other":false},{"code":"O05","label":"Posizione, comfort e servizi delle sedi","exclusive":false,"other":false},{"code":"O06","label":"Coinvolgimento dei soci nelle decisioni dell’associazione","exclusive":false,"other":false},{"code":"O07","label":"Quota mensile e valore dell’offerta","exclusive":false,"other":false},{"code":"O08","label":"Organizzazione di ritrovi nel fine settimana","exclusive":false,"other":false},{"code":"O09","label":"Altro (specificare):","exclusive":false,"other":true},{"code":"O10","label":"Non ritengo necessari miglioramenti","exclusive":true,"other":false},{"code":"O11","label":"Non so","exclusive":true,"other":false}],"hint":[],"random":true,"max":2},{"id":"F1","text":"Considerando la tua situazione economica attuale, quanto è o sarebbe sostenibile per te versare una quota mensile di 40 €?","type":"scale","opts":[{"code":"1","label":"Per niente sostenibile","exclusive":false,"other":false},{"code":"2","label":"Poco sostenibile","exclusive":false,"other":false},{"code":"3","label":"Abbastanza sostenibile","exclusive":false,"other":false},{"code":"4","label":"Molto sostenibile","exclusive":false,"other":false},{"code":"5","label":"Del tutto sostenibile","exclusive":false,"other":false},{"code":"O06","label":"Non so","exclusive":true,"other":false}],"hint":[],"random":false},{"id":"F2","text":"Considerando l’esperienza complessiva di Better Together, in che misura ritieni che valga la quota mensile di 40 €?","type":"scale","opts":[{"code":"1","label":"Per niente","exclusive":false,"other":false},{"code":"2","label":"Poco","exclusive":false,"other":false},{"code":"3","label":"Abbastanza","exclusive":false,"other":false},{"code":"4","label":"Molto","exclusive":false,"other":false},{"code":"5","label":"Completamente","exclusive":false,"other":false},{"code":"O06","label":"Non so","exclusive":true,"other":false}],"hint":[],"random":false},{"id":"F3","text":"Se la quota mensile di Better Together aumentasse da 40 a 45 €, senza modifiche ai ritrovi, quanto considereresti accettabile questo aumento?","type":"scale","opts":[{"code":"1","label":"Del tutto inaccettabile","exclusive":false,"other":false},{"code":"2","label":"Piuttosto inaccettabile","exclusive":false,"other":false},{"code":"3","label":"Né accettabile né inaccettabile","exclusive":false,"other":false},{"code":"4","label":"Piuttosto accettabile","exclusive":false,"other":false},{"code":"5","label":"Del tutto accettabile","exclusive":false,"other":false},{"code":"O06","label":"Non so","exclusive":true,"other":false}],"hint":[],"random":false},{"id":"G1","text":"Come descriveresti il tuo genere?","type":"single","opts":[{"code":"O01","label":"Donna","exclusive":false,"other":false},{"code":"O02","label":"Uomo","exclusive":false,"other":false},{"code":"O03","label":"Non binario","exclusive":false,"other":false},{"code":"O04","label":"Mi descrivo in un altro modo (specificare facoltativamente):","exclusive":false,"other":true},{"code":"O05","label":"Preferisco non rispondere","exclusive":true,"other":false}],"hint":[],"random":false},{"id":"G2","text":"Qual è la tua condizione occupazionale principale?","type":"single","opts":[{"code":"O01","label":"Lavoratorə dipendente","exclusive":false,"other":false},{"code":"O02","label":"Lavoratorə autonomə, freelance o imprenditorə","exclusive":false,"other":false},{"code":"O03","label":"Studentə","exclusive":false,"other":false},{"code":"O04","label":"In cerca di occupazione","exclusive":false,"other":false},{"code":"O05","label":"Altra condizione (specificare):","exclusive":false,"other":true},{"code":"O06","label":"Preferisco non rispondere","exclusive":true,"other":false}],"hint":[],"random":false},{"id":"G3","text":"Qual è la tua modalità prevalente di lavoro?","type":"single","opts":[{"code":"O01","label":"Prevalentemente in presenza","exclusive":false,"other":false},{"code":"O02","label":"Ibrida","exclusive":false,"other":false},{"code":"O03","label":"Prevalentemente da remoto","exclusive":false,"other":false},{"code":"O04","label":"Non so indicare","exclusive":false,"other":false},{"code":"O05","label":"Preferisco non rispondere","exclusive":true,"other":false}],"hint":[],"random":false},{"id":"G4","text":"Da quanto tempo vivi a Milano o nell’area metropolitana?","type":"single","opts":[{"code":"O01","label":"Meno di un anno","exclusive":false,"other":false},{"code":"O02","label":"Da un anno a meno di tre anni","exclusive":false,"other":false},{"code":"O03","label":"Da tre anni a meno di sei anni","exclusive":false,"other":false},{"code":"O04","label":"Da sei anni a meno di undici anni","exclusive":false,"other":false},{"code":"O05","label":"Undici anni o più","exclusive":false,"other":false},{"code":"O06","label":"Da sempre","exclusive":false,"other":false},{"code":"O07","label":"Non vivo attualmente a Milano","exclusive":false,"other":false},{"code":"O08","label":"Preferisco non rispondere","exclusive":true,"other":false}],"hint":["Considera l’attuale periodo di residenza continuativa. Se ci hai sempre vissuto, scegli \"Da sempre\"."],"random":false},{"id":"G5","text":"Qual è il CAP della zona in cui vivi attualmente?","type":"postal","opts":[{"code":"O01","label":"CAP (cinque cifre):","exclusive":false,"other":false},{"code":"O02","label":"Preferisco non rispondere","exclusive":false,"other":false}],"hint":["Non indicare l’indirizzo completo."],"random":false},{"id":"H1","type":"comment","random":false,"text":"C’è qualcos’altro che vorresti farci sapere sulla tua esperienza con Better Together o sulla tua partecipazione futura?","hint":[],"opts":[{"code":"O01","label":"Vorrei aggiungere (scrivi il tuo commento):","exclusive":false,"other":false},{"code":"O02","label":"Non ho altro da aggiungere","exclusive":false,"other":false}]}],"outro":"Grazie per il tempo che ci hai dedicato. Il tuo contributo aiuterà a comprendere meglio le esperienze e le esigenze dei soci.","sections":[{"startAt":"P1","id":"SEC_P1","title":"Partecipazione ai ritrovi","lines":[{"text":"Iniziamo con il chiederti alcune domande sulla tua partecipazione ai ritrovi.","highlights":["tua partecipazione ai ritrovi"]}]},{"startAt":"A1","id":"SEC_A1","title":"Esperienza, comunicazione e accoglienza","lines":[{"text":"Ora ti chiederemo delle domande sulla tua esperienza con Better Together.","highlights":["esperienza"]}]},{"startAt":"B1-B5","id":"SEC_B1-B5","title":"Comportamenti durante i ritrovi","lines":[{"text":"Ora vorremmo conoscere meglio come hai vissuto i ritrovi, considerando le diverse attività e occasioni di partecipazione.","highlights":["come hai vissuto i ritrovi"]}]},{"startAt":"A5","id":"SEC_A5","title":"Attività organizzate","lines":[{"text":"Vediamo ora cosa pensi delle attività proposte da Better Together e organizzate dai soci (come, ad esempio, yoga, club del libro, cineforum, laboratorio di teatro, laboratoro di collage, etc.).","highlights":["attività","organizzate dai soci"]}]},{"startAt":"B10","id":"SEC_B10","title":"Sedi e accessibilità","lines":[{"text":"Ora ci piacerebbe sapere cosa ne pensi delle sedi dei ritrovi.","highlights":["sedi"]}]},{"startAt":"C1","id":"SEC_C1","title":"Relazioni, appartenenza e benefici percepiti","lines":[{"text":"Vorremo sapere ora qualcosa sulla comunità di Better Together.","highlights":["comunità"]}]},{"startAt":"D1","id":"SEC_D1","title":"Partecipazione futura, motivazioni e ostacoli","lines":[{"text":"Ora vorremmo conoscere meglio quali elementi potrebbero ostacolare la tua partecipazione ai ritrovi.","highlights":["ostacolare la tua partecipazione"]}]},{"startAt":"E1","id":"SEC_E1","title":"Punti di forza e priorità di miglioramento","lines":[{"text":"Ora vorremmo conoscere meglio come possiamo migliorare Better Together.","highlights":["possiamo migliorare"]}]},{"startAt":"F1","id":"SEC_F1","title":"Valutazione economica","lines":[{"text":"Ora ti chiediamo cosa ne pensi della quota mensile.","highlights":["quota","mensile"]},{"text":"Le seguenti domande riguardano la quota mensile ordinaria di 40 €. Puoi rispondere anche se utilizzi l’ingresso giornaliero, hai usufruito del mese iniziale a 5 € oppure oggi non frequenti.","highlights":[]}]},{"startAt":"G1","id":"SEC_G1","title":"Alcune informazioni su di te","lines":[{"text":"Infine, vorremmo sapere qualcosa in più di te.","highlights":["te"]}]},{"startAt":"H1","id":"SEC_H1","title":"Un ultimo commento","lines":[]}]};
+window.BT_SURVEY = {
+  "intro": [
+    "Carə sociə, ti chiediamo di raccontarci come valuti Better Together, quali relazioni hai sviluppato e che cosa ti invoglia a partecipare o ti trattiene dal farlo. La tua opinione è utile anche se hai partecipato una sola volta, vieni saltuariamente, non frequenti più.",
+    "Rispondi sulla base della tua esperienza e della tua situazione attuale. Non c’è un periodo di riferimento uguale per tutte le domande: quando serve, lo troverai indicato. Se non hai esperienza o elementi sufficienti, puoi segnalarlo nelle risposte.",
+    "La partecipazione è volontaria. Per proseguire è necessario rispondere a ogni domanda visualizzata; quando previsto, puoi indicare che non sai rispondere o preferisci non rispondere. Le risposte saranno collegate successivamente alle presenze e ai versamenti registrati dall’associazione per studiare la partecipazione. I risultati saranno presentati in forma aggregata."
+  ],
+  "questions": [
+    {
+      "id": "P1",
+      "text": "Complessivamente, quante volte hai partecipato ai ritrovi?",
+      "type": "single",
+      "opts": [
+        {
+          "code": "O01",
+          "label": "Una volta",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O02",
+          "label": "Due o tre volte",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O03",
+          "label": "Quattro o più volte",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O04",
+          "label": "Non ricordo",
+          "other": false,
+          "exclusive": false
+        }
+      ],
+      "hint": [],
+      "random": false,
+      "highlights": []
+    },
+    {
+      "id": "P2",
+      "text": "Quale delle seguenti affermazioni descrive meglio la tua partecipazione attuale ai ritrovi?",
+      "type": "single",
+      "opts": [
+        {
+          "code": "O01",
+          "label": "Vengo con continuità, per esempio ogni settimana o quasi",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O02",
+          "label": "Vengo quando posso, anche dopo alcune settimane di assenza",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O03",
+          "label": "In questo periodo non partecipo, ma penso di riprendere",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O04",
+          "label": "In questo periodo non partecipo, ma non ho deciso se tornerò",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O05",
+          "label": "Ho partecipato in passato e non tornerò ai ritrovi",
+          "other": false,
+          "exclusive": false
+        }
+      ],
+      "hint": [],
+      "random": false,
+      "highlights": []
+    },
+    {
+      "id": "P3",
+      "text": "Prima di sospendere o interrompere la partecipazione, con quale regolarità venivi ai ritrovi?",
+      "type": "single",
+      "opts": [
+        {
+          "code": "O01",
+          "label": "Venivo con continuità, per esempio ogni settimana o quasi",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O02",
+          "label": "Venivo quando potevo, anche dopo alcune settimane di assenza",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O03",
+          "label": "Non ricordo",
+          "other": false,
+          "exclusive": false
+        }
+      ],
+      "hint": [],
+      "random": false,
+      "highlights": []
+    },
+    {
+      "id": "A1",
+      "text": "Nel complesso, quanto sei soddisfattə dell’esperienza che hai avuto nei ritrovi?",
+      "type": "scale",
+      "opts": [
+        {
+          "code": "1",
+          "label": "Per niente soddisfattə",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "2",
+          "label": "Poco soddisfattə",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "3",
+          "label": "Abbastanza soddisfattə",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "4",
+          "label": "Molto soddisfattə",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "5",
+          "label": "Completamente soddisfattə",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O06",
+          "label": "Non so",
+          "other": false,
+          "exclusive": false
+        }
+      ],
+      "hint": [
+        "Considera l’esperienza avuta finora, anche se hai partecipato una sola volta o oggi non frequenti più."
+      ],
+      "random": false,
+      "highlights": []
+    },
+    {
+      "id": "A2a",
+      "text": "Su quale canale ti capita o ti capitava più spesso di cercare le informazioni pratiche sui ritrovi, come date, orari e sedi?",
+      "type": "single",
+      "opts": [
+        {
+          "code": "O01",
+          "label": "App di Better Together",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O02",
+          "label": "Profilo Instagram di Better Together",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O03",
+          "label": "Eventbrite",
+          "other": false,
+          "exclusive": false
+        }
+      ],
+      "hint": [],
+      "random": false,
+      "highlights": []
+    },
+    {
+      "id": "A2b",
+      "text": "Quanto ti risultano chiare le informazioni su: [Risposta a A2a]?",
+      "type": "scale",
+      "opts": [
+        {
+          "code": "1",
+          "label": "Per niente chiare",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "2",
+          "label": "Poco chiare",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "3",
+          "label": "Abbastanza chiare",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "4",
+          "label": "Molto chiare",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "5",
+          "label": "Del tutto chiare",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O06",
+          "label": "Non so",
+          "other": false,
+          "exclusive": false
+        }
+      ],
+      "hint": [],
+      "random": false,
+      "highlights": []
+    },
+    {
+      "id": "A4",
+      "text": "Da ottobre abbiamo introdotto la app di Better Together. Quanto è stato facile completare l’iscrizione tramite la nuova piattaforma?",
+      "type": "scale",
+      "opts": [
+        {
+          "code": "1",
+          "label": "Per niente facile",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "2",
+          "label": "Poco facile",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "3",
+          "label": "Abbastanza facile",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "4",
+          "label": "Molto facile",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "5",
+          "label": "Estremamente facile",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O06",
+          "label": "Non l’ho mai usato",
+          "other": false,
+          "exclusive": false
+        }
+      ],
+      "hint": [
+        "Considera anche la prima iscrizione a un ritrovo ed eventuali tentativi non riusciti."
+      ],
+      "random": false,
+      "highlights": [
+        "app"
+      ]
+    },
+    {
+      "id": "A6-A7",
+      "text": "Pensando alla tua esperienza nei ritrovi, quanto ti sei sentitə accoltə dalle seguenti figure?",
+      "type": "matrix",
+      "random": false,
+      "rows": [
+        {
+          "id": "A6",
+          "label": "Organizzatori",
+          "question": "Pensando alla tua esperienza nei ritrovi, quanto ti sei sentitə accoltə dagli Organizzatori?",
+          "highlights": [
+            "Organizzatori"
+          ]
+        },
+        {
+          "id": "A7",
+          "label": "Volontari",
+          "question": "Pensando alla tua esperienza nei ritrovi, quanto ti sei sentitə accoltə dai Volontari?",
+          "highlights": [
+            "Volontari"
+          ]
+        }
+      ],
+      "opts": [
+        {
+          "code": "1",
+          "label": "Per niente accoltə",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "2",
+          "label": "Poco accoltə",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "3",
+          "label": "Abbastanza accoltə",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "4",
+          "label": "Molto accoltə",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "5",
+          "label": "Completamente accoltə",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "NI",
+          "label": "Non ho avuto interazioni a sufficienza",
+          "other": false,
+          "exclusive": true
+        },
+        {
+          "code": "ND",
+          "label": "Non so distinguere questa figura dalle altre persone",
+          "other": false,
+          "exclusive": true
+        },
+        {
+          "code": "NR",
+          "label": "Non ricordo",
+          "other": false,
+          "exclusive": true
+        }
+      ],
+      "hint": []
+    },
+    {
+      "id": "A5",
+      "text": "Nel complesso, quanto trovi interessanti le attività attualmente proposte nel calendario?",
+      "type": "scale",
+      "opts": [
+        {
+          "code": "1",
+          "label": "Per niente interessanti",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "2",
+          "label": "Poco interessanti",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "3",
+          "label": "Abbastanza interessanti",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "4",
+          "label": "Molto interessanti",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "5",
+          "label": "Estremamente interessanti",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O06",
+          "label": "Non so",
+          "other": false,
+          "exclusive": false
+        }
+      ],
+      "hint": [],
+      "random": false,
+      "highlights": []
+    },
+    {
+      "id": "B7",
+      "text": "Quali sono le tre l’attività più recenti a cui hai partecipato più recentemente?",
+      "type": "multi",
+      "opts": [
+        {
+          "code": "F1",
+          "label": "Attività dimostrativa 1",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "F2",
+          "label": "Attività dimostrativa 2",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "F3",
+          "label": "Attività dimostrativa 3",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O04",
+          "label": "Non ho mai partecipato ad attività organizzate",
+          "other": false,
+          "exclusive": true
+        },
+        {
+          "code": "O05",
+          "label": "Non ricordo",
+          "other": false,
+          "exclusive": true
+        }
+      ],
+      "hint": [
+        "Indica al massimo tre risposte (non è obbligatorio indicarne tre)."
+      ],
+      "random": true,
+      "highlights": [],
+      "max": 3,
+      "demoList": true
+    },
+    {
+      "id": "B8",
+      "text": "Quando hai partecipato a queste attività?",
+      "type": "matrix",
+      "opts": [
+        {
+          "code": "O01",
+          "label": "Eri già al ritrovo e ti sei fermatə per l’attività",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O02",
+          "label": "Sei venutə direttamente per l’attività",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O03",
+          "label": "Non ricordo",
+          "other": false,
+          "exclusive": true
+        }
+      ],
+      "hint": [],
+      "random": false,
+      "highlights": [],
+      "rows": [
+        {
+          "id": "B8_F1",
+          "activityCode": "F1",
+          "label": "Attività dimostrativa 1",
+          "question": "Quando hai partecipato a: Attività dimostrativa 1?",
+          "highlights": [
+            "Attività dimostrativa 1"
+          ]
+        },
+        {
+          "id": "B8_F2",
+          "activityCode": "F2",
+          "label": "Attività dimostrativa 2",
+          "question": "Quando hai partecipato a: Attività dimostrativa 2?",
+          "highlights": [
+            "Attività dimostrativa 2"
+          ]
+        },
+        {
+          "id": "B8_F3",
+          "activityCode": "F3",
+          "label": "Attività dimostrativa 3",
+          "question": "Quando hai partecipato a: Attività dimostrativa 3?",
+          "highlights": [
+            "Attività dimostrativa 3"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "B9",
+      "text": "Quali tipi di attività vorresti che Better Together proponesse più frequentemente?",
+      "type": "multi",
+      "opts": [
+        {
+          "code": "O01",
+          "label": "Attività sportive o di movimento",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O02",
+          "label": "Giochi e attività ludiche",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O03",
+          "label": "Attività culturali",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O04",
+          "label": "Laboratori o attività creative",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O05",
+          "label": "Momenti di socialità organizzata",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O06",
+          "label": "Altre attività (specificare):",
+          "other": true,
+          "exclusive": false
+        },
+        {
+          "code": "O07",
+          "label": "Nessuna in particolare",
+          "other": false,
+          "exclusive": true
+        },
+        {
+          "code": "O08",
+          "label": "Non so",
+          "other": false,
+          "exclusive": true
+        }
+      ],
+      "hint": [],
+      "random": true,
+      "highlights": [],
+      "max": 2
+    },
+    {
+      "id": "B10",
+      "text": "In quale sede si è svolto l’ultimo ritrovo a cui hai partecipato?",
+      "type": "single",
+      "opts": [
+        {
+          "code": "F1",
+          "label": "LatoB",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "F2",
+          "label": "Parteciprato",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "F3",
+          "label": "21 House of Stories (Piola)",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "F4",
+          "label": "Palazzina Appiani",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "F5",
+          "label": "Spaces Turati",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "F6",
+          "label": "Social Lab (Navigli)",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O07",
+          "label": "Non ricordo",
+          "other": false,
+          "exclusive": false
+        }
+      ],
+      "hint": [],
+      "random": true,
+      "highlights": [],
+      "demoList": false
+    },
+    {
+      "id": "B12",
+      "text": "Quanto è stato facile per te raggiungere la sede: [inserire risposta da elenco aggiornato delle sedi effettive]?",
+      "type": "scale",
+      "opts": [
+        {
+          "code": "1",
+          "label": "Per niente facile",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "2",
+          "label": "Poco facile",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "3",
+          "label": "Abbastanza facile",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "4",
+          "label": "Molto facile",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "5",
+          "label": "Estremamente facile",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O06",
+          "label": "Non ricordo",
+          "other": false,
+          "exclusive": false
+        }
+      ],
+      "hint": [],
+      "random": false,
+      "highlights": []
+    },
+    {
+      "id": "B11",
+      "text": "Quali delle seguenti caratteristiche apprezzi o hai apprezzato di più della sede: [inserire risposta da elenco aggiornato delle sedi effettive]?",
+      "type": "multi",
+      "opts": [
+        {
+          "code": "O01",
+          "label": "Spazi per lavorare o studiare",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O02",
+          "label": "Spazi per socializzare",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O03",
+          "label": "Spazi per le attività",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O04",
+          "label": "Comfort acustico",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O05",
+          "label": "Comfort termico",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O06",
+          "label": "Possibilità di portare cibo dall’esterno",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O07",
+          "label": "Bar / bistrot all’interno",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O08",
+          "label": "Presenza di microonde",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O09",
+          "label": "Posizione della sede e facilità di raggiungerla",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O10",
+          "label": "Supermercati nelle vicinanze",
+          "other": false,
+          "exclusive": false
+        }
+      ],
+      "hint": [],
+      "random": true,
+      "highlights": [],
+      "max": 3
+    },
+    {
+      "id": "B14",
+      "text": "Indipendentemente dalla tua esperienza nelle sedi attuali, quali sono per te le caratteristiche più importanti che dovrebbe avere una sede dei ritrovi?",
+      "type": "multi",
+      "opts": [
+        {
+          "code": "O01",
+          "label": "Spazi per lavorare o studiare",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O02",
+          "label": "Spazi per socializzare",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O03",
+          "label": "Spazi per le attività",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O04",
+          "label": "Comfort acustico",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O05",
+          "label": "Comfort termico",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O06",
+          "label": "Possibilità di portare cibo dall’esterno",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O07",
+          "label": "Bar / bistrot all’interno",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O08",
+          "label": "Presenza di microonde",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O09",
+          "label": "Posizione della sede e facilità di raggiungerla",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O10",
+          "label": "Supermercati nelle vicinanze",
+          "other": false,
+          "exclusive": false
+        }
+      ],
+      "hint": [],
+      "random": true,
+      "highlights": [],
+      "max": 3
+    },
+    {
+      "id": "C6",
+      "text": "Pensando alla tua esperienza complessiva con Better Together, in che misura ritieni che la partecipazione ai ritrovi abbia contribuito a farti sentire meno solə?",
+      "type": "scale",
+      "opts": [
+        {
+          "code": "1",
+          "label": "Per niente",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "2",
+          "label": "Poco",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "3",
+          "label": "Abbastanza",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "4",
+          "label": "Molto",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "5",
+          "label": "Moltissimo",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O06",
+          "label": "Non mi sentivo solə",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O07",
+          "label": "Non so",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O08",
+          "label": "Preferisco non rispondere",
+          "other": false,
+          "exclusive": false
+        }
+      ],
+      "hint": [],
+      "random": false,
+      "highlights": []
+    },
+    {
+      "id": "C1",
+      "text": "Pensando alla tua esperienza complessiva, in che misura ritieni che i ritrovi abbiano ampliato la tua cerchia di conoscenze?",
+      "type": "scale",
+      "opts": [
+        {
+          "code": "1",
+          "label": "Per niente",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "2",
+          "label": "Poco",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "3",
+          "label": "Abbastanza",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "4",
+          "label": "Molto",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "5",
+          "label": "Moltissimo",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O06",
+          "label": "Non so",
+          "other": false,
+          "exclusive": false
+        }
+      ],
+      "hint": [],
+      "random": false,
+      "highlights": []
+    },
+    {
+      "id": "C2",
+      "text": "Con quante persone conosciute attraverso Better Together mantieni attualmente contatti personali anche al di fuori dei ritrovi?",
+      "type": "single",
+      "opts": [
+        {
+          "code": "O01",
+          "label": "Nessuna",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O02",
+          "label": "Una",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O03",
+          "label": "Due o tre",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O04",
+          "label": "Quattro o più",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O05",
+          "label": "Non so indicare",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O06",
+          "label": "Preferisco non rispondere",
+          "other": false,
+          "exclusive": false
+        }
+      ],
+      "hint": [
+        "Considera incontri, conversazioni o scambi personali, anche a distanza. Non contare la semplice presenza nello stesso gruppo di messaggistica."
+      ],
+      "random": false,
+      "highlights": []
+    },
+    {
+      "id": "C5",
+      "text": "Attualmente, quanto ti senti parte della comunità di Better Together?",
+      "type": "scale",
+      "opts": [
+        {
+          "code": "1",
+          "label": "Per niente",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "2",
+          "label": "Poco",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "3",
+          "label": "Abbastanza",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "4",
+          "label": "Molto",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "5",
+          "label": "Moltissimo",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O06",
+          "label": "Non so",
+          "other": false,
+          "exclusive": false
+        }
+      ],
+      "hint": [],
+      "random": false,
+      "highlights": []
+    },
+    {
+      "id": "D1",
+      "text": "Quanto ritieni probabile che parteciperai ad almeno un ritrovo durante il mese di gennaio 2027?",
+      "type": "scale",
+      "opts": [
+        {
+          "code": "1",
+          "label": "Per niente probabile",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "2",
+          "label": "Poco probabile",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "3",
+          "label": "Abbastanza probabile",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "4",
+          "label": "Molto probabile",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "5",
+          "label": "Estremamente probabile",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O06",
+          "label": "Non so",
+          "other": false,
+          "exclusive": false
+        }
+      ],
+      "hint": [
+        "Considera qualsiasi modalità di partecipazione, compreso l’ingresso giornaliero."
+      ],
+      "random": false,
+      "highlights": [
+        "gennaio 2027"
+      ]
+    },
+    {
+      "id": "D2",
+      "text": "Quali aspetti ti invogliano oggi a partecipare ai ritrovi?",
+      "type": "multi",
+      "opts": [
+        {
+          "code": "O01",
+          "label": "Conoscere persone nuove",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O02",
+          "label": "Incontrare persone già conosciute attraverso Better Together",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O03",
+          "label": "Lavorare o studiare in uno spazio condiviso",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O04",
+          "label": "Partecipare ad attività che mi interessano",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O05",
+          "label": "Sentirmi parte di una comunità",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O06",
+          "label": "Avere un’occasione per uscire di casa",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O07",
+          "label": "Altro (specificare):",
+          "other": true,
+          "exclusive": false
+        },
+        {
+          "code": "O08",
+          "label": "Al momento non c’è un aspetto che mi invogli a partecipare",
+          "other": false,
+          "exclusive": true
+        },
+        {
+          "code": "O09",
+          "label": "Non so",
+          "other": false,
+          "exclusive": true
+        }
+      ],
+      "hint": [],
+      "random": true,
+      "highlights": [],
+      "max": 2
+    },
+    {
+      "id": "D3",
+      "text": "Quali dei seguenti aspetti, se presenti, limitano o scoraggiano attualmente la tua partecipazione ai ritrovi?",
+      "type": "multi",
+      "opts": [
+        {
+          "code": "O01",
+          "label": "Impegni di lavoro o studio",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O02",
+          "label": "Impegni personali o familiari",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O03",
+          "label": "Giorni o orari dei ritrovi poco adatti a me",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O04",
+          "label": "Difficoltà a raggiungere le sedi",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O05",
+          "label": "Costi della partecipazione difficili da sostenere",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O06",
+          "label": "Motivi di salute",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O07",
+          "label": "Difficoltà nel conoscere persone o inserirmi nel gruppo",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O08",
+          "label": "Attività proposte poco interessanti per me",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O09",
+          "label": "Esperienze precedenti poco soddisfacenti",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O10",
+          "label": "Informazioni insufficienti",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O11",
+          "label": "Al momento non sento il bisogno di partecipare",
+          "other": false,
+          "exclusive": true
+        },
+        {
+          "code": "O12",
+          "label": "Altro (specificare):",
+          "other": true,
+          "exclusive": false
+        },
+        {
+          "code": "O13",
+          "label": "Nessun aspetto mi limita o scoraggia attualmente",
+          "other": false,
+          "exclusive": true
+        },
+        {
+          "code": "O14",
+          "label": "Non so",
+          "other": false,
+          "exclusive": true
+        }
+      ],
+      "hint": [],
+      "random": true,
+      "highlights": [],
+      "max": 3
+    },
+    {
+      "id": "D5",
+      "text": "Quali sono stati i principali motivi per cui hai sospeso o interrotto la partecipazione?",
+      "type": "multi",
+      "opts": [
+        {
+          "code": "O01",
+          "label": "Impegni di lavoro o studio",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O02",
+          "label": "Impegni personali o familiari",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O03",
+          "label": "Giorni o orari dei ritrovi poco adatti a me",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O04",
+          "label": "Distanza dalle sedi o difficoltà negli spostamenti",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O05",
+          "label": "Trasferimento in un’altra zona o città",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O06",
+          "label": "Motivi di salute",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O07",
+          "label": "Difficoltà a sostenere i costi della partecipazione",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O08",
+          "label": "Attività proposte poco interessanti per me",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O09",
+          "label": "Difficoltà nel conoscere persone o inserirmi nel gruppo",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O10",
+          "label": "Esperienze nei ritrovi poco soddisfacenti",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O11",
+          "label": "Informazioni non chiare",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O12",
+          "label": "Le relazioni nate in Better Together proseguono fuori dai ritrovi e sento meno il bisogno di frequentarli",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O13",
+          "label": "Preferisco altre occasioni di socialità o altre attività",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O14",
+          "label": "Non sento più il bisogno di partecipare, per altre ragioni",
+          "other": false,
+          "exclusive": true
+        },
+        {
+          "code": "O15",
+          "label": "Altro (specificare):",
+          "other": true,
+          "exclusive": false
+        },
+        {
+          "code": "O16",
+          "label": "Non so",
+          "other": false,
+          "exclusive": true
+        }
+      ],
+      "hint": [],
+      "random": true,
+      "highlights": [],
+      "max": 2
+    },
+    {
+      "id": "E2",
+      "text": "Su quali aspetti Better Together dovrebbe intervenire con maggiore priorità?",
+      "type": "multi",
+      "opts": [
+        {
+          "code": "O01",
+          "label": "Comunicazione e organizzazione dei ritrovi",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O02",
+          "label": "Attività proposte",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O03",
+          "label": "Accoglienza e facilità di inserirsi nel gruppo",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O04",
+          "label": "Opportunità di conoscere persone e sviluppare relazioni significative",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O05",
+          "label": "Posizione, comfort e servizi delle sedi",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O06",
+          "label": "Coinvolgimento dei soci nelle decisioni dell’associazione",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O07",
+          "label": "Quota mensile e valore dell’offerta",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O08",
+          "label": "Organizzazione di ritrovi nel fine settimana",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O09",
+          "label": "Altro (specificare):",
+          "other": true,
+          "exclusive": false
+        },
+        {
+          "code": "O10",
+          "label": "Non ritengo necessari miglioramenti",
+          "other": false,
+          "exclusive": true
+        },
+        {
+          "code": "O11",
+          "label": "Non so",
+          "other": false,
+          "exclusive": true
+        }
+      ],
+      "hint": [],
+      "random": true,
+      "highlights": [],
+      "max": 2
+    },
+    {
+      "id": "F1",
+      "text": "Considerando la tua situazione economica attuale, quanto è o sarebbe sostenibile per te versare una quota mensile di 40 €?",
+      "type": "scale",
+      "opts": [
+        {
+          "code": "1",
+          "label": "Per niente sostenibile",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "2",
+          "label": "Poco sostenibile",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "3",
+          "label": "Abbastanza sostenibile",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "4",
+          "label": "Molto sostenibile",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "5",
+          "label": "Del tutto sostenibile",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O06",
+          "label": "Non so",
+          "other": false,
+          "exclusive": false
+        }
+      ],
+      "hint": [],
+      "random": false,
+      "highlights": []
+    },
+    {
+      "id": "F2",
+      "text": "Considerando l’esperienza complessiva di Better Together, in che misura ritieni che valga la quota mensile di 40 €?",
+      "type": "scale",
+      "opts": [
+        {
+          "code": "1",
+          "label": "Per niente",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "2",
+          "label": "Poco",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "3",
+          "label": "Abbastanza",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "4",
+          "label": "Molto",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "5",
+          "label": "Completamente",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O06",
+          "label": "Non so",
+          "other": false,
+          "exclusive": false
+        }
+      ],
+      "hint": [],
+      "random": false,
+      "highlights": []
+    },
+    {
+      "id": "F3",
+      "text": "Se la quota mensile di Better Together aumentasse da 40 a 45 €, senza modifiche ai ritrovi, quanto considereresti accettabile questo aumento?",
+      "type": "scale",
+      "opts": [
+        {
+          "code": "1",
+          "label": "Del tutto inaccettabile",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "2",
+          "label": "Piuttosto inaccettabile",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "3",
+          "label": "Né accettabile né inaccettabile",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "4",
+          "label": "Piuttosto accettabile",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "5",
+          "label": "Del tutto accettabile",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O06",
+          "label": "Non so",
+          "other": false,
+          "exclusive": false
+        }
+      ],
+      "hint": [],
+      "random": false,
+      "highlights": []
+    },
+    {
+      "id": "G1",
+      "text": "Come descriveresti il tuo genere?",
+      "type": "single",
+      "opts": [
+        {
+          "code": "O01",
+          "label": "Donna",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O02",
+          "label": "Uomo",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O03",
+          "label": "Non binario",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O04",
+          "label": "Mi descrivo in un altro modo (specificare facoltativamente):",
+          "other": true,
+          "exclusive": false
+        },
+        {
+          "code": "O05",
+          "label": "Preferisco non rispondere",
+          "other": false,
+          "exclusive": false
+        }
+      ],
+      "hint": [],
+      "random": false,
+      "highlights": []
+    },
+    {
+      "id": "G2",
+      "text": "Qual è la tua condizione occupazionale principale?",
+      "type": "single",
+      "opts": [
+        {
+          "code": "O01",
+          "label": "Lavoratorə dipendente",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O02",
+          "label": "Lavoratorə autonomə, freelance o imprenditorə",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O03",
+          "label": "Studentə",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O04",
+          "label": "In cerca di occupazione",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O05",
+          "label": "Altra condizione (specificare):",
+          "other": true,
+          "exclusive": false
+        },
+        {
+          "code": "O06",
+          "label": "Preferisco non rispondere",
+          "other": false,
+          "exclusive": false
+        }
+      ],
+      "hint": [],
+      "random": false,
+      "highlights": []
+    },
+    {
+      "id": "G3",
+      "text": "Qual è la tua modalità prevalente di lavoro?",
+      "type": "single",
+      "opts": [
+        {
+          "code": "O01",
+          "label": "Prevalentemente in presenza",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O02",
+          "label": "Ibrida",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O03",
+          "label": "Prevalentemente da remoto",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O04",
+          "label": "Non so indicare",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O05",
+          "label": "Preferisco non rispondere",
+          "other": false,
+          "exclusive": false
+        }
+      ],
+      "hint": [],
+      "random": false,
+      "highlights": []
+    },
+    {
+      "id": "G4",
+      "text": "Da quanto tempo vivi a Milano o nell’area metropolitana?",
+      "type": "single",
+      "opts": [
+        {
+          "code": "O01",
+          "label": "Meno di un anno",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O02",
+          "label": "Da un anno a meno di tre anni",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O03",
+          "label": "Da tre anni a meno di sei anni",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O04",
+          "label": "Da sei anni a meno di undici anni",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O05",
+          "label": "Undici anni o più",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O06",
+          "label": "Da sempre",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O07",
+          "label": "Non vivo attualmente a Milano",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O08",
+          "label": "Preferisco non rispondere",
+          "other": false,
+          "exclusive": false
+        }
+      ],
+      "hint": [
+        "Considera l’attuale periodo di residenza continuativa. Se ci hai sempre vissuto, scegli \"Da sempre\"."
+      ],
+      "random": false,
+      "highlights": []
+    },
+    {
+      "id": "G5",
+      "text": "Qual è il CAP della zona in cui vivi attualmente?",
+      "type": "postal",
+      "opts": [
+        {
+          "code": "O01",
+          "label": "CAP (cinque cifre):",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O02",
+          "label": "Preferisco non rispondere",
+          "other": false,
+          "exclusive": true
+        }
+      ],
+      "hint": [
+        "Non indicare l’indirizzo completo."
+      ],
+      "random": false,
+      "highlights": []
+    },
+    {
+      "id": "H1",
+      "text": "C’è qualcos’altro che vorresti farci sapere sulla tua esperienza con Better Together o sulla tua partecipazione futura?",
+      "type": "comment",
+      "opts": [
+        {
+          "code": "O01",
+          "label": "Vorrei aggiungere (scrivi il tuo commento):",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "O02",
+          "label": "Non ho altro da aggiungere",
+          "other": false,
+          "exclusive": true
+        }
+      ],
+      "hint": [],
+      "random": false,
+      "highlights": []
+    }
+  ],
+  "sections": [
+    {
+      "id": "SEC_P1_9",
+      "startAt": "P1",
+      "lines": [
+        {
+          "text": "Iniziamo con il chiederti alcune domande sulla tua partecipazione ai ritrovi.",
+          "highlights": [
+            "tua partecipazione ai ritrovi"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SEC_A1_37",
+      "startAt": "A1",
+      "lines": [
+        {
+          "text": "Ora ti chiederemo delle domande sulla tua esperienza con Better Together.",
+          "highlights": [
+            "esperienza"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SEC_A5_94",
+      "startAt": "A5",
+      "lines": [
+        {
+          "text": "Vediamo ora cosa pensi delle attività proposte da Better Together e organizzate dai soci (come, ad esempio, yoga, club del libro, cineforum, laboratorio di teatro, laboratoro di collage, etc.).",
+          "highlights": [
+            "attività",
+            "organizzate dai soci"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SEC_B10_139",
+      "startAt": "B10",
+      "lines": [
+        {
+          "text": "Ora ci piacerebbe sapere cosa ne pensi delle sedi dei ritrovi.",
+          "highlights": [
+            "sedi"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SEC_C6_190",
+      "startAt": "C6",
+      "lines": [
+        {
+          "text": "Vorremo sapere ora qualcosa sulla comunità di Better Together.",
+          "highlights": [
+            "comunità"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SEC_D1_237",
+      "startAt": "D1",
+      "lines": [
+        {
+          "text": "Ora vorremmo conoscere meglio quali elementi potrebbero ostacolare la tua partecipazione ai ritrovi.",
+          "highlights": [
+            "ostacolare la tua partecipazione"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SEC_E2_306",
+      "startAt": "E2",
+      "lines": [
+        {
+          "text": "Ora vorremmo conoscere meglio come possiamo migliorare Better Together.",
+          "highlights": [
+            "possiamo migliorare"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SEC_F1_326",
+      "startAt": "F1",
+      "lines": [
+        {
+          "text": "Ora ti chiediamo cosa ne pensi della quota mensile.",
+          "highlights": [
+            "quota",
+            "mensile"
+          ]
+        },
+        {
+          "text": "Le domande che seguono riguardano la quota mensile ordinaria di 40 €. Puoi rispondere anche se utilizzi l’ingresso giornaliero, hai usufruito del mese iniziale a 5 € oppure oggi non frequenti.",
+          "highlights": []
+        }
+      ]
+    },
+    {
+      "id": "SEC_G1_364",
+      "startAt": "G1",
+      "lines": [
+        {
+          "text": "Infine, vorremmo sapere qualcosa in più di te.",
+          "highlights": [
+            "te"
+          ]
+        }
+      ]
+    }
+  ],
+  "outro": "Grazie per il tempo che ci hai dedicato. Il tuo contributo aiuterà a comprendere meglio le esperienze e le esigenze dei soci."
+};

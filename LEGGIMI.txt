@@ -1,16 +1,55 @@
-# Better Together — prova con i volontari
+BETTER TOGETHER - AGGIORNAMENTO ESCLUSIVO PER marioquaranta/test
 
-Sito di test, senza soci fittizi e senza link individuali.
+Repository di destinazione:
+https://github.com/marioquaranta/test
 
-## Pubblicazione su GitHub Pages
-Sostituisci in root i cinque file `index.html`, `styles.css`, `questions.js`, `app.js`, `logo.png`.
-**Elimina** dal repository l'eventuale vecchio file `demo-soci.js` (non è più usato).
+NON usare marioquaranta/test-dev.
 
-Il questionario apre direttamente la pagina iniziale, senza elenco di soci fittizi. Il riquadro sulla ripresa è sotto l'introduzione e **sopra il pulsante di avvio**.
+Sostituisci SOLTANTO questi file nella radice del repository "test":
+- index.html
+- questions.js
+Aggiungi inoltre:
+- survey-patch.js
 
-## Ripresa
-Durante la compilazione, ogni scelta e ogni testo vengono salvati automaticamente nel `localStorage` del browser. Chi chiude e riapre lo stesso indirizzo nello **stesso browser e dispositivo** vede la pagina iniziale con il pulsante **Riprendi il questionario**; tornando alle domande ritrova risposte, posizione e ordine randomizzato.
+NON modificare o cancellare: app.js, styles.css, logo.png, README.md.
 
-Il salvataggio locale non è sincronizzato tra dispositivi, può essere cancellato dall'utente ed è assente in alcune modalità di navigazione privata. **Non raccoglie dati sul server né su GitHub.** Per ripetere la prova dallo stesso browser è disponibile `Ricomincia la prova` dopo il completamento.
+Per provare, apri l'indirizzo GitHub Pages del repository /test/ e
+ricomincia la prova se c'e' una compilazione locale precedente. Il
+sito /test/ salva localmente, non invia le risposte a Supabase.
 
-Gli elenchi B7N e B9 sono ancora dimostrativi. Non utilizzare questa versione per la raccolta dei soci reali.
+CONTENUTI:
+- testo delle domande, risposte, scala, ordine e raccordi dalla versione
+  Questionario_Better_Together_full_v9(2).docx;
+- nessun titolo di sezione visualizzato; i raccordi mantengono
+  l'aspetto esistente, con grassetto in viola;
+- B7: massimo tre attivita', con "Non ho mai partecipato" e "Non ricordo"
+  mutuamente esclusivi;
+- B8: una risposta per ogni attivita' selezionata in B7, fino a tre;
+- B10: sei sedi elencate nel Word e "Non ricordo";
+- B11/B14: massimo tre caratteristiche;
+- P3, B8, B11/B12, D5, G3 filtrate dalle risposte del questionario;
+- altre risposte multiple limitate ed esclusive secondo il Word.
+
+PUNTI DA VERIFICARE PRIMA DELLA SOMMINISTRAZIONE:
+1. Nel Word l'elenco definitivo delle attivita' per B7 non e' ancora
+   presente. Il sito mantiene tre voci DIMOSTRATIVE, da sostituire.
+2. Il corpo del Word omette A3, B1-B5, B6, B13, C3-C4, D4 ed E1, ma
+   l'appendice tecnica li cita ancora. Per questa bozza si e' seguito
+   il corpo delle domande e questi item non sono stati inclusi.
+3. Il testo di B7 nel Word contiene una ripetizione evidente ("le tre
+   l'attivita' ... piu' recentemente"): e' stato mantenuto fedelmente.
+4. B8 e' presentata come sequenza di item individuali, secondo l'interfaccia
+   corrente del sito, non come griglia simultanea. La logica di una risposta
+   per attivita' e' applicata.
+5. L'appendice tecnica descrive B11/B14 come batterie ma il corpo del
+   Word le presenta come selezioni multiple; si e' seguito il corpo.
+
+VERIFICHE:
+- sintassi JavaScript verificata con node --check;
+- test automatici della logica B7/B8 e delle colonne FILTERED in un
+  ambiente simulato superati;
+- NON e' stato eseguito un test end-to-end con browser e database reale.
+- Nessuna modifica e' stata pubblicata direttamente su GitHub.
+
+Raccomandazione: dopo la pubblicazione in /test/, simulare un giro con
+P2 in pausa, tre attivita' in B7 e una sede in B10, poi esportare il CSV.
