@@ -1,0 +1,13 @@
+BETTER TOGETHER - AGGIORNAMENTO DEL SITO "test"
+
+1. Apri https://github.com/marioquaranta/test
+2. Sostituisci nella root del repository: questions.js, app.js e styles.css
+3. Salva le modifiche con Commit changes
+4. Apri https://marioquaranta.github.io/test/ e aggiorna la pagina
+5. Avvia una nuova compilazione di prova e controlla domande, filtri e layout
+
+Non modificare il sito "test-dev".
+Non caricare file CSV dei token personali su GitHub.
+
+Gli elenchi B7 (attivita') e B10 (sedi) sono ancora dimostrativi.
+Le risposte di prova restano salvate solo sul browser/dispositivo utilizzato.

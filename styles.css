@@ -682,3 +682,15 @@ body[data-survey-screen="question"] .single-flow > .actions {
 /* Avviso di ripresa: in fondo al riquadro iniziale, sopra il pulsante. */
 .resume-notice{border-left:3px solid #8a5d94;padding:8px 10px;background:#f7f2f8;font-size:14px;line-height:1.45;margin:18px 0 0;color:#49364f;}
 .resume-notice strong{font-weight:750;}
+
+/* Test Word 9: frasi di raccordo e parole evidenziate nel documento. */
+.bt-emphasis{color:var(--purple-dark);font-weight:750}
+body[data-survey-screen="section"] .section-card{display:flex;flex-direction:column;justify-content:center;gap:18px;min-height:300px}
+body[data-survey-screen="section"] .section-card h2{margin:0;font-size:clamp(24px,3vw,32px);line-height:1.25}
+body[data-survey-screen="section"] .section-lead{font-size:clamp(17px,2.3vw,21px);line-height:1.5;margin:0}
+body[data-survey-screen="section"] .single-flow>.actions{margin-top:16px}
+@media(max-width:550px){
+ body[data-survey-screen="section"] .section-card{padding:27px 20px;min-height:240px;gap:15px}
+ body[data-survey-screen="section"] .section-lead{font-size:17px;line-height:1.46}
+ body[data-survey-screen="section"] .section-card h2{font-size:24px}
+}
