@@ -95,12 +95,14 @@ function matrixRows(q,state=answers){
 // Una schermata per ogni item delle batterie, senza alterare i codici delle variabili.
 function steps(){
   return activeQuestions().flatMap(q=>{
-    // B11: one page for each selected venue, B12: one battery on a single page.
-    if(q.id==='B11')return chosenVenues().map(code=>({key:'B11::'+code,q,row:{id:'B11_'+code,venueCode:code,label:venueName(code)}}));
-    if(q.type==='matrix' && ['A6-A7','B8','B12'].includes(q.id))
-      return [{key:q.id,q,row:null}];
-    return q.type==='matrix' ? matrixRows(q).map(row=>({key:`${q.id}::${row.id}`,q,row}))
+    let pages;
+    // B11: a page for each selected venue; B8 and B12 stay on one page.
+    if(q.id==='B11')pages=chosenVenues().map(code=>({key:'B11::'+code,q,row:{id:'B11_'+code,venueCode:code,label:venueName(code)}}));
+    else if(q.type==='matrix' && ['A6-A7','B8','B12'].includes(q.id))pages=[{key:q.id,q,row:null}];
+    else pages=q.type==='matrix' ? matrixRows(q).map(row=>({key:`${q.id}::${row.id}`,q,row}))
       : [{key:q.id,q,row:null}];
+    const section=(SURVEY.sections||[]).find(x=>x.startAt===q.id);
+    return section?[{key:`section::${section.id}`,section},...pages]:pages;
   });
 }
 function getStep(){return steps().find(s=>s.key===currentKey)||null;}
@@ -142,10 +144,15 @@ function displayTitle(q,row){
  return txt;
 }
 function titleAndHint(q,row){
- const isFirstRow=!row || row.id===matrixRows(q)[0]?.id;
- const section=(SURVEY.sections||[]).find(x=>x.startAt===q.id);
- const connector=section&&isFirstRow?section.lines.map(line=>`<p style="font-size:inherit;line-height:1.55;margin:0 0 16px">${richText(line.text,line.highlights)}</p>`).join(''):'';
- return connector+`<h2 id="question-title">${richText(displayTitle(q,row),q.id==='B11'&&row?.venueCode?[row.label]:q.highlights)}</h2>${(q.hint||[]).map(h=>`<p class="hint">${escapeHtml(h)}</p>`).join('')}`;
+ return `<h2 id="question-title">${richText(displayTitle(q,row),q.id==='B11'&&row?.venueCode?[row.label]:q.highlights)}</h2>${(q.hint||[]).map(h=>`<p class="hint">${escapeHtml(h)}</p>`).join('')}`;
+}
+// A raccordo is a standalone screen: never combine it with the first question.
+function renderRaccordo(step,preserveScroll=false){
+ document.body.dataset.surveyScreen='section';
+ const y=window.scrollY;
+ const lines=step.section.lines.map(line=>`<p style="line-height:1.55;margin:0 0 16px">${richText(line.text,line.highlights)}</p>`).join('');
+ app.innerHTML=pageTop()+`<div class="question-card" role="region" aria-label="Raccordo tra le domande">${lines}</div><div class="actions"><button type="button" class="btn" data-action="back">← Indietro</button><button type="button" class="btn primary" data-action="next">Avanti →</button></div></div>`;
+ if(preserveScroll)window.scrollTo(0,y);else window.scrollTo(0,0);
 }
 function renderIntro(){
  document.body.dataset.surveyScreen="intro";
@@ -212,6 +219,7 @@ function renderQuestion(preserveScroll=false){
  document.body.dataset.surveyScreen="question";
   const step=getStep();
   if(!step){screen='intro';renderIntro();return;}
+  if(step.section){renderRaccordo(step,preserveScroll);return;}
   const {q,row}=step;
   const y=window.scrollY;
   const content=q.type==='matrix' && !row
@@ -221,6 +229,7 @@ function renderQuestion(preserveScroll=false){
   if(preserveScroll)window.scrollTo(0,y);else window.scrollTo(0,0);
 }
 function validate(step){
+  if(step.section)return '';
   const {q,row}=step;
   const ans=getAnswer(q,row);
   if(!ans)return 'Seleziona una risposta per proseguire.';
@@ -383,6 +392,6 @@ app.addEventListener('input',e=>{
  saveProgress();
 });
 // Read-only interface for automated smoke testing; not displayed to respondents.
-window.BT_TEST={get activeIds(){return activeQuestions().map(q=>q.id);},get activeKeys(){return steps().map(s=>s.key);},get currentId(){return getStep()?.q.id||null;},get currentRowId(){return getStep()?.row?.id||null;},get currentKey(){return currentKey;},get answers(){return JSON.parse(JSON.stringify(answers));},get csv(){return toCSV();},get pages(){return QUESTIONS;}};
+window.BT_TEST={get activeIds(){return activeQuestions().map(q=>q.id);},get activeKeys(){return steps().map(s=>s.key);},get currentId(){return getStep()?.q?.id||null;},get currentRowId(){return getStep()?.row?.id||null;},get currentKey(){return currentKey;},get answers(){return JSON.parse(JSON.stringify(answers));},get csv(){return toCSV();},get pages(){return QUESTIONS;}};
 restoreProgress();
 if(screen==='done')renderDone();else renderIntro();

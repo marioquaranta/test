@@ -1,25 +1,9 @@
-BETTER TOGETHER - TEST (solo repository marioquaranta/test)
-Versione riferimento: Questionario_Better_Together_full_v9(4).docx
+Better Together - test - v9(4) con raccordi su schermate separate
 
-Caricare nella radice di github.com/marioquaranta/test:
-  1) questions.js
-  2) app.js
-NON caricare in test-dev. Nessun survey-patch.js.
-index.html, styles.css, logo.png rimangono invariati.
+Sostituisci su GitHub (repository marioquaranta/test) il file app.js.
+questions.js e index.html sono inclusi per comodita e sono invariati rispetto alla v9(4).
+Non aggiungere survey-patch.js: la logica e tutta in app.js.
 
-B10: fino a tre SEDI (senza doppioni), "Non ricordo" esclusivo.
-B12: una pagina, una valutazione obbligatoria per ciascuna sede scelta.
-B11: una pagina per ciascuna sede scelta, fino a tre caratteristiche obbligatorie.
-Esportazione CSV: B10 con codici separati da punto e virgola; B12_F1...B12_F6,
-B11_F1...B11_F6 per sedi in ordine codici; sedi non selezionate = FILTERED.
-
-A2a: soltanto App, Instagram, Eventbrite sono in grassetto viola.
-Senza titoli di sezione, FILTRO o NOTA per i rispondenti.
-B7 mantiene il provvisorio elenco DIMOSTRATIVO delle attività.
-Il salvataggio locale usa chiave V4: il precedente test non viene recuperato.
-Il sito continua a essere una prova LOCALE: nessun invio a Supabase.
-
-Incongruenze nel Word v9(4): nelle note B11 e B12 si parla di "attivita"
-selezionate in B10, ma B10 elenca SEDI; implementate come sedi.
-Le note tecniche finali sulla batteria B11/B14 non sono aggiornate;
-prevalgono il corpo delle domande e le istruzioni accanto a esse.
+Le frasi di raccordo sono ora schermate autonome, prima della prima domanda di ciascun blocco.
+Mantengono grassetti in viola e font uguale al resto del testo, senza mostrare i titoli di sezione.
+La navigazione Indietro/Avanti e la ripresa locale includono anche le schermate di raccordo.
