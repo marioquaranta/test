@@ -2,7 +2,7 @@
 /* Test con volontari: ripresa locale nel browser, senza raccolta centralizzata. */
 const SURVEY=window.BT_SURVEY;
 const QUESTIONS=SURVEY.questions;
-const SECTIONS=SURVEY.sections||[];
+const SECTIONS=(SURVEY.sections||[]).filter(section=>(section.lines||[]).some(line=>String(line.text||'').trim()));
 const SECTION_BY_START=Object.fromEntries(SECTIONS.map(s=>[s.startAt,s]));
 const QUESTION_MAP=Object.fromEntries(QUESTIONS.map(q=>[q.id,q]));
 const app=document.getElementById('app');
@@ -121,9 +121,11 @@ function titleAndHint(q,row=null){
  return `<h2 id="question-title">${richText(resolveText(prompt),highlights)}</h2>${(q.hint||[]).map(h=>`<p class="hint">${escapeHtml(h)}</p>`).join('')}`;
 }
 function renderSection(section){
- document.body.dataset.surveyScreen='section';
- const content=(section.lines||[]).map(line=>`<p class="section-lead">${richText(line.text,line.highlights)}</p>`).join('');
- app.innerHTML=pageTop()+`<div class="question-card section-card"><h2 id="section-title">${escapeHtml(section.title)}</h2>${content}</div><div class="actions"><button type="button" class="btn" data-action="back">← Indietro</button><button type="button" class="btn primary" data-action="next">Avanti →</button></div></div>`;
+ // Nessun titolo di sezione: le frasi di raccordo utilizzano esattamente
+ // dimensione e stile del testo delle domande, su ogni dispositivo.
+ document.body.dataset.surveyScreen='question';
+ const content=(section.lines||[]).map(line=>`<h2 class="section-lead">${richText(line.text,line.highlights)}</h2>`).join('');
+ app.innerHTML=pageTop()+`<div class="question-card section-card">${content}</div><div class="actions"><button type="button" class="btn" data-action="back">← Indietro</button><button type="button" class="btn primary" data-action="next">Avanti →</button></div></div>`;
  window.scrollTo(0,0);
 }
 function renderIntro(){
