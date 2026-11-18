@@ -164,19 +164,28 @@ window.BT_SURVEY = {
           "code": "O01",
           "label": "App di Better Together",
           "other": false,
-          "exclusive": false
+          "exclusive": false,
+          "highlights": [
+            "App"
+          ]
         },
         {
           "code": "O02",
           "label": "Profilo Instagram di Better Together",
           "other": false,
-          "exclusive": false
+          "exclusive": false,
+          "highlights": [
+            "Instagram"
+          ]
         },
         {
           "code": "O03",
           "label": "Eventbrite",
           "other": false,
-          "exclusive": false
+          "exclusive": false,
+          "highlights": [
+            "Eventbrite"
+          ]
         }
       ],
       "hint": [],
@@ -446,7 +455,7 @@ window.BT_SURVEY = {
     },
     {
       "id": "B8",
-      "text": "Quando hai partecipato a queste attività?",
+      "text": "Quando hai partecipato a:",
       "type": "matrix",
       "opts": [
         {
@@ -562,8 +571,8 @@ window.BT_SURVEY = {
     },
     {
       "id": "B10",
-      "text": "In quale sede si è svolto l’ultimo ritrovo a cui hai partecipato?",
-      "type": "single",
+      "text": "Quali sono le sedi degli ultimi tre ritrovi a cui hai partecipato più recentemente?",
+      "type": "multi",
       "opts": [
         {
           "code": "F1",
@@ -605,18 +614,21 @@ window.BT_SURVEY = {
           "code": "O07",
           "label": "Non ricordo",
           "other": false,
-          "exclusive": false
+          "exclusive": true
         }
       ],
-      "hint": [],
+      "hint": [
+        "Indica al massimo tre risposte (non è obbligatorio indicarne tre)."
+      ],
       "random": true,
       "highlights": [],
-      "demoList": false
+      "demoList": false,
+      "max": 3
     },
     {
       "id": "B12",
-      "text": "Quanto è stato facile per te raggiungere la sede: [inserire risposta da elenco aggiornato delle sedi effettive]?",
-      "type": "scale",
+      "text": "Quanto è stato facile per te raggiungere la sede:",
+      "type": "matrix",
       "opts": [
         {
           "code": "1",
@@ -657,11 +669,61 @@ window.BT_SURVEY = {
       ],
       "hint": [],
       "random": false,
-      "highlights": []
+      "highlights": [],
+      "rows": [
+        {
+          "id": "B12_F1",
+          "venueCode": "F1",
+          "label": "LatoB",
+          "highlights": [
+            "LatoB"
+          ]
+        },
+        {
+          "id": "B12_F2",
+          "venueCode": "F2",
+          "label": "Parteciprato",
+          "highlights": [
+            "Parteciprato"
+          ]
+        },
+        {
+          "id": "B12_F3",
+          "venueCode": "F3",
+          "label": "21 House of Stories (Piola)",
+          "highlights": [
+            "21 House of Stories (Piola)"
+          ]
+        },
+        {
+          "id": "B12_F4",
+          "venueCode": "F4",
+          "label": "Palazzina Appiani",
+          "highlights": [
+            "Palazzina Appiani"
+          ]
+        },
+        {
+          "id": "B12_F5",
+          "venueCode": "F5",
+          "label": "Spaces Turati",
+          "highlights": [
+            "Spaces Turati"
+          ]
+        },
+        {
+          "id": "B12_F6",
+          "venueCode": "F6",
+          "label": "Social Lab (Navigli)",
+          "highlights": [
+            "Social Lab (Navigli)"
+          ]
+        }
+      ]
     },
     {
       "id": "B11",
-      "text": "Quali delle seguenti caratteristiche apprezzi o hai apprezzato di più della sede: [inserire risposta da elenco aggiornato delle sedi effettive]?",
+      "text": "Quali delle seguenti caratteristiche apprezzi o hai apprezzato di più della sede:",
       "type": "multi",
       "opts": [
         {
@@ -1311,7 +1373,9 @@ window.BT_SURVEY = {
           "exclusive": true
         }
       ],
-      "hint": [],
+      "hint": [
+        "Riferisciti alla pausa o interruzione attuale."
+      ],
       "random": true,
       "highlights": [],
       "max": 2
@@ -1759,7 +1823,9 @@ window.BT_SURVEY = {
           "exclusive": true
         }
       ],
-      "hint": [],
+      "hint": [
+        "Grazie per il tempo che ci hai dedicato. Il tuo contributo aiuterà a comprendere meglio le esperienze e le esigenze dei soci."
+      ],
       "random": false,
       "highlights": []
     }
@@ -1803,7 +1869,7 @@ window.BT_SURVEY = {
       ]
     },
     {
-      "id": "SEC_B10_139",
+      "id": "SEC_B10_140",
       "startAt": "B10",
       "lines": [
         {
@@ -1815,7 +1881,7 @@ window.BT_SURVEY = {
       ]
     },
     {
-      "id": "SEC_C6_190",
+      "id": "SEC_C6_191",
       "startAt": "C6",
       "lines": [
         {
@@ -1827,7 +1893,7 @@ window.BT_SURVEY = {
       ]
     },
     {
-      "id": "SEC_D1_237",
+      "id": "SEC_D1_238",
       "startAt": "D1",
       "lines": [
         {
@@ -1839,7 +1905,7 @@ window.BT_SURVEY = {
       ]
     },
     {
-      "id": "SEC_E2_306",
+      "id": "SEC_E2_307",
       "startAt": "E2",
       "lines": [
         {
@@ -1851,7 +1917,7 @@ window.BT_SURVEY = {
       ]
     },
     {
-      "id": "SEC_F1_326",
+      "id": "SEC_F1_327",
       "startAt": "F1",
       "lines": [
         {
@@ -1868,7 +1934,7 @@ window.BT_SURVEY = {
       ]
     },
     {
-      "id": "SEC_G1_364",
+      "id": "SEC_G1_365",
       "startAt": "G1",
       "lines": [
         {

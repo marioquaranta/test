@@ -2,45 +2,19 @@
 /* Test con volontari: ripresa locale nel browser, senza raccolta centralizzata. */
 const SURVEY=window.BT_SURVEY;
 const QUESTIONS=SURVEY.questions;
-const SECTIONS=(SURVEY.sections||[]).filter(section=>(section.lines||[]).some(line=>String(line.text||'').trim()));
-const SECTION_BY_START=Object.fromEntries(SECTIONS.map(s=>[s.startAt,s]));
 const QUESTION_MAP=Object.fromEntries(QUESTIONS.map(q=>[q.id,q]));
 const app=document.getElementById('app');
 const invitation='TEST_VOLONTARI';
-const STORAGE_KEY='BT_TEST_VOLONTARI_PROGRESS_V9';
+const STORAGE_KEY='BT_TEST_VOLONTARI_PROGRESS_V4';
 let started=false;
 let screen='intro';
-let currentKey='SEC_P1';
+let currentKey=QUESTIONS[0].id;
 let answers={};
 let alertMessage='';
 const optionOrders={};
 const rowOrders={};
 
 function escapeHtml(value){return String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-// Colora in viola soltanto le parole contrassegnate in grassetto nel Word.
-function richText(value,highlights=[]){
-  const str=String(value??'');
-  const spans=[];
-  for(const keyword of highlights){
-    if(!keyword)continue;
-    const start=str.toLowerCase().indexOf(keyword.toLowerCase());
-    if(start>=0&&spans.every(x=>start>=x[1]||start+keyword.length<=x[0]))spans.push([start,start+keyword.length]);
-  }
-  spans.sort((a,b)=>a[0]-b[0]);
-  let out='',cursor=0;
-  for(const [a,b] of spans){out+=escapeHtml(str.slice(cursor,a))+'<span class="bt-emphasis">'+escapeHtml(str.slice(a,b))+'</span>';cursor=b;}
-  return out+escapeHtml(str.slice(cursor));
-}
-function selectedLabel(id){
- const q=QUESTION_MAP[id];
- return q?.opts.find(o=>o.code===answers[id]?.v)?.label||'';
-}
-function resolveText(value){
- return String(value||'')
-   .replace('[Risposta a A2a]',selectedLabel('A2a'))
-   .replace('[inserire risposta da elenco delle singole attività effettivamente organizzate]',selectedLabel('B7'))
-   .replace('[inserire risposta da elenco aggiornato delle sedi effettive]',selectedLabel('B10'));
-}
 function shuffle(items){let arr=[...items];for(let i=arr.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}return arr;}
 for(const q of QUESTIONS){
   const o=q.opts||[];
@@ -48,7 +22,7 @@ for(const q of QUESTIONS){
   optionOrders[q.id]=q.random?[...shuffle(o.filter(x=>!fixed.includes(x))),...fixed]:o;
   if(q.type==='matrix'){
     if(q.id==='B1-B5'){
-      rowOrders[q.id]=[q.rows.find(r=>r.id==='B1'),...shuffle(q.rows.filter(r=>r.id!=='B1'))];
+      rowOrders[q.id]=shuffle(q.rows.filter(r=>r.id!=='B2'));
     }else{
       rowOrders[q.id]=q.random?shuffle(q.rows):q.rows;
     }
@@ -56,13 +30,13 @@ for(const q of QUESTIONS){
 }
 // I progressi del test rimangono esclusivamente in questo browser e dispositivo.
 function saveProgress(){
- try{localStorage.setItem(STORAGE_KEY,JSON.stringify({version:9,started,screen,currentKey,answers,optionOrders:Object.fromEntries(Object.entries(optionOrders).map(([id,opts])=>[id,opts.map(o=>o.code)])),rowOrders:Object.fromEntries(Object.entries(rowOrders).map(([id,rows])=>[id,rows.map(r=>r.id)])),savedAt:new Date().toISOString()}));}
+ try{localStorage.setItem(STORAGE_KEY,JSON.stringify({version:4,started,screen,currentKey,answers,optionOrders:Object.fromEntries(Object.entries(optionOrders).map(([id,opts])=>[id,opts.map(o=>o.code)])),rowOrders:Object.fromEntries(Object.entries(rowOrders).map(([id,rows])=>[id,rows.map(r=>r.id)])),savedAt:new Date().toISOString()}));}
  catch(err){console.warn('Salvataggio locale non disponibile',err);}
 }
 function restoreProgress(){
  let st;
  try{st=JSON.parse(localStorage.getItem(STORAGE_KEY)||'null');}catch{return;}
- if(!st||st.version!==9||!st.started||typeof st.answers!=='object'||!st.answers)return;
+ if(!st||st.version!==4||!st.started||typeof st.answers!=='object'||!st.answers)return;
  started=true;
  answers=st.answers;
  for(const q of QUESTIONS){
@@ -71,7 +45,7 @@ function restoreProgress(){
    optionOrders[q.id]=prev.map(c=>q.opts.find(o=>o.code===c));
   if(q.type==='matrix'){
    const previous=st.rowOrders?.[q.id];
-   const eligible=q.rows;
+   const eligible=q.id==='B1-B5'?q.rows.filter(r=>r.id!=='B2'):q.rows;
    if(Array.isArray(previous)&&previous.length===eligible.length&&new Set(previous).size===previous.length&&previous.every(id=>eligible.some(r=>r.id===id)))
     rowOrders[q.id]=previous.map(id=>eligible.find(r=>r.id===id));
   }
@@ -79,35 +53,55 @@ function restoreProgress(){
  currentKey=typeof st.currentKey==='string'?st.currentKey:QUESTIONS[0].id;
  screen=st.screen==='done'?'done':'intro';
 }
-function getAnswer(q){return answers[q.id]||null;}
-function active(q){
- const value=(id)=>answers[id]?.v;
+function getAnswer(q,row=null){
+ if(q.id==='B11'&&row?.venueCode) return answers.B11?.byVenue?.[row.venueCode]||null;
+ return answers[q.id]||null;
+}
+function chosenVenues(state=answers){
+ const codes=Array.isArray(state.B10?.v)?state.B10.v:[];
+ return codes.filter(code=>/^F[1-6]$/.test(code));
+}
+function venueName(code){return QUESTION_MAP.B10.opts.find(o=>o.code===code)?.label||'';}
+
+function active(q,state=answers){
+ const value=(id)=>state[id]?.v;
  if(q.id==='P3')return ['O03','O04','O05'].includes(value('P2')) && ['O02','O03'].includes(value('P1'));
- if(q.id==='B8')return /^F\d+$/.test(value('B7')||'');
- if(['B11','B12'].includes(q.id))return /^F\d+$/.test(value('B10')||'');
+ if(q.id==='B8')return Array.isArray(value('B7')) && value('B7').some(code=>/^F\d+$/.test(code));
+ if(['B11','B12'].includes(q.id))return chosenVenues(state).length>0;
  if(q.id==='D5')return ['O03','O04','O05'].includes(value('P2'));
  if(q.id==='G3')return ['O01','O02'].includes(value('G2'));
  return true;
 }
-function activeQuestions(){return QUESTIONS.filter(active);}
-function matrixRows(q){
+function activeQuestions(){return QUESTIONS.filter(q=>active(q));}
+function matrixRows(q,state=answers){
+ if(q.id==='B8'){
+  const chosen=Array.isArray(state.B7?.v)?state.B7.v:[];
+  return chosen.map(code=>q.rows.find(row=>row.activityCode===code)).filter(Boolean);
+ }
+ if(q.id==='B12'){
+  return chosenVenues(state).map(code=>q.rows.find(row=>row.venueCode===code)).filter(Boolean);
+ }
  const rows=rowOrders[q.id]||[];
  if(q.id==='B1-B5'){
-  const used=['2','3','4'].includes(answers[q.id]?.rows?.B1);
-  return rows.filter(r=>r.id!=='B2'||used);
+  const withB2=[];
+  for(const r of rows){
+   withB2.push(r);
+   if(r.id==='B1'&&['2','3','4'].includes(state[q.id]?.rows?.B1))withB2.push(q.rows.find(x=>x.id==='B2'));
+  }
+  return withB2;
  }
  return rows;
 }
 // Una schermata per ogni item delle batterie, senza alterare i codici delle variabili.
 function steps(){
-  const all=[];
-  for(const q of activeQuestions()){
-    const section=SECTION_BY_START[q.id];
-    if(section)all.push({key:section.id,section,q:null,row:null});
-    if(q.type==='matrix')all.push(...matrixRows(q).map(row=>({key:`${q.id}::${row.id}`,q,row})));
-    else all.push({key:q.id,q,row:null});
-  }
-  return all;
+  return activeQuestions().flatMap(q=>{
+    // B11: one page for each selected venue, B12: one battery on a single page.
+    if(q.id==='B11')return chosenVenues().map(code=>({key:'B11::'+code,q,row:{id:'B11_'+code,venueCode:code,label:venueName(code)}}));
+    if(q.type==='matrix' && ['A6-A7','B8','B12'].includes(q.id))
+      return [{key:q.id,q,row:null}];
+    return q.type==='matrix' ? matrixRows(q).map(row=>({key:`${q.id}::${row.id}`,q,row}))
+      : [{key:q.id,q,row:null}];
+  });
 }
 function getStep(){return steps().find(s=>s.key===currentKey)||null;}
 function pageTop(){
@@ -115,18 +109,43 @@ function pageTop(){
   const percent=Math.round(((i+1)/list.length)*100);
   return `<div class="single-flow"><div class="eyebrow">QUESTIONARIO SOCI · DICEMBRE 2026</div><div class="progress-bg" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${percent}" aria-label="Avanzamento"><div class="progress-fill" style="width:${percent}%"></div></div>`;
 }
-function titleAndHint(q,row=null){
- const prompt=row?.question||q.text;
- const highlights=row?.highlights||q.highlights||[];
- return `<h2 id="question-title">${richText(resolveText(prompt),highlights)}</h2>${(q.hint||[]).map(h=>`<p class="hint">${escapeHtml(h)}</p>`).join('')}`;
+// Raccordi e parole in grassetto del Word: in viola, senza cambiare font.
+function richText(value,highlights=[]){
+ const src=String(value??'');
+ const parts=(highlights||[]).filter(Boolean).sort((a,b)=>b.length-a.length);
+ if(!parts.length)return escapeHtml(src);
+ let cursor=0,result='';
+ while(cursor<src.length){
+  let found=null;
+  for(const word of parts){
+   const pos=src.indexOf(word,cursor);
+   if(pos<0)continue;
+   if(!found||pos<found.pos||(pos===found.pos&&word.length>found.word.length))found={pos,word};
+  }
+  if(!found)break;
+  result+=escapeHtml(src.slice(cursor,found.pos));
+  result+=`<strong style="color:var(--purple);font-weight:700">${escapeHtml(found.word)}</strong>`;
+  cursor=found.pos+found.word.length;
+ }
+ return result+escapeHtml(src.slice(cursor));
 }
-function renderSection(section){
- // Nessun titolo di sezione: le frasi di raccordo utilizzano esattamente
- // dimensione e stile del testo delle domande, su ogni dispositivo.
- document.body.dataset.surveyScreen='question';
- const content=(section.lines||[]).map(line=>`<h2 class="section-lead">${richText(line.text,line.highlights)}</h2>`).join('');
- app.innerHTML=pageTop()+`<div class="question-card section-card">${content}</div><div class="actions"><button type="button" class="btn" data-action="back">← Indietro</button><button type="button" class="btn primary" data-action="next">Avanti →</button></div></div>`;
- window.scrollTo(0,0);
+function displayTitle(q,row){
+ if(q.id==='B8')return 'Quando hai partecipato a:';
+ let txt=q.text;
+ if(q.id==='A2b'){
+  const option=QUESTION_MAP.A2a.opts.find(o=>o.code===answers.A2a?.v);
+  txt=txt.replace('[Risposta a A2a]',option?.label||'il canale selezionato');
+ }
+ if(q.id==='B11'&&row?.venueCode){
+   txt=txt+' '+venueName(row.venueCode)+'?';
+ }
+ return txt;
+}
+function titleAndHint(q,row){
+ const isFirstRow=!row || row.id===matrixRows(q)[0]?.id;
+ const section=(SURVEY.sections||[]).find(x=>x.startAt===q.id);
+ const connector=section&&isFirstRow?section.lines.map(line=>`<p style="font-size:inherit;line-height:1.55;margin:0 0 16px">${richText(line.text,line.highlights)}</p>`).join(''):'';
+ return connector+`<h2 id="question-title">${richText(displayTitle(q,row),q.id==='B11'&&row?.venueCode?[row.label]:q.highlights)}</h2>${(q.hint||[]).map(h=>`<p class="hint">${escapeHtml(h)}</p>`).join('')}`;
 }
 function renderIntro(){
  document.body.dataset.surveyScreen="intro";
@@ -145,32 +164,34 @@ function renderSingle(q){
  const options=optionOrders[q.id];
  const choice=(o)=>{
   const checked=ans.v===o.code;
-  return `<div class="choice-wrap"><label class="choice ${checked?'selected':''}"><input type="radio" name="single-${q.id}" data-action="radio" value="${escapeHtml(o.code)}" ${checked?'checked':''}><span>${escapeHtml(o.label)}</span></label>${o.other&&checked?`<div class="write-in"><label for="other-input">${o.label.includes('facoltativamente')?'Se desideri, specifica':'Specifica'}</label><input id="other-input" data-action="other-text" type="text" maxlength="300" value="${escapeHtml(ans.t||'')}" autocomplete="off"></div>`:''}</div>`;
+  return `<div class="choice-wrap"><label class="choice ${checked?'selected':''}"><input type="radio" name="single-${q.id}" data-action="radio" value="${escapeHtml(o.code)}" ${checked?'checked':''}><span>${richText(o.label,o.highlights)}</span></label>${o.other&&checked?`<div class="write-in"><label for="other-input">${o.label.includes('facoltativamente')?'Se desideri, specifica':'Specifica'}</label><input id="other-input" data-action="other-text" type="text" maxlength="300" value="${escapeHtml(ans.t||'')}" autocomplete="off"></div>`:''}</div>`;
  };
  return `<div class="choice-list">${options.map(choice).join('')}</div>`;
 }
-function renderMulti(q){
- const ans=getAnswer(q)||{v:[],otherTexts:{}};
+function renderMulti(q,row=null){
+ const ans=getAnswer(q,row)||{v:[],otherTexts:{}};
  const codes=Array.isArray(ans.v)?ans.v:[];
- const maxText=q.max?`Seleziona al massimo ${q.max} risposte.`:'Seleziona tutte le risposte pertinenti.';
+ const maxText=['B7','B10'].includes(q.id)?'':q.max?`Seleziona al massimo ${q.max} risposte.`:'Seleziona tutte le risposte pertinenti.';
  const options=optionOrders[q.id];
- return `<p class="muted small" style="margin-bottom:16px">${maxText}</p><div class="choice-list">${options.map(o=>{
+ return `${maxText?`<p class="muted small" style="margin-bottom:16px">${maxText}</p>`:''}<div class="choice-list">${options.map(o=>{
    const checked=codes.includes(o.code);
-   return `<div class="choice-wrap"><label class="choice ${checked?'selected':''}"><input type="checkbox" data-action="check" value="${escapeHtml(o.code)}" ${checked?'checked':''}><span>${escapeHtml(o.label)}</span></label>${o.other&&checked?`<div class="write-in"><label for="other-input">Specifica</label><input id="other-input" data-action="other-text" data-code="${o.code}" maxlength="300" value="${escapeHtml(ans.otherTexts?.[o.code]||'')}" autocomplete="off"></div>`:''}</div>`;
+   return `<div class="choice-wrap"><label class="choice ${checked?'selected':''}"><input type="checkbox" data-action="check" value="${escapeHtml(o.code)}" ${checked?'checked':''}><span>${richText(o.label,o.highlights)}</span></label>${o.other&&checked?`<div class="write-in"><label for="other-input">Specifica</label><input id="other-input" data-action="other-text" data-code="${o.code}" maxlength="300" value="${escapeHtml(ans.otherTexts?.[o.code]||'')}" autocomplete="off"></div>`:''}</div>`;
  }).join('')}</div>`;
 }
 function renderMatrixItem(q,row){
   const ans=answers[q.id]?.rows?.[row.id]||'';
   const normal=q.opts.filter(o=>/^[1-5]$/.test(o.code));
-  const extras=q.opts.filter(o=>!normal.includes(o)&&(!o.onlyRows||o.onlyRows.includes(row.id)));
+  const extras=q.opts.filter(o=>!normal.includes(o));
   const instructionByBattery={
     'A6-A7':'Per ogni figura indicata, seleziona una sola risposta.',
     'B1-B5':'Per ogni situazione descritta, seleziona una sola risposta.',
-    'B11':'Per ogni aspetto indicato, seleziona una sola risposta.',
-    'B14':'Per ogni caratteristica indicata, seleziona una sola risposta.'
+    'B9V':'Per ogni aspetto indicato, seleziona una sola risposta.',
+    'B13':'Per ogni caratteristica indicata, seleziona una sola risposta.',
+    'B8':'Seleziona una sola risposta per questa attività.',
+    'B12':'Seleziona una risposta per questa sede.'
   };
   const instruction=instructionByBattery[q.id]||'Seleziona una sola risposta.';
-  const prefix=`${q.id==='A6-A7'?'':`<h3 class="battery-item-label">${escapeHtml(row.label)}</h3>`}<p class="muted small battery-instruction">${escapeHtml(instruction)}</p>`;
+  const prefix=`<h3 class="battery-item-label">${richText(row.label,['B8','B12'].includes(q.id)?[row.label]:row.highlights)}</h3><p class="muted small battery-instruction">${escapeHtml(instruction)}</p>`;
   const choices=`<div class="scale-labeled" role="group" aria-label="${escapeHtml(row.label)}">${normal.map(o=>`<button type="button" class="scale-label ${ans===o.code?'active':''}" data-action="matrix-choice" data-rowid="${row.id}" data-code="${o.code}" aria-pressed="${ans===o.code}"><strong>${o.code}</strong><span>${escapeHtml(o.label)}</span></button>`).join('')}</div>`;
   const special=extras.length?`<div class="specials">${extras.map(o=>`<label class="special-choice ${ans===o.code?'selected':''}"><input type="radio" name="matrix-${q.id}-${row.id}" data-action="matrix-radio" data-rowid="${row.id}" value="${escapeHtml(o.code)}" ${ans===o.code?'checked':''}>${escapeHtml(o.label)}</label>`).join('')}</div>`:'';
   return prefix+choices+special;
@@ -191,20 +212,22 @@ function renderQuestion(preserveScroll=false){
  document.body.dataset.surveyScreen="question";
   const step=getStep();
   if(!step){screen='intro';renderIntro();return;}
-  if(step.section){renderSection(step.section);return;}
   const {q,row}=step;
   const y=window.scrollY;
-  const content=q.type==='matrix'?renderMatrixItem(q,row):q.type==='scale'?renderScale(q):q.type==='multi'?renderMulti(q):q.type==='postal'?renderPostal(q):q.type==='comment'?renderComment(q):renderSingle(q);
+  const content=q.type==='matrix' && !row
+    ? `<div class="battery-group">${matrixRows(q).map(r=>`<div class="battery-group-row">${renderMatrixItem(q,r)}</div>`).join('')}</div>`
+    :q.type==='matrix'?renderMatrixItem(q,row):q.type==='scale'?renderScale(q):q.type==='multi'?renderMulti(q,row):q.type==='postal'?renderPostal(q):q.type==='comment'?renderComment(q):renderSingle(q);
   app.innerHTML=pageTop()+`<div class="question-card" aria-labelledby="question-title">${titleAndHint(q,row)}${content}${alertMessage?`<div class="alert" role="alert">${escapeHtml(alertMessage)}</div>`:''}</div><div class="actions"><button type="button" class="btn" data-action="back">← Indietro</button><button type="button" class="btn primary" data-action="next">${steps().at(-1)?.key===currentKey?'Termina':'Avanti'} →</button></div></div>`;
   if(preserveScroll)window.scrollTo(0,y);else window.scrollTo(0,0);
 }
 function validate(step){
-  if(step.section)return '';
   const {q,row}=step;
-  const ans=getAnswer(q);
+  const ans=getAnswer(q,row);
   if(!ans)return 'Seleziona una risposta per proseguire.';
   if(q.type==='matrix'){
-    if(!ans.rows?.[row.id])return 'Seleziona una risposta per proseguire.';
+    const shownRows=row?[row]:matrixRows(q);
+    for(const required of shownRows)
+      if(!ans.rows?.[required.id])return `Seleziona una risposta per ${required.label} prima di proseguire.`;
   }else if(q.type==='multi'){
     if(!Array.isArray(ans.v)||!ans.v.length)return 'Seleziona almeno una risposta per proseguire.';
     if(q.max && ans.v.length>q.max)return `Puoi selezionare al massimo ${q.max} risposte.`;
@@ -229,7 +252,8 @@ function updateChoice(code){
 }
 function updateMulti(code,checked){
  const q=getStep().q;
- const current=answers[q.id]||{v:[],otherTexts:{}};
+ const step=getStep(), venue=step.row?.venueCode;
+ const current=q.id==='B11'?(answers.B11?.byVenue?.[venue]||{v:[],otherTexts:{}}):(answers[q.id]||{v:[],otherTexts:{}});
  const option=q.opts.find(x=>x.code===code);
  let values=Array.isArray(current.v)?[...current.v]:[];
  if(checked){
@@ -243,7 +267,17 @@ function updateMulti(code,checked){
   alertMessage=`Puoi selezionare al massimo ${q.max} risposte.`;
   renderQuestion(true);return;
  }
- answers[q.id]={v:values,otherTexts:current.otherTexts||{}};
+ if(q.id==='B11'){
+   answers.B11??={byVenue:{}}; answers.B11.byVenue??={};
+   answers.B11.byVenue[venue]={v:values,otherTexts:current.otherTexts||{}};
+ }else{
+   answers[q.id]={v:values,otherTexts:current.otherTexts||{}};
+   if(q.id==='B10'){
+     const selected=new Set(chosenVenues());
+     if(answers.B12?.rows)for(const v of Object.keys(answers.B12.rows))if(!selected.has(v.replace('B12_','')))delete answers.B12.rows[v];
+     if(answers.B11?.byVenue)for(const v of Object.keys(answers.B11.byVenue))if(!selected.has(v))delete answers.B11.byVenue[v];
+   }
+ }
  alertMessage='';saveProgress();renderQuestion(true);
 }
 function updateMatrix(rowid,code){
@@ -267,7 +301,8 @@ function back(){
 function columnNames(){
  const cols=['id_rispondente'];
  for(const q of QUESTIONS){
-   if(q.type==='matrix')cols.push(...q.rows.map(r=>r.id));
+   if(q.id==='B11')cols.push(...QUESTION_MAP.B10.opts.filter(o=>/^F[1-6]$/.test(o.code)).map(o=>'B11_'+o.code));
+   else if(q.type==='matrix')cols.push(...q.rows.map(r=>r.id));
    else if(q.type==='comment')cols.push(q.id,q.id+'_testo');
    else if(q.type==='postal')cols.push(q.id,q.id+'_cap');
    else if(q.type==='multi')cols.push(q.id,q.id+'_altro');
@@ -280,10 +315,16 @@ function valueRows(){
  const result={id_rispondente:invitation};
  for(const q of QUESTIONS){
    const shown=active(q),a=shown?answers[q.id]:null;
-   if(q.type==='matrix'){
-    for(const r of q.rows){
-     const eligible=shown&&(q.id!=='B1-B5'||r.id!=='B2'||['2','3','4'].includes(a?.rows?.B1));
-     result[r.id]=eligible?(a?.rows?.[r.id]||''):'FILTERED';
+   if(q.id==='B11'){
+     const selected=new Set(chosenVenues());
+     for(const v of QUESTION_MAP.B10.opts.filter(o=>/^F[1-6]$/.test(o.code))){
+      const selectedAnswers=a?.byVenue?.[v.code]?.v||[];
+      result['B11_'+v.code]=selected.has(v.code)?q.opts.filter(o=>selectedAnswers.includes(o.code)).map(o=>o.code).join(';'):'FILTERED';
+     }
+   }else if(q.type==='matrix'){
+    const eligibleRows=shown?new Set(matrixRows(q).map(row=>row.id)):new Set();
+    for(const row of q.rows){
+     result[row.id]=eligibleRows.has(row.id)?(a?.rows?.[row.id]||''):'FILTERED';
     }
    }else if(q.type==='comment'){
     result[q.id]=shown?(a?.v||''):'FILTERED';result[q.id+'_testo']=shown?(a?.t||''):'';
@@ -291,7 +332,7 @@ function valueRows(){
     result[q.id]=shown?(a?.v||''):'FILTERED';result[q.id+'_cap']=shown?(a?.t||''):'';
    }else if(q.type==='multi'){
     result[q.id]=shown?(Array.isArray(a?.v)?q.opts.filter(o=>a.v.includes(o.code)).map(o=>o.code).join(';'):''):'FILTERED';
-    result[q.id+'_altro']=shown?Object.values(a?.otherTexts||{}).join('; '):'';
+    result[q.id+'_altro']=shown?q.opts.filter(o=>o.other && a?.v?.includes(o.code)).map(o=>a.otherTexts?.[o.code]||'').filter(Boolean).join('; '):'';
    }else if(q.opts?.some(o=>o.other)){
     result[q.id]=shown?(a?.v||''):'FILTERED';result[q.id+'_altro']=shown?(a?.t||''):'';
    }else result[q.id]=shown?(a?.v||''):'FILTERED';
@@ -342,6 +383,6 @@ app.addEventListener('input',e=>{
  saveProgress();
 });
 // Read-only interface for automated smoke testing; not displayed to respondents.
-window.BT_TEST={get activeIds(){return activeQuestions().map(q=>q.id);},get activeKeys(){return steps().map(s=>s.key);},get currentId(){return getStep()?.q?.id||null;},get currentRowId(){return getStep()?.row?.id||null;},get currentKey(){return currentKey;},get answers(){return JSON.parse(JSON.stringify(answers));},get csv(){return toCSV();},get pages(){return QUESTIONS;}};
+window.BT_TEST={get activeIds(){return activeQuestions().map(q=>q.id);},get activeKeys(){return steps().map(s=>s.key);},get currentId(){return getStep()?.q.id||null;},get currentRowId(){return getStep()?.row?.id||null;},get currentKey(){return currentKey;},get answers(){return JSON.parse(JSON.stringify(answers));},get csv(){return toCSV();},get pages(){return QUESTIONS;}};
 restoreProgress();
 if(screen==='done')renderDone();else renderIntro();
