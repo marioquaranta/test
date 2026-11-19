@@ -1,25 +1,24 @@
-BETTER TOGETHER - sito test - correzioni di testo e grafica
+BETTER TOGETHER - Aggiornamento elenco attivita (repository test)
 
-Sostituire nel repository marioquaranta/test ESATTAMENTE:
-- app.js
+Sostituire nel repository marioquaranta/test SOLO:
 - questions.js
-- styles.css
+- app.js
 
-NON sostituire index.html: il file esistente carica correttamente
-questions.js, app.js e styles.css. NON aggiungere survey-patch.js.
+Non sostituire index.html, styles.css o logo.png.
+Non aggiungere survey-patch.js.
 
-Modifiche:
-- A4: risposta 'Non l'ho mai usata'; 'app' gia' in grassetto viola
-- A2b: canale scelto in A2a su una riga nuova, interamente viola;
-  punto interrogativo nel colore nero della domanda
-- A6-A7: Organizzatori/Volontari hanno la stessa dimensione del titolo
-- A6-A7, B8, B12: spazio tra le domande della batteria
-- B11: nomi delle sedi in grassetto viola (confermato)
-- D1: gennaio 2027 in grassetto viola (confermato)
+B7: 29 attivita reali, nomi esattamente come comunicati, ordine randomizzato,
+massimo 3 selezioni. "Non ho mai partecipato" e "Non ricordo" restano
+alternative esclusive in fondo.
+B8: un quesito per ciascuna attivita indicata in B7, sulla stessa pagina.
+CSV: 29 colonne B8_F1 ... B8_F29, con FILTERED per attivita non selezionate.
 
-Filtri, codici delle risposte, pagine di raccordo, esportazione CSV
-e comportamento del questionario NON sono stati modificati.
-Test: sintassi JS e verifiche di visualizzazione su desktop e mobile.
+Per non confondere le vecchie tre attivita dimostrative con quelle reali,
+la ripresa di compilazioni precedenti invalida SOLO B7 e B8, mantenendo
+le altre risposte gia salvate; se necessario riporta a B7.
 
-Caricamento su GitHub manuale. Non e' stata effettuata alcuna
-modifica al repository pubblico.
+Gli elenchi delle 10 sedi, i filtri, le frasi di raccordo e lo stile
+rimangono invariati.
+
+Controlli automatici eseguiti sulla logica: superati.
+Non pubblicato automaticamente su GitHub.

@@ -6,6 +6,7 @@ const QUESTION_MAP=Object.fromEntries(QUESTIONS.map(q=>[q.id,q]));
 const app=document.getElementById('app');
 const invitation='TEST_VOLONTARI';
 const STORAGE_KEY='BT_TEST_VOLONTARI_PROGRESS_V4';
+const ACTIVITIES_REVISION='BT_ACTIVITIES_29_20261119';
 let started=false;
 let screen='intro';
 let currentKey=QUESTIONS[0].id;
@@ -30,7 +31,7 @@ for(const q of QUESTIONS){
 }
 // I progressi del test rimangono esclusivamente in questo browser e dispositivo.
 function saveProgress(){
- try{localStorage.setItem(STORAGE_KEY,JSON.stringify({version:4,started,screen,currentKey,answers,optionOrders:Object.fromEntries(Object.entries(optionOrders).map(([id,opts])=>[id,opts.map(o=>o.code)])),rowOrders:Object.fromEntries(Object.entries(rowOrders).map(([id,rows])=>[id,rows.map(r=>r.id)])),savedAt:new Date().toISOString()}));}
+ try{localStorage.setItem(STORAGE_KEY,JSON.stringify({version:4,activitiesRevision:ACTIVITIES_REVISION,started,screen,currentKey,answers,optionOrders:Object.fromEntries(Object.entries(optionOrders).map(([id,opts])=>[id,opts.map(o=>o.code)])),rowOrders:Object.fromEntries(Object.entries(rowOrders).map(([id,rows])=>[id,rows.map(r=>r.id)])),savedAt:new Date().toISOString()}));}
  catch(err){console.warn('Salvataggio locale non disponibile',err);}
 }
 function restoreProgress(){
@@ -39,6 +40,11 @@ function restoreProgress(){
  if(!st||st.version!==4||!st.started||typeof st.answers!=='object'||!st.answers)return;
  started=true;
  answers=st.answers;
+ // The previous list contained three demonstration activities with codes F1-F3.
+ // Invalidate only B7/B8 answers if they predate the real activity list.
+ const staleActivities=st.activitiesRevision!==ACTIVITIES_REVISION;
+ const hadStaleAnswers=staleActivities&&(Array.isArray(answers.B7?.v)||Boolean(answers.B8?.rows));
+ if(staleActivities){delete answers.B7;delete answers.B8;}
  for(const q of QUESTIONS){
   const prev=st.optionOrders?.[q.id];
   if(Array.isArray(prev)&&prev.length===q.opts.length&&new Set(prev).size===prev.length&&prev.every(c=>q.opts.some(opt=>opt.code===c)))
@@ -51,6 +57,10 @@ function restoreProgress(){
   }
  }
  currentKey=typeof st.currentKey==='string'?st.currentKey:QUESTIONS[0].id;
+ if(hadStaleAnswers){
+  const oldIndex=QUESTIONS.findIndex(q=>q.id===currentKey.split('::')[0]);
+  if(oldIndex>=QUESTIONS.findIndex(q=>q.id==='B7'))currentKey='B7';
+ }
  screen=st.screen==='done'?'done':'intro';
 }
 function getAnswer(q,row=null){
@@ -59,7 +69,7 @@ function getAnswer(q,row=null){
 }
 function chosenVenues(state=answers){
  const codes=Array.isArray(state.B10?.v)?state.B10.v:[];
- return codes.filter(code=>/^F[1-6]$/.test(code));
+ return codes.filter(code=>/^F(?:[1-9]|10)$/.test(code));
 }
 function venueName(code){return QUESTION_MAP.B10.opts.find(o=>o.code===code)?.label||'';}
 
@@ -334,7 +344,7 @@ function back(){
 function columnNames(){
  const cols=['id_rispondente'];
  for(const q of QUESTIONS){
-   if(q.id==='B11')cols.push(...QUESTION_MAP.B10.opts.filter(o=>/^F[1-6]$/.test(o.code)).map(o=>'B11_'+o.code));
+   if(q.id==='B11')cols.push(...QUESTION_MAP.B10.opts.filter(o=>/^F(?:[1-9]|10)$/.test(o.code)).map(o=>'B11_'+o.code));
    else if(q.type==='matrix')cols.push(...q.rows.map(r=>r.id));
    else if(q.type==='comment')cols.push(q.id,q.id+'_testo');
    else if(q.type==='postal')cols.push(q.id,q.id+'_cap');
@@ -350,7 +360,7 @@ function valueRows(){
    const shown=active(q),a=shown?answers[q.id]:null;
    if(q.id==='B11'){
      const selected=new Set(chosenVenues());
-     for(const v of QUESTION_MAP.B10.opts.filter(o=>/^F[1-6]$/.test(o.code))){
+     for(const v of QUESTION_MAP.B10.opts.filter(o=>/^F(?:[1-9]|10)$/.test(o.code))){
       const selectedAnswers=a?.byVenue?.[v.code]?.v||[];
       result['B11_'+v.code]=selected.has(v.code)?q.opts.filter(o=>selectedAnswers.includes(o.code)).map(o=>o.code).join(';'):'FILTERED';
      }

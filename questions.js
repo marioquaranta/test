@@ -416,19 +416,175 @@ window.BT_SURVEY = {
       "opts": [
         {
           "code": "F1",
-          "label": "Attività dimostrativa 1",
+          "label": "Club di scrittura",
           "other": false,
           "exclusive": false
         },
         {
           "code": "F2",
-          "label": "Attività dimostrativa 2",
+          "label": "Laboratorio di scrittura stand-up comedy",
           "other": false,
           "exclusive": false
         },
         {
           "code": "F3",
-          "label": "Attività dimostrativa 3",
+          "label": "Torneo di cruciverba",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "F4",
+          "label": "Laboratorio fotografico",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "F5",
+          "label": "Sport Talk",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "F6",
+          "label": "Aperitivo sociale",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "F7",
+          "label": "Playlist Jam Session",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "F8",
+          "label": "LET – laboratorio teatrale",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "F9",
+          "label": "Lezioni di pallavolo",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "F10",
+          "label": "Cineforum in lingua originale",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "F11",
+          "label": "Laboratorio di origami",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "F12",
+          "label": "Giochi della Teoria",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "F13",
+          "label": "Simposio filosofico",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "F14",
+          "label": "Laboratorio di creazione di giochi",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "F15",
+          "label": "Aperiscienza",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "F16",
+          "label": "Karaoke",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "F17",
+          "label": "Concerto interattivo di Fortino",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "F18",
+          "label": "Racconti di viaggio",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "F19",
+          "label": "Laboratorio Fuocus",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "F20",
+          "label": "giochi da tavolo con il Board Game Club",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "F21",
+          "label": "Laboratorio di disegno",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "F22",
+          "label": "Laboratorio musicale e creazione di strumenti",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "F23",
+          "label": "Bookclub",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "F24",
+          "label": "Jam Session",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "F25",
+          "label": "Agorà",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "F26",
+          "label": "Laboratorio di collage",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "F27",
+          "label": "Meditazione",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "F28",
+          "label": "Yoga",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "F29",
+          "label": "Aperitivo",
           "other": false,
           "exclusive": false
         },
@@ -450,8 +606,7 @@ window.BT_SURVEY = {
       ],
       "random": true,
       "highlights": [],
-      "max": 3,
-      "demoList": true
+      "max": 3
     },
     {
       "id": "B8",
@@ -484,28 +639,262 @@ window.BT_SURVEY = {
         {
           "id": "B8_F1",
           "activityCode": "F1",
-          "label": "Attività dimostrativa 1",
-          "question": "Quando hai partecipato a: Attività dimostrativa 1?",
+          "label": "Club di scrittura",
+          "question": "Quando hai partecipato a: Club di scrittura?",
           "highlights": [
-            "Attività dimostrativa 1"
+            "Club di scrittura"
           ]
         },
         {
           "id": "B8_F2",
           "activityCode": "F2",
-          "label": "Attività dimostrativa 2",
-          "question": "Quando hai partecipato a: Attività dimostrativa 2?",
+          "label": "Laboratorio di scrittura stand-up comedy",
+          "question": "Quando hai partecipato a: Laboratorio di scrittura stand-up comedy?",
           "highlights": [
-            "Attività dimostrativa 2"
+            "Laboratorio di scrittura stand-up comedy"
           ]
         },
         {
           "id": "B8_F3",
           "activityCode": "F3",
-          "label": "Attività dimostrativa 3",
-          "question": "Quando hai partecipato a: Attività dimostrativa 3?",
+          "label": "Torneo di cruciverba",
+          "question": "Quando hai partecipato a: Torneo di cruciverba?",
           "highlights": [
-            "Attività dimostrativa 3"
+            "Torneo di cruciverba"
+          ]
+        },
+        {
+          "id": "B8_F4",
+          "activityCode": "F4",
+          "label": "Laboratorio fotografico",
+          "question": "Quando hai partecipato a: Laboratorio fotografico?",
+          "highlights": [
+            "Laboratorio fotografico"
+          ]
+        },
+        {
+          "id": "B8_F5",
+          "activityCode": "F5",
+          "label": "Sport Talk",
+          "question": "Quando hai partecipato a: Sport Talk?",
+          "highlights": [
+            "Sport Talk"
+          ]
+        },
+        {
+          "id": "B8_F6",
+          "activityCode": "F6",
+          "label": "Aperitivo sociale",
+          "question": "Quando hai partecipato a: Aperitivo sociale?",
+          "highlights": [
+            "Aperitivo sociale"
+          ]
+        },
+        {
+          "id": "B8_F7",
+          "activityCode": "F7",
+          "label": "Playlist Jam Session",
+          "question": "Quando hai partecipato a: Playlist Jam Session?",
+          "highlights": [
+            "Playlist Jam Session"
+          ]
+        },
+        {
+          "id": "B8_F8",
+          "activityCode": "F8",
+          "label": "LET – laboratorio teatrale",
+          "question": "Quando hai partecipato a: LET – laboratorio teatrale?",
+          "highlights": [
+            "LET – laboratorio teatrale"
+          ]
+        },
+        {
+          "id": "B8_F9",
+          "activityCode": "F9",
+          "label": "Lezioni di pallavolo",
+          "question": "Quando hai partecipato a: Lezioni di pallavolo?",
+          "highlights": [
+            "Lezioni di pallavolo"
+          ]
+        },
+        {
+          "id": "B8_F10",
+          "activityCode": "F10",
+          "label": "Cineforum in lingua originale",
+          "question": "Quando hai partecipato a: Cineforum in lingua originale?",
+          "highlights": [
+            "Cineforum in lingua originale"
+          ]
+        },
+        {
+          "id": "B8_F11",
+          "activityCode": "F11",
+          "label": "Laboratorio di origami",
+          "question": "Quando hai partecipato a: Laboratorio di origami?",
+          "highlights": [
+            "Laboratorio di origami"
+          ]
+        },
+        {
+          "id": "B8_F12",
+          "activityCode": "F12",
+          "label": "Giochi della Teoria",
+          "question": "Quando hai partecipato a: Giochi della Teoria?",
+          "highlights": [
+            "Giochi della Teoria"
+          ]
+        },
+        {
+          "id": "B8_F13",
+          "activityCode": "F13",
+          "label": "Simposio filosofico",
+          "question": "Quando hai partecipato a: Simposio filosofico?",
+          "highlights": [
+            "Simposio filosofico"
+          ]
+        },
+        {
+          "id": "B8_F14",
+          "activityCode": "F14",
+          "label": "Laboratorio di creazione di giochi",
+          "question": "Quando hai partecipato a: Laboratorio di creazione di giochi?",
+          "highlights": [
+            "Laboratorio di creazione di giochi"
+          ]
+        },
+        {
+          "id": "B8_F15",
+          "activityCode": "F15",
+          "label": "Aperiscienza",
+          "question": "Quando hai partecipato a: Aperiscienza?",
+          "highlights": [
+            "Aperiscienza"
+          ]
+        },
+        {
+          "id": "B8_F16",
+          "activityCode": "F16",
+          "label": "Karaoke",
+          "question": "Quando hai partecipato a: Karaoke?",
+          "highlights": [
+            "Karaoke"
+          ]
+        },
+        {
+          "id": "B8_F17",
+          "activityCode": "F17",
+          "label": "Concerto interattivo di Fortino",
+          "question": "Quando hai partecipato a: Concerto interattivo di Fortino?",
+          "highlights": [
+            "Concerto interattivo di Fortino"
+          ]
+        },
+        {
+          "id": "B8_F18",
+          "activityCode": "F18",
+          "label": "Racconti di viaggio",
+          "question": "Quando hai partecipato a: Racconti di viaggio?",
+          "highlights": [
+            "Racconti di viaggio"
+          ]
+        },
+        {
+          "id": "B8_F19",
+          "activityCode": "F19",
+          "label": "Laboratorio Fuocus",
+          "question": "Quando hai partecipato a: Laboratorio Fuocus?",
+          "highlights": [
+            "Laboratorio Fuocus"
+          ]
+        },
+        {
+          "id": "B8_F20",
+          "activityCode": "F20",
+          "label": "giochi da tavolo con il Board Game Club",
+          "question": "Quando hai partecipato a: giochi da tavolo con il Board Game Club?",
+          "highlights": [
+            "giochi da tavolo con il Board Game Club"
+          ]
+        },
+        {
+          "id": "B8_F21",
+          "activityCode": "F21",
+          "label": "Laboratorio di disegno",
+          "question": "Quando hai partecipato a: Laboratorio di disegno?",
+          "highlights": [
+            "Laboratorio di disegno"
+          ]
+        },
+        {
+          "id": "B8_F22",
+          "activityCode": "F22",
+          "label": "Laboratorio musicale e creazione di strumenti",
+          "question": "Quando hai partecipato a: Laboratorio musicale e creazione di strumenti?",
+          "highlights": [
+            "Laboratorio musicale e creazione di strumenti"
+          ]
+        },
+        {
+          "id": "B8_F23",
+          "activityCode": "F23",
+          "label": "Bookclub",
+          "question": "Quando hai partecipato a: Bookclub?",
+          "highlights": [
+            "Bookclub"
+          ]
+        },
+        {
+          "id": "B8_F24",
+          "activityCode": "F24",
+          "label": "Jam Session",
+          "question": "Quando hai partecipato a: Jam Session?",
+          "highlights": [
+            "Jam Session"
+          ]
+        },
+        {
+          "id": "B8_F25",
+          "activityCode": "F25",
+          "label": "Agorà",
+          "question": "Quando hai partecipato a: Agorà?",
+          "highlights": [
+            "Agorà"
+          ]
+        },
+        {
+          "id": "B8_F26",
+          "activityCode": "F26",
+          "label": "Laboratorio di collage",
+          "question": "Quando hai partecipato a: Laboratorio di collage?",
+          "highlights": [
+            "Laboratorio di collage"
+          ]
+        },
+        {
+          "id": "B8_F27",
+          "activityCode": "F27",
+          "label": "Meditazione",
+          "question": "Quando hai partecipato a: Meditazione?",
+          "highlights": [
+            "Meditazione"
+          ]
+        },
+        {
+          "id": "B8_F28",
+          "activityCode": "F28",
+          "label": "Yoga",
+          "question": "Quando hai partecipato a: Yoga?",
+          "highlights": [
+            "Yoga"
+          ]
+        },
+        {
+          "id": "B8_F29",
+          "activityCode": "F29",
+          "label": "Aperitivo",
+          "question": "Quando hai partecipato a: Aperitivo?",
+          "highlights": [
+            "Aperitivo"
           ]
         }
       ]
@@ -588,7 +977,7 @@ window.BT_SURVEY = {
         },
         {
           "code": "F3",
-          "label": "21 House of Stories (Piola)",
+          "label": "21 House of Stories (Città Studi)",
           "other": false,
           "exclusive": false
         },
@@ -600,13 +989,37 @@ window.BT_SURVEY = {
         },
         {
           "code": "F5",
-          "label": "Spaces Turati",
+          "label": "Spaces (Turati)",
           "other": false,
           "exclusive": false
         },
         {
           "code": "F6",
-          "label": "Social Lab (Navigli)",
+          "label": "Social Lab (Porta Genova)",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "F7",
+          "label": "Casello San Cristoforo",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "F8",
+          "label": "Ribalta",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "F9",
+          "label": "Mia Platform",
+          "other": false,
+          "exclusive": false
+        },
+        {
+          "code": "F10",
+          "label": "Copernico Martesana",
           "other": false,
           "exclusive": false
         },
@@ -690,9 +1103,9 @@ window.BT_SURVEY = {
         {
           "id": "B12_F3",
           "venueCode": "F3",
-          "label": "21 House of Stories (Piola)",
+          "label": "21 House of Stories (Città Studi)",
           "highlights": [
-            "21 House of Stories (Piola)"
+            "21 House of Stories (Città Studi)"
           ]
         },
         {
@@ -706,17 +1119,49 @@ window.BT_SURVEY = {
         {
           "id": "B12_F5",
           "venueCode": "F5",
-          "label": "Spaces Turati",
+          "label": "Spaces (Turati)",
           "highlights": [
-            "Spaces Turati"
+            "Spaces (Turati)"
           ]
         },
         {
           "id": "B12_F6",
           "venueCode": "F6",
-          "label": "Social Lab (Navigli)",
+          "label": "Social Lab (Porta Genova)",
           "highlights": [
-            "Social Lab (Navigli)"
+            "Social Lab (Porta Genova)"
+          ]
+        },
+        {
+          "id": "B12_F7",
+          "venueCode": "F7",
+          "label": "Casello San Cristoforo",
+          "highlights": [
+            "Casello San Cristoforo"
+          ]
+        },
+        {
+          "id": "B12_F8",
+          "venueCode": "F8",
+          "label": "Ribalta",
+          "highlights": [
+            "Ribalta"
+          ]
+        },
+        {
+          "id": "B12_F9",
+          "venueCode": "F9",
+          "label": "Mia Platform",
+          "highlights": [
+            "Mia Platform"
+          ]
+        },
+        {
+          "id": "B12_F10",
+          "venueCode": "F10",
+          "label": "Copernico Martesana",
+          "highlights": [
+            "Copernico Martesana"
           ]
         }
       ]
