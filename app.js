@@ -134,17 +134,23 @@ function richText(value,highlights=[]){
 function displayTitle(q,row){
  if(q.id==='B8')return 'Quando hai partecipato a:';
  let txt=q.text;
- if(q.id==='A2b'){
-  const option=QUESTION_MAP.A2a.opts.find(o=>o.code===answers.A2a?.v);
-  txt=txt.replace('[Risposta a A2a]',option?.label||'il canale selezionato');
- }
  if(q.id==='B11'&&row?.venueCode){
    txt=txt+' '+venueName(row.venueCode)+'?';
  }
  return txt;
 }
 function titleAndHint(q,row){
- return `<h2 id="question-title">${richText(displayTitle(q,row),q.id==='B11'&&row?.venueCode?[row.label]:q.highlights)}</h2>${(q.hint||[]).map(h=>`<p class="hint">${escapeHtml(h)}</p>`).join('')}`;
+ let title;
+ if(q.id==='A2b'){
+  // Mostra il canale di A2a sulla riga successiva, tutto in viola;
+  // il punto interrogativo rimane nero come il testo della domanda.
+  const option=QUESTION_MAP.A2a.opts.find(o=>o.code===answers.A2a?.v);
+  const [prefix,suffix='']=q.text.split('[Risposta a A2a]');
+  title=`${escapeHtml(prefix)}<span class="linked-answer-line"><span class="linked-answer">${escapeHtml(option?.label||'il canale selezionato')}</span>${escapeHtml(suffix)}</span>`;
+ }else{
+  title=richText(displayTitle(q,row),q.id==='B11'&&row?.venueCode?[row.label]:q.highlights);
+ }
+ return `<h2 id="question-title">${title}</h2>${(q.hint||[]).map(h=>`<p class="hint">${escapeHtml(h)}</p>`).join('')}`;
 }
 // A raccordo is a standalone screen: never combine it with the first question.
 function renderRaccordo(step,preserveScroll=false){
@@ -225,7 +231,7 @@ function renderQuestion(preserveScroll=false){
   const content=q.type==='matrix' && !row
     ? `<div class="battery-group">${matrixRows(q).map(r=>`<div class="battery-group-row">${renderMatrixItem(q,r)}</div>`).join('')}</div>`
     :q.type==='matrix'?renderMatrixItem(q,row):q.type==='scale'?renderScale(q):q.type==='multi'?renderMulti(q,row):q.type==='postal'?renderPostal(q):q.type==='comment'?renderComment(q):renderSingle(q);
-  app.innerHTML=pageTop()+`<div class="question-card" aria-labelledby="question-title">${titleAndHint(q,row)}${content}${alertMessage?`<div class="alert" role="alert">${escapeHtml(alertMessage)}</div>`:''}</div><div class="actions"><button type="button" class="btn" data-action="back">← Indietro</button><button type="button" class="btn primary" data-action="next">${steps().at(-1)?.key===currentKey?'Termina':'Avanti'} →</button></div></div>`;
+  app.innerHTML=pageTop()+`<div class="question-card" data-question="${escapeHtml(q.id)}" aria-labelledby="question-title">${titleAndHint(q,row)}${content}${alertMessage?`<div class="alert" role="alert">${escapeHtml(alertMessage)}</div>`:''}</div><div class="actions"><button type="button" class="btn" data-action="back">← Indietro</button><button type="button" class="btn primary" data-action="next">${steps().at(-1)?.key===currentKey?'Termina':'Avanti'} →</button></div></div>`;
   if(preserveScroll)window.scrollTo(0,y);else window.scrollTo(0,0);
 }
 function validate(step){

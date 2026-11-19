@@ -275,7 +275,7 @@ window.BT_SURVEY = {
         },
         {
           "code": "O06",
-          "label": "Non l’ho mai usato",
+          "label": "Non l'ho mai usata",
           "other": false,
           "exclusive": false
         }

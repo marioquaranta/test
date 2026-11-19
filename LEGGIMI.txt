@@ -1,17 +1,25 @@
-BETTER TOGETHER - TEST - aggiornamento filtri v9(4)
+BETTER TOGETHER - sito test - correzioni di testo e grafica
 
-Sostituire nel repository GitHub marioquaranta/test i file:
+Sostituire nel repository marioquaranta/test ESATTAMENTE:
 - app.js
 - questions.js
+- styles.css
 
-Non modificare index.html, styles.css o logo.png (index.html deve gia' caricare questions.js e app.js, senza survey-patch.js).
+NON sostituire index.html: il file esistente carica correttamente
+questions.js, app.js e styles.css. NON aggiungere survey-patch.js.
 
-Controlli effettuati:
-- 118 combinazioni di condizioni dei filtri P3, B8, B11, B12, D5, G3 e di altre domande
-- azzeramento delle risposte diventate non pertinenti cambiando P1, P2, G2, B7 e A2a
-- corretto trattamento della risposta D5 "Non sento piu' il bisogno di partecipare, per altre ragioni" come non esclusiva
-- navigazione delle frasi di raccordo su schermate separate
-- verifica browser di B10-B12-B11, CSV, recupero risposte e formattazione A2a
+Modifiche:
+- A4: risposta 'Non l'ho mai usata'; 'app' gia' in grassetto viola
+- A2b: canale scelto in A2a su una riga nuova, interamente viola;
+  punto interrogativo nel colore nero della domanda
+- A6-A7: Organizzatori/Volontari hanno la stessa dimensione del titolo
+- A6-A7, B8, B12: spazio tra le domande della batteria
+- B11: nomi delle sedi in grassetto viola (confermato)
+- D1: gennaio 2027 in grassetto viola (confermato)
 
-Elenco delle attivita' B7 ancora dimostrativo.
-Il sito pubblico non viene modificato dalla preparazione di questi file.
+Filtri, codici delle risposte, pagine di raccordo, esportazione CSV
+e comportamento del questionario NON sono stati modificati.
+Test: sintassi JS e verifiche di visualizzazione su desktop e mobile.
+
+Caricamento su GitHub manuale. Non e' stata effettuata alcuna
+modifica al repository pubblico.
