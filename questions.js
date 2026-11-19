@@ -530,7 +530,7 @@ window.BT_SURVEY = {
         },
         {
           "code": "F20",
-          "label": "giochi da tavolo con il Board Game Club",
+          "label": "Giochi da tavolo con il Board Game Club",
           "other": false,
           "exclusive": false
         },
@@ -579,12 +579,6 @@ window.BT_SURVEY = {
         {
           "code": "F28",
           "label": "Yoga",
-          "other": false,
-          "exclusive": false
-        },
-        {
-          "code": "F29",
-          "label": "Aperitivo",
           "other": false,
           "exclusive": false
         },
@@ -810,10 +804,10 @@ window.BT_SURVEY = {
         {
           "id": "B8_F20",
           "activityCode": "F20",
-          "label": "giochi da tavolo con il Board Game Club",
-          "question": "Quando hai partecipato a: giochi da tavolo con il Board Game Club?",
+          "label": "Giochi da tavolo con il Board Game Club",
+          "question": "Quando hai partecipato a: Giochi da tavolo con il Board Game Club?",
           "highlights": [
-            "giochi da tavolo con il Board Game Club"
+            "Giochi da tavolo con il Board Game Club"
           ]
         },
         {
@@ -887,15 +881,6 @@ window.BT_SURVEY = {
           "highlights": [
             "Yoga"
           ]
-        },
-        {
-          "id": "B8_F29",
-          "activityCode": "F29",
-          "label": "Aperitivo",
-          "question": "Quando hai partecipato a: Aperitivo?",
-          "highlights": [
-            "Aperitivo"
-          ]
         }
       ]
     },
@@ -930,7 +915,7 @@ window.BT_SURVEY = {
         },
         {
           "code": "O05",
-          "label": "Momenti di socialità organizzata",
+          "label": "Momenti di socialità",
           "other": false,
           "exclusive": false
         },
@@ -1868,7 +1853,7 @@ window.BT_SURVEY = {
         },
         {
           "code": "O07",
-          "label": "Quota mensile e valore dell’offerta",
+          "label": "Quota mensile",
           "other": false,
           "exclusive": false
         },

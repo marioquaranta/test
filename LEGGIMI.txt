@@ -1,24 +1,14 @@
-BETTER TOGETHER - Aggiornamento elenco attivita (repository test)
+Better Together - Aggiornamento del questionario per il repository marioquaranta/test
 
-Sostituire nel repository marioquaranta/test SOLO:
-- questions.js
-- app.js
+Le modifiche di questa versione comprendono:
+- B7/B8: "Giochi da tavolo con il Board Game Club" (maiuscola iniziale)
+- B7/B8: rimossa la voce "Aperitivo"; resta "Aperitivo sociale"; 28 attivita in totale
+- B9: "Momenti di socialita" invece di "Momenti di socialita organizzata"
+- E2: "Quota mensile" invece di "Quota mensile e valore dell'offerta"
 
-Non sostituire index.html, styles.css o logo.png.
-Non aggiungere survey-patch.js.
+Caricare nel repository GitHub test:
+- questions.js (aggiornato)
+- app.js (incluso per avere il pacchetto completo e coerente con la versione a 28 attivita; invariato rispetto al pacchetto precedente)
 
-B7: 29 attivita reali, nomi esattamente come comunicati, ordine randomizzato,
-massimo 3 selezioni. "Non ho mai partecipato" e "Non ricordo" restano
-alternative esclusive in fondo.
-B8: un quesito per ciascuna attivita indicata in B7, sulla stessa pagina.
-CSV: 29 colonne B8_F1 ... B8_F29, con FILTERED per attivita non selezionate.
-
-Per non confondere le vecchie tre attivita dimostrative con quelle reali,
-la ripresa di compilazioni precedenti invalida SOLO B7 e B8, mantenendo
-le altre risposte gia salvate; se necessario riporta a B7.
-
-Gli elenchi delle 10 sedi, i filtri, le frasi di raccordo e lo stile
-rimangono invariati.
-
-Controlli automatici eseguiti sulla logica: superati.
-Non pubblicato automaticamente su GitHub.
+index.html e styles.css restano invariati; non e' previsto survey-patch.js.
+Il sito online non e' stato modificato.

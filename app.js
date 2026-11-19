@@ -6,7 +6,7 @@ const QUESTION_MAP=Object.fromEntries(QUESTIONS.map(q=>[q.id,q]));
 const app=document.getElementById('app');
 const invitation='TEST_VOLONTARI';
 const STORAGE_KEY='BT_TEST_VOLONTARI_PROGRESS_V4';
-const ACTIVITIES_REVISION='BT_ACTIVITIES_29_20261119';
+const ACTIVITIES_REVISION='BT_ACTIVITIES_28_20261119';
 let started=false;
 let screen='intro';
 let currentKey=QUESTIONS[0].id;
@@ -40,11 +40,23 @@ function restoreProgress(){
  if(!st||st.version!==4||!st.started||typeof st.answers!=='object'||!st.answers)return;
  started=true;
  answers=st.answers;
- // The previous list contained three demonstration activities with codes F1-F3.
- // Invalidate only B7/B8 answers if they predate the real activity list.
+ // Preserve answers for real activities when the only change is the removal of
+ // duplicate 'Aperitivo' (F29); discard any selection or B8 response for F29.
+ const oldActivities29=st.activitiesRevision==='BT_ACTIVITIES_29_20261119';
  const staleActivities=st.activitiesRevision!==ACTIVITIES_REVISION;
- const hadStaleAnswers=staleActivities&&(Array.isArray(answers.B7?.v)||Boolean(answers.B8?.rows));
- if(staleActivities){delete answers.B7;delete answers.B8;}
+ let hadStaleAnswers=false;
+ if(staleActivities && oldActivities29){
+  const previousSelection=answers.B7?.v;
+  hadStaleAnswers=Array.isArray(previousSelection)&&previousSelection.includes('F29');
+  if(hadStaleAnswers)answers.B7.v=previousSelection.filter(c=>c!=='F29');
+  if(answers.B8?.rows){
+   delete answers.B8.rows.B8_F29;
+   if(!Object.keys(answers.B8.rows).length)delete answers.B8;
+  }
+ }else if(staleActivities){
+  hadStaleAnswers=Array.isArray(answers.B7?.v)||Boolean(answers.B8?.rows);
+  delete answers.B7;delete answers.B8;
+ }
  for(const q of QUESTIONS){
   const prev=st.optionOrders?.[q.id];
   if(Array.isArray(prev)&&prev.length===q.opts.length&&new Set(prev).size===prev.length&&prev.every(c=>q.opts.some(opt=>opt.code===c)))
