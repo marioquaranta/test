@@ -252,11 +252,21 @@ function validate(step){
   }
   return '';
 }
+// Aggiorna le dipendenze quando una risposta precedente cambia.
+function clearInactiveDependents(){
+  for(const id of ['P3','D5','G3']){
+    if(!active(QUESTION_MAP[id]))delete answers[id];
+  }
+}
 function updateChoice(code){
  const q=getStep().q;
+ const previous=answers[q.id]?.v;
  answers[q.id]={...(answers[q.id]||{}),v:code};
  if(q.type==='postal'&&code!=='O01')delete answers[q.id].t;
  if(q.type==='comment'&&code!=='O01')delete answers[q.id].t;
+ // A2b valuta un canale specifico: cambiando A2a la valutazione va ripetuta.
+ if(q.id==='A2a'&&previous!==code)delete answers.A2b;
+ if(['P1','P2','G2'].includes(q.id))clearInactiveDependents();
  alertMessage='';saveProgress();renderQuestion(true);
 }
 function updateMulti(code,checked){
@@ -281,6 +291,14 @@ function updateMulti(code,checked){
    answers.B11.byVenue[venue]={v:values,otherTexts:current.otherTexts||{}};
  }else{
    answers[q.id]={v:values,otherTexts:current.otherTexts||{}};
+   if(q.id==='B7'){
+     // Le risposte su attivita' non piu' selezionate non devono ricomparire.
+     const selected=new Set(values.filter(c=>/^F\d+$/.test(c)));
+     if(answers.B8?.rows)for(const rowId of Object.keys(answers.B8.rows)){
+       if(!selected.has(rowId.replace('B8_','')))delete answers.B8.rows[rowId];
+     }
+     if(answers.B8?.rows && !Object.keys(answers.B8.rows).length)delete answers.B8;
+   }
    if(q.id==='B10'){
      const selected=new Set(chosenVenues());
      if(answers.B12?.rows)for(const v of Object.keys(answers.B12.rows))if(!selected.has(v.replace('B12_','')))delete answers.B12.rows[v];

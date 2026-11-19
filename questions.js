@@ -1358,7 +1358,7 @@ window.BT_SURVEY = {
           "code": "O14",
           "label": "Non sento più il bisogno di partecipare, per altre ragioni",
           "other": false,
-          "exclusive": true
+          "exclusive": false
         },
         {
           "code": "O15",
